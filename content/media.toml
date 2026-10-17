@@ -1,0 +1,58 @@
+# Outreach and media (rendered on the home page, #outreach). Most recent first.
+#   date = "YYYY" or "YYYY-MM";  kind = "exhibition" | "video" | "channel" | "book" | "press" | "blog"
+#   title, outlet, url (optional), text (Markdown, optional)
+# Talks for the general public are in talks.toml (kind = "outreach").
+
+intro = """
+I joined the IUF in 2021 on its then-new chair in science outreach (*Médiation scientifique*). Chess is my main way in: everyone knows the game, its rules give an objective referee, and it lets anyone check, rather than take on faith, what generative AI can and cannot do. My [blog](https://blog.mathieuacher.com) publishes these experiments with code and data.
+"""
+
+[[item]]
+date = "2026"
+kind = "channel"
+title = "CodeplAI: IA, Code & Jeux"
+outlet = "YouTube (in French)"
+url = "https://www.youtube.com/@CodeplAI"
+text = "AI, programming, and games: puzzles, algorithms, variants, playing with and against AI."
+
+[[item]]
+date = "2026-01"
+kind = "exhibition"
+title = "The Constant"
+outlet = "Source Code Exhibition, Software Heritage and Inria"
+url = "https://www.sourcecode-exhibition.softwareheritage.org/the-constant/"
+text = "A panel on the number 1070372, unchanged in Stockfish's source code since 2014. Unveiled at UNESCO in Paris, then shown at the Cité des sciences and Sorbonne Université."
+
+[[item]]
+date = "2026"
+kind = "press"
+title = "Interview"
+outlet = "Le Parisien"
+
+[[item]]
+date = "2025"
+kind = "book"
+title = "Un ordinateur, ça ne calcule jamais juste (with Jean-Marc Jézéquel)"
+outlet = "Le calcul à découvert, CNRS Éditions"
+url = "https://mathieuacher.com/publications/#acher2025ordinateur"
+
+[[item]]
+date = "2024-05"
+kind = "video"
+title = "ChatGPT rêve-t-il de cavaliers électriques ?"
+outlet = "Monsieur Phi (YouTube, in French)"
+url = "https://www.youtube.com/watch?v=6D1XIbkm4JE"
+text = "Our experiments on large language models playing chess."
+
+[[item]]
+date = "2023"
+kind = "press"
+title = "Interview"
+outlet = "Science & Vie"
+
+[[item]]
+date = "2022-10"
+kind = "press"
+title = "One software, billions of possibilities"
+outlet = "CNRS News"
+url = "https://news.cnrs.fr/articles/one-software-billions-of-possibilities"

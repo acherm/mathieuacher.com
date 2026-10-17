@@ -160,7 +160,7 @@ main > .block:first-child, .hero + .block { border-top: 0; }
 .theme-links li::before { content: "→"; position: absolute; left: 0; color: var(--muted); }
 .card h3 { font-family: var(--sans); font-size: 1.02rem; display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem; }
 .status { font: 500 0.72rem/1 var(--sans); padding: 0.25rem 0.5rem; border-radius: 999px; background: var(--chip); color: var(--muted); }
-.status-active, .status-maintained { background: var(--ok-bg); color: var(--ok); }
+.status-active, .status-maintained, .status-new { background: var(--ok-bg); color: var(--ok); }
 
 /* Publications ------------------------------------------------------------ */
 
@@ -238,6 +238,7 @@ pre.bibtex { margin: 0; overflow-x: auto; font: 0.78rem/1.5 var(--mono); white-s
 .people { list-style: none; padding: 0; margin: 0; max-width: 50rem; }
 .people li { padding: 0.7rem 0; border-bottom: 1px solid var(--line); }
 .people li:last-child { border-bottom: 0; }
+.people li.highlight { border-left: 3px solid var(--ok); padding-left: 0.8rem; }
 .people p { margin: 0.1rem 0; font-size: 0.95rem; }
 .person-head { font-size: 1rem !important; }
 

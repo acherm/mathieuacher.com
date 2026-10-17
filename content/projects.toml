@@ -1,0 +1,79 @@
+# Research projects (rendered on /service/#projects). Most recent / most active first.
+#   start, end ("YYYY"; no end = ongoing), role, url, text (Markdown), highlight (shown first, marked "new")
+# Budgets and other private details live in ../private/facts-private.toml.
+
+[[project]]
+name = "FRAIME"
+start = "2025"
+role = "lead for DiverSE"
+url = "https://www.inria.fr/fr/fraime"
+highlight = true
+text = "*Formal Reasoning applied to AI for Methodological Engineering*: Inria challenge with Mitsubishi Electric R&D Centre Europe on trustworthy AI with formal methods, from verifying AI-generated code and content to using AI to make formal methods easier to use ([press release](https://www.mitsubishielectric.com/en/pr/2025/pdf/0918.pdf)). In DiverSE: two PhD theses (Najwa Naamane, Guillaume Freyermuth) and a postdoc."
+
+[[project]]
+name = "LLM4Code"
+start = "2024"
+end = "2028"
+role = "co-lead with Guillaume Baudart"
+url = "https://project.inria.fr/llm4code/"
+text = "Inria challenge on reliable and productive code assistants based on large language models: 11 Inria teams, LaBRI, Software Heritage, and Sopra Steria."
+
+[[project]]
+name = "CodeCommons"
+start = "2025"
+end = "2028"
+role = "work-package lead"
+url = "https://codecommons.org/"
+text = "France 2030 project around Software Heritage, building large-scale, curated code datasets for AI; my part covers programming-language identification and a catalog of programming languages."
+
+[[project]]
+name = "RIPOST"
+start = "2024"
+end = "2027"
+role = "co-lead with Arnaud Gotlieb"
+url = "https://diverse-project.github.io/ripost_ea/"
+text = "Inria–Simula associate team on resilient and reproducible software, following RESIST (2021–2023)."
+
+[[project]]
+name = "CONFVERT"
+start = "2026"
+end = "2028"
+text = "Postdoctoral project (Sophie Fortz)."
+
+[[project]]
+name = "COFECUB with PUC-Rio"
+start = "2024"
+end = "2027"
+role = "coordinator"
+text = "Learning from software evolution to learn software variability, with Juliana Alves Pereira (PUC-Rio, Brazil)."
+
+[[project]]
+name = "Industrial collaborations"
+start = "2021"
+text = "CGI France (legacy code re-engineering with LLMs, IBM-i), Sopra Steria (COBOL modernization, within LLM4Code), Nokia (LLMs and causal reasoning), Mitsubishi Electric R&D Centre Europe (FRAIME), Airbus (OneWay project, MODELS 2023 best paper)."
+
+[[project]]
+name = "REVARY"
+start = "2021"
+end = "2026"
+url = "https://www.iufrance.fr/les-membres-de-liuf/membre/2282-mathieu-acher.html"
+text = "My IUF project: finding and removing useless variability."
+
+[[project]]
+name = "SLIMFAST"
+start = "2020"
+end = "2022"
+role = "coordinator"
+text = "DGA project on debloating variability."
+
+[[project]]
+name = "VaryVary"
+start = "2018"
+end = "2021"
+role = "coordinator"
+url = "https://varyvary.github.io/"
+text = "ANR JCJC project on software variability and statistical machine learning (ANR-17-CE25-0010)."
+
+[[project]]
+name = "Earlier projects"
+text = "ANR SOPRANO (SMT and constraint programming solvers), MOTIV (synthesis of video variants, with DGA, Bertin, and InPixal), ITEA2 MERGE (safety, security, and variability), VaryMDE (Thales–Inria collaboration on variability and model-driven engineering)."

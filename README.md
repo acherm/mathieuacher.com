@@ -12,7 +12,12 @@ Source of [mathieuacher.com](https://mathieuacher.com): a small static site gene
 | Research themes | `content/research.toml` |
 | Software | `content/software.toml` |
 | Teaching | `content/teaching.md` |
-| Students, projects, service | `content/service.toml` |
+| PhD students, postdocs | `content/people.toml` (dates, status, theses.fr ids) |
+| Research projects | `content/projects.toml` |
+| Keynotes and invited talks | `content/talks.toml` |
+| Juries | `content/juries.toml` |
+| Outreach and media | `content/media.toml` |
+| Committees, organization roles, reviewing | `content/service.toml` |
 | PhD / HDR | `content/theses.toml` |
 | Chess | `content/chess.md` |
 | Name, title, affiliations, profiles, menu, llms.txt summary | `content/site.toml` |
@@ -47,6 +52,18 @@ python3 tools/bibsync.py --check --sort   # also re-sort by date and normalize f
 ```
 
 Works you deliberately leave out (preprints of published papers, datasets…) go in `tools/bibsync-ignore.txt` so they stop being reported. Review what `--add` wrote (keys, venue, `important`, `award`) before committing. Keys of existing entries must not change: they are URL anchors (`/publications/#key`, `/acher_bib.html#key`).
+
+## Facts for CVs and application forms
+
+The structured files above are the single source for public facts: the site, `llms.txt`, and dossiers (IUF, HCERES, RIPEC…) should all draw from them. Private details (supervision rates, budgets, contract notes) go in `../private/facts-private.toml`, outside this repository, never published.
+
+```sh
+python3 tools/facts.py check            # validate the files, compare with theses.fr, HAL award notes, and the bib
+python3 tools/facts.py tables --lang fr # Markdown tables (theses, postdocs, projects, talks per period, juries),
+                                        # merged with ../private/facts-private.toml when it exists
+```
+
+When a fact changes (new student, defense date, project end), change it here first, then regenerate the dossier tables.
 
 ## What gets generated
 

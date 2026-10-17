@@ -1,0 +1,167 @@
+# Keynotes, invited talks and lectures (rendered on /service/#talks). Most recent first.
+#   date  = "YYYY", "YYYY-MM", or "YYYY-MM-DD"
+#   kind  = "keynote" | "invited" | "lecture" (invited course) | "outreach" (general public) | "industry"
+#   title (may be empty if unknown), event, place, url (slides, video, or event page), bib (key in data/acher.bib)
+# Not listed: Dagstuhl seminars, panels, talks of accepted papers.
+# Counts per period for dossiers: `python3 tools/facts.py tables`.
+
+[[talk]]
+date = "2026-11-04"
+kind = "keynote"
+title = "Archived Variants, Generated Variants: Code Reproducibility between Software Heritage and LLM4Code"
+event = "ShareFAIR and Neurovasc Days (PEPR Santé numérique)"
+place = "Paris, France"
+
+[[talk]]
+date = "2026-09-04"
+kind = "outreach"
+title = "Langages de programmation à l'ère de l'IA générative : COBOL, M&M's, français… ou peu importe ?"
+event = "Semaine de l'IA, Université de Rennes"
+place = "Rennes, France"
+url = "https://www.youtube.com/watch?v=Aj5arTQzMQ4"
+
+[[talk]]
+date = "2026-06-05"
+kind = "invited"
+title = "Interview on the IUF chair in science outreach (closing session)"
+event = "Congrès de la Société informatique de France (SIF)"
+
+[[talk]]
+date = "2025-09"
+kind = "keynote"
+title = "Software Variability for Replicable Science"
+event = "SBCARS, CBSoft 2025"
+place = "Rio de Janeiro, Brazil"
+bib = "acher2025software"
+url = "https://hal.science/hal-05334168"
+
+[[talk]]
+date = "2024-12-10"
+kind = "invited"
+title = "Science du logiciel et IA en science du sport : de la démocratisation des outils à la reproductibilité sans friction"
+event = "Université de Toulon, UFR STAPS"
+place = "Toulon, France"
+
+[[talk]]
+date = "2024-11-28"
+kind = "invited"
+title = "Generative AI for Generative Programming"
+event = "Normastic day on large language models"
+place = "Caen, France"
+bib = "acher2024generative"
+url = "https://hal.science/hal-04809253"
+
+[[talk]]
+date = "2024-10"
+kind = "outreach"
+title = "Un ordinateur, ça ne calcule jamais juste"
+event = "Fête de la science, INSA Rennes"
+place = "Rennes, France"
+bib = "acher2024ordinateur"
+url = "https://hal.science/hal-04736121"
+
+[[talk]]
+date = "2024-06-05"
+kind = "invited"
+title = "Deep Software Variability and Frictionless Reproducibility"
+event = "Journées nationales du GDR GPL"
+place = "Strasbourg, France"
+bib = "acher2024deep"
+url = "https://hal.science/hal-04601752"
+
+[[talk]]
+date = "2024-04"
+kind = "invited"
+title = "LLM for Software Engineering"
+event = "ERCIM Visionary Event"
+place = "Brussels, Belgium"
+
+[[talk]]
+date = "2024-02"
+kind = "keynote"
+title = ""
+event = "MODEVAR workshop at VaMoS 2024"
+place = "Bern, Switzerland"
+
+[[talk]]
+date = "2024"
+kind = "invited"
+title = "Can Generative AI Generate Computational Experiments?"
+event = "ORAP forum (CNRS)"
+
+[[talk]]
+date = "2023-07"
+kind = "lecture"
+title = "Reproducible Science and Software Engineering (with Paul Temple)"
+event = "École Jeunes Chercheurs en Programmation (EJCP 2023)"
+place = "Valence, France"
+bib = "acher2023reproducible"
+url = "https://hal.science/hal-04152637"
+
+[[talk]]
+date = "2023"
+kind = "invited"
+title = "Deep Software Variability for Replicability in Computational Science"
+event = "Software Engineering Symposium (SES 2023, IPSJ/SIGSE)"
+place = "Tokyo, Japan"
+
+[[talk]]
+date = "2022"
+kind = "keynote"
+title = "Reproducible Science and Deep Software Variability"
+event = "VaMoS 2022"
+place = "Florence, Italy"
+url = "https://vamos2022.isti.cnr.it/keynotes"
+
+[[talk]]
+date = "2022"
+kind = "invited"
+title = ""
+event = "Seminar at LaBRI, Université de Bordeaux"
+place = "Bordeaux, France"
+
+[[talk]]
+date = "2021"
+kind = "invited"
+title = "Deep Software Variability: Challenges and Opportunities for Handling Cross-Layer Configurations"
+event = "YODA day of the GDR GPL"
+
+[[talk]]
+date = "2021"
+kind = "lecture"
+title = ""
+event = "École Jeunes Chercheurs en Programmation (EJCP 2021, online)"
+
+[[talk]]
+date = "2019-10"
+kind = "industry"
+title = "Learning the Linux Kernel Configuration Space: Results and Challenges"
+event = "Embedded Linux Conference Europe 2019"
+place = "Lyon, France"
+bib = "acher:hal-02342130"
+url = "https://hal.science/hal-02342130"
+
+[[talk]]
+date = "2019"
+kind = "lecture"
+title = ""
+event = "École Jeunes Chercheurs en Programmation (EJCP 2019)"
+
+[[talk]]
+date = "2018"
+kind = "lecture"
+title = ""
+event = "École Jeunes Chercheurs en Programmation (EJCP 2018)"
+
+[[talk]]
+date = "2015"
+kind = "keynote"
+title = "From Basic Variability Models to OpenCompare"
+event = "REVE 2015 workshop at SPLC 2015"
+
+[[talk]]
+date = "2009-10"
+kind = "invited"
+title = "Separation of Concerns in Software Product Line Engineering"
+event = "Colorado State University, Department of Computer Science"
+place = "Fort Collins, USA"

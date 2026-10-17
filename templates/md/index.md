@@ -52,6 +52,15 @@ Full list with abstracts: {{ base }}/publications.md · BibTeX: {{ base }}/acher
 
 {{ teaching }}
 
+## Outreach
+
+{{ media.intro }}
+
+{% for m in media.item %}
+- **{{ m.title }}** ({{ m.outlet }}, {{ m.date }}){% if m.text %}: {{ m.text }}{% endif %}{% if m.url %} {{ m.url }}{% endif %}
+
+{% endfor %}
+
 ## Students, projects & service
 
 {{ service.summary }}

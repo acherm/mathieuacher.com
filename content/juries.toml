@@ -1,0 +1,83 @@
+# Thesis and habilitation juries (rendered on /service/#juries).
+#   degree = "PhD" | "HDR";  role = "reviewer" (rapporteur) | "examiner" | "president" | "member" (role not recorded)
+#   year may be omitted when unknown; url = theses.fr or thesis page when available.
+
+record = "https://theses.fr/158563913"
+
+other = [
+  "Prize committees: SIF PhD thesis prize (2022), Gilles Kahn PhD thesis prize (2021)",
+  "Jury of the *Agrégation d'informatique* (2022)",
+]
+
+[[jury]]
+name = "Younoussa Sow"
+degree = "PhD"
+role = "reviewer"
+institution = "Université de Lille"
+year = 2026
+
+[[jury]]
+name = "Salman Farhat"
+degree = "PhD"
+role = "reviewer"
+institution = "Université de Lille"
+year = 2024
+
+[[jury]]
+name = "Corentin Latappy"
+degree = "PhD"
+role = "reviewer"
+institution = "Université de Bordeaux"
+year = 2024
+
+[[jury]]
+name = "Élodie Germani"
+degree = "PhD"
+role = "president"
+institution = "Université de Rennes"
+year = 2024
+
+[[jury]]
+name = "Adrien Gougeon"
+degree = "PhD"
+role = "president"
+institution = "Université de Rennes"
+year = 2023
+
+[[jury]]
+name = "Chico Sundermann"
+degree = "PhD"
+role = "member"
+institution = "Ulm University, Germany"
+year = 2025
+
+[[jury]]
+name = "Christian Kaltenecker"
+degree = "PhD"
+role = "member"
+institution = "Saarland University, Germany"
+year = 2024
+
+[[jury]]
+name = "Raúl Medeiros"
+degree = "PhD"
+role = "member"
+institution = "University of the Basque Country, Spain"
+year = 2024
+
+[[jury]]
+name = "Marcel Heinz"
+degree = "PhD"
+role = "member"
+institution = "University of Koblenz-Landau, Germany"
+year = 2021
+
+[[jury]]
+name = "Clément Quinton"
+degree = "HDR"
+role = "reviewer"
+
+[[jury]]
+name = "Adel Noureddine"
+degree = "HDR"
+role = "reviewer"

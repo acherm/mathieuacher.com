@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 {% block title %}Students, projects & service · {{ site.person.name }}{% endblock %}
-{% block description %}PhD students, postdocs, research projects, and academic service (conference organization, program committees, reviewing) of {{ site.person.name }}.{% endblock %}
+{% block description %}PhD students, postdocs, research projects, talks, and academic service (conference organization, program committees, juries, reviewing) of {{ site.person.name }}.{% endblock %}
 {% block canonical %}/service/{% endblock %}
 {% block content %}
 <div class="wrap block">
   <h1>Students, projects &amp; service</h1>
   <div class="prose lead">{{ service.summary | md }}</div>
 
-  {% for group in service.people %}
+  {% for group in people %}
   <section class="block-sm" id="{{ group.id }}">
     <h2>{{ group.title }}</h2>
     <ul class="people">
@@ -16,6 +16,7 @@
         <p class="person-head"><strong>{% if s.url %}<a href="{{ s.url }}">{{ s.name }}</a>{% else %}{{ s.name }}{% endif %}</strong> {% if s.years or s.role %}<span class="muted">{% if s.years %}· {{ s.years }}{% endif %}{% if s.role %} · {{ s.role }}{% endif %}</span>{% endif %}</p>
         {% if s.topic %}<p>{{ s.topic | mdi }}</p>{% endif %}
         {% if s.with %}<p class="muted">With {{ s.with }}{% if s.funding %} · {{ s.funding }}{% endif %}</p>{% elif s.funding %}<p class="muted">{{ s.funding }}</p>{% endif %}
+        {% if s.note %}<p class="muted">{{ s.note | mdi }}</p>{% endif %}
         {% if s.now %}<p class="muted">Now: {{ s.now | mdi }}</p>{% endif %}
       </li>
     {% endfor %}
@@ -26,9 +27,9 @@
   <section class="block-sm" id="projects">
     <h2>Research projects</h2>
     <ul class="people">
-    {% for pr in service.projects %}
-      <li>
-        <p class="person-head"><strong>{% if pr.url %}<a href="{{ pr.url }}">{{ pr.name }}</a>{% else %}{{ pr.name }}{% endif %}</strong> {% if pr.years or pr.role %}<span class="muted">{% if pr.years %} · {{ pr.years }}{% endif %}{% if pr.role %} · {{ pr.role }}{% endif %}</span>{% endif %}</p>
+    {% for pr in projects %}
+      <li{% if pr.highlight %} class="highlight"{% endif %}>
+        <p class="person-head"><strong>{% if pr.url %}<a href="{{ pr.url }}">{{ pr.name }}</a>{% else %}{{ pr.name }}{% endif %}</strong>{% if pr.highlight %} <span class="status status-new">new</span>{% endif %} {% if pr.years or pr.role %}<span class="muted">{% if pr.years %} · {{ pr.years }}{% endif %}{% if pr.role %} · {{ pr.role }}{% endif %}</span>{% endif %}</p>
         <p>{{ pr.text | mdi }}</p>
       </li>
     {% endfor %}
@@ -44,14 +45,33 @@
     </ul>
   </section>
 
+  <section class="block-sm" id="talks">
+    <h2>Keynotes and invited talks</h2>
+    <ul class="timeline">
+    {% for y in talks %}
+      <li><span class="when">{{ y.year }}</span><span>
+      {% for t in y.talks %}{{ t.label }}, {% if t.url and not t.title %}<a href="{{ t.url }}">{{ t.event }}</a>{% else %}{{ t.event }}{% endif %}{% if t.place %} ({{ t.place }}){% endif %}{% if t.title %}: {% if t.url %}<a href="{{ t.url }}"><em>{{ t.title }}</em></a>{% else %}<em>{{ t.title }}</em>{% endif %}{% endif %}{% if not loop.last %}<br>{% endif %}
+      {% endfor %}</span></li>
+    {% endfor %}
+    </ul>
+  </section>
+
   <section class="block-sm" id="committees">
     <h2>Program committees</h2>
     <div class="prose">{{ service.committees | md }}</div>
   </section>
 
   <section class="block-sm" id="juries">
-    <h2>PhD juries and prize committees</h2>
-    <div class="prose">{{ service.juries | md }}</div>
+    <h2>Juries and prize committees</h2>
+    <div class="prose"><ul>
+    {% for g in juries.groups %}
+      <li>{{ g.label | mdi }}: {{ g.names | join(", ") }}</li>
+    {% endfor %}
+    {% for o in juries.other %}
+      <li>{{ o | mdi }}</li>
+    {% endfor %}
+      <li>Full record of French PhD juries on <a href="{{ juries.record }}">theses.fr</a></li>
+    </ul></div>
   </section>
 
   <section class="block-sm" id="reviewing">

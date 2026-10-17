@@ -46,6 +46,10 @@ date = "2025-09"
 text = "Keynote at SBCARS (CBSoft 2025, Brazil): *Software Variability for Replicable Science*. Three papers at SPLC 2025 on neuroimaging pipelines, feature reduction and energy, and uniform sampling."
 
 [[news]]
+date = "2025-09"
+text = "Start of **[FRAIME](https://www.inria.fr/fr/fraime)** (*Formal Reasoning applied to AI for Methodological Engineering*), a four-year Inria challenge with Mitsubishi Electric R&D Centre Europe on trustworthy AI with formal methods. I lead DiverSE's part ([press release](https://www.mitsubishielectric.com/en/pr/2025/pdf/0918.pdf))."
+
+[[news]]
 date = "2025-07"
 text = "*Teaching Reproducibility and Embracing Variability* at ACM REP 2025, about my reproducibility course at INSA Rennes ([blog post](https://blog.mathieuacher.com/TeachingReproducibilityVariability/))."
 

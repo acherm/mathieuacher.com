@@ -1,0 +1,268 @@
+# PhD students and postdocs (rendered on /service/, /service.md, and llms-full.txt).
+#
+# One [[person]] per position. Dates are "YYYY", "YYYY-MM", or "YYYY-MM-DD".
+#   kind    = "phd" (I am director or co-supervisor), "associated" (PhD student I work with,
+#             without being a supervisor), "postdoc"
+#   status  = "ongoing", "defended", "not-defended" (PhD); postdocs are current until `end`
+#   start, end, defense, with, funding, topic, thesis (URL), thesesfr (theses.fr id), now, note
+# Years shown on the site are computed from start/end/defense.
+# Private details (supervision rates, contracts) are NOT here: see ../private/facts-private.toml
+# and `python3 tools/facts.py tables`. `python3 tools/facts.py check` compares this file with theses.fr.
+
+# --- PhD students -----------------------------------------------------------
+
+[[person]]
+name = "Najwa Naamane"
+kind = "phd"
+status = "ongoing"
+start = "2026"
+topic = "AI, code, and formal methods"
+funding = "Inria–Mitsubishi Electric challenge FRAIME"
+
+[[person]]
+name = "Guillaume Freyermuth"
+kind = "phd"
+status = "ongoing"
+start = "2026"
+with = "the Khora team"
+funding = "Inria–Mitsubishi Electric challenge FRAIME"
+
+[[person]]
+name = "Wentao Sun"
+kind = "phd"
+status = "ongoing"
+start = "2026"
+topic = "LLM causal deduction ([NeurIPS 2026 paper](https://mathieuacher.com/publications/#sun2026externalized))"
+funding = "CIFRE with Nokia"
+
+[[person]]
+name = "Axel Allain"
+kind = "phd"
+status = "ongoing"
+start = "2026-01"
+topic = "Continuous co-evolution of code for mainstream languages and libraries"
+with = "Djamel Eddine Khelladi and Aymeric Blot"
+thesesfr = "s435552"
+
+[[person]]
+name = "Jean-Baptiste Espinasse"
+kind = "phd"
+status = "ongoing"
+start = "2025"
+topic = "LLM-based code modernization"
+with = "Djamel Eddine Khelladi"
+funding = "CIFRE with Sopra Steria"
+
+[[person]]
+name = "Youenn Merel Jourdan"
+kind = "phd"
+status = "ongoing"
+start = "2024-09"
+topic = "Exploring variability induced by configurations in neuroimaging analysis pipelines"
+with = "Camille Maumet (Empenn team)"
+thesesfr = "s399367"
+
+[[person]]
+name = "Charly Reux"
+kind = "phd"
+status = "ongoing"
+start = "2024"
+topic = "LLMs and software variants"
+with = "Djamel Eddine Khelladi and Olivier Barais"
+funding = "Inria challenge LLM4Code"
+
+[[person]]
+name = "N'Guessan Hermann Kouadio"
+kind = "phd"
+status = "ongoing"
+start = "2023-11"
+topic = "Improving software quality in application modernization with large language models (IBM-i RPG)"
+with = "Olivier Barais"
+funding = "CIFRE with CGI France"
+thesesfr = "s377153"
+
+[[person]]
+name = "Jean-Baptiste Döderlein"
+kind = "associated"
+status = "ongoing"
+start = "2025-09"
+topic = "Live programming for continuous software engineering"
+with = "Benoit Combemale (thesis director)"
+funding = "ENS Rennes"
+thesesfr = "s418911"
+
+[[person]]
+name = "Quentin Mazouni"
+kind = "associated"
+status = "ongoing"
+topic = "Testing reinforcement learning policies"
+with = "Helge Spieker and Arnaud Gotlieb (Simula Research Laboratory, Norway)"
+note = "I supervised his master's internship; we keep working together within the RIPOST associate team."
+
+[[person]]
+name = "Georges Aaron Randrianaina"
+kind = "phd"
+status = "defended"
+start = "2021-10"
+defense = "2025-05-28"
+topic = "[Incremental, reproducible builds of software variants](https://hal.science/tel-05308121). GDR SciLog 2026 thesis prize."
+with = "Olivier Zendra and Djamel Eddine Khelladi"
+funding = "MESR doctoral contract"
+
+[[person]]
+name = "Zohra Kaouter Kebaili"
+kind = "phd"
+status = "defended"
+start = "2022-01"
+defense = "2025-05-15"
+topic = "[Supporting metamodel and code co-evolution](https://hal.science/tel-05272600)"
+with = "Olivier Barais and Djamel Eddine Khelladi"
+funding = "ANR CoEvolution"
+
+[[person]]
+name = "Luc Lesoil"
+kind = "phd"
+status = "defended"
+start = "2020"
+defense = "2023-04-17"
+topic = "[Deep software variability for resilient performance models of configurable systems](https://hal.science/tel-04190983)"
+with = "Arnaud Blouin and Jean-Marc Jézéquel"
+funding = "ANR VaryVary"
+
+[[person]]
+name = "Hugo Martin"
+kind = "phd"
+status = "defended"
+start = "2018"
+defense = "2021-12-16"
+topic = "[Machine learning for performance modelling on colossal software configuration spaces](https://hal.science/tel-03698474)"
+with = "Jean-Marc Jézéquel"
+funding = "ANR VaryVary"
+
+[[person]]
+name = "Paul Temple"
+kind = "phd"
+status = "defended"
+start = "2015"
+defense = "2018-09"
+topic = "[Investigate the matrix: leveraging variability to specialize software and test suites](https://hal.science/tel-02125962)"
+with = "Jean-Marc Jézéquel"
+funding = "MESR doctoral contract"
+
+[[person]]
+name = "Quentin Plazar"
+kind = "phd"
+status = "not-defended"
+start = "2015"
+end = "2018"
+topic = "Decision procedures and solvers, constraint programming, SMT"
+with = "Arnaud Gotlieb and Sébastien Bardin"
+funding = "ANR SOPRANO"
+
+[[person]]
+name = "Guillaume Bécan"
+kind = "phd"
+status = "defended"
+start = "2013"
+defense = "2016-09-23"
+topic = "Metamodels and feature models: complementary approaches to formalize product comparison matrices"
+with = "Benoit Baudry"
+funding = "MESR doctoral contract"
+
+[[person]]
+name = "Sana Ben Nasr"
+kind = "phd"
+status = "defended"
+start = "2013"
+defense = "2016-04-05"
+topic = "Mining and modeling variability from natural language documents"
+with = "Benoit Baudry"
+funding = "CONNEXION project (with EDF)"
+
+# --- Postdocs ---------------------------------------------------------------
+
+[[person]]
+name = "Sophie Fortz"
+kind = "postdoc"
+start = "2026"
+end = "2028"
+funding = "CONFVERT project"
+
+[[person]]
+name = "Zohra Kaouter Kebaili"
+kind = "postdoc"
+start = "2025"
+end = "2027"
+funding = "Sopra Steria and Inria"
+
+[[person]]
+name = "Heraldo Borges"
+kind = "postdoc"
+start = "2025"
+end = "2026"
+
+[[person]]
+name = "Théo Matricon"
+kind = "postdoc"
+start = "2024"
+end = "2026"
+
+[[person]]
+name = "Gauthier Le Bartz Lyan"
+kind = "postdoc"
+start = "2024"
+end = "2026"
+topic = "Reproducibility and variability"
+funding = "Inria–Simula associate team RIPOST"
+
+[[person]]
+name = "Xhevahire Tërnava"
+kind = "postdoc"
+start = "2020"
+end = "2022"
+topic = "Debloating variability"
+funding = "SLIMFAST project"
+
+[[person]]
+name = "Juliana Alves Pereira"
+kind = "postdoc"
+start = "2018"
+end = "2020"
+topic = "Machine learning and variability"
+funding = "ANR VaryVary"
+now = "PUC-Rio, Brazil"
+
+[[person]]
+name = "Jin Hyun Kim"
+kind = "postdoc"
+start = "2014"
+end = "2016"
+topic = "Product lines and formal analysis"
+with = "Axel Legay"
+funding = "SAD program (Brittany region)"
+
+[[person]]
+name = "José A. Galindo"
+kind = "postdoc"
+start = "2013"
+end = "2016"
+role = "PhD, then postdoc"
+topic = "Synthesis of video variants, automated reasoning"
+funding = "MOTIV project"
+
+[[person]]
+name = "João Bosco Ferreira Filho"
+kind = "postdoc"
+start = "2012"
+end = "2016"
+role = "PhD, then postdoc"
+topic = "Model-based product lines"
+funding = "VaryMDE / Clarity"
+
+[[person]]
+name = "Mauricio Alférez"
+kind = "postdoc"
+start = "2012"
+end = "2014"
+topic = "Synthesis of video variants, variability modelling"
+funding = "MOTIV project (DGA, Bertin, InPixal)"

@@ -5,6 +5,17 @@ Software comes in many variants. Configuration options, conditional compilation,
 """
 
 [[themes]]
+title = "AI and formal methods"
+summary = "Making AI-generated code and content trustworthy with formal methods, and using AI to make formal methods easier to use, in the Inria–Mitsubishi Electric challenge FRAIME."
+text = """
+Generative AI makes code cheap to produce but hard to trust. In [FRAIME](https://www.inria.fr/fr/fraime), a four-year Inria challenge with Mitsubishi Electric R&D Centre Europe started in 2025, we combine formal reasoning with machine learning: checking what AI produces, and letting AI help practitioners use formal methods. Two PhD theses started in DiverSE in 2026.
+"""
+links = [
+  { label = "FRAIME (Inria)", url = "https://www.inria.fr/fr/fraime" },
+  { label = "Mitsubishi Electric press release (2025)", url = "https://www.mitsubishielectric.com/en/pr/2025/pdf/0918.pdf" },
+]
+
+[[themes]]
 title = "Coding agents and programming languages"
 summary = "What LLM-based coding agents can build, in which programming languages (from Rust to COBOL, LaTeX, or Brainfuck), and whether programming languages still matter."
 text = """

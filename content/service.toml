@@ -1,14 +1,15 @@
-# Students, projects, and service (rendered at /service/ and /service.md).
+# Service (rendered at /service/ and /service.md). People, projects, juries, and talks
+# have their own files: people.toml, projects.toml, juries.toml, talks.toml.
 # Keep top-level keys (summary, committees, ...) above the first [[table]].
 
 summary = """
-I supervise PhD students, postdocs, and engineers in the DiverSE team, on variability, machine learning and LLMs for software engineering, reproducibility, and testing, often with industrial partners (CGI France, Sopra Steria, Nokia, Airbus). I serve the software product line and variability community (SPLC and VaMoS steering committees, VaMoS 2025 general chair) and co-lead the Inria challenge LLM4Code and the Inria–Simula associate team RIPOST.
+I supervise PhD students, postdocs, and engineers in the DiverSE team, on variability, machine learning and LLMs for software engineering, reproducibility, and testing, often with industrial partners (CGI France, Sopra Steria, Nokia, Mitsubishi Electric, Airbus). I serve the software product line and variability community (SPLC, VaMoS, and VARIABILITY steering committees, VaMoS 2025 general chair), co-lead the Inria challenge LLM4Code and the Inria–Simula associate team RIPOST, and lead DiverSE's part of the Inria–Mitsubishi Electric challenge FRAIME.
 """
 
 committees = """
 - **2026**: VARIABILITY (research papers)
 - **2025**: ECAI, SPLC (main and challenge tracks), MODEVAR
-- **2024**: SPLC, MODEVAR (also keynote at MODEVAR@VaMoS)
+- **2024**: [ECAI](https://www.ecai2024.eu/committees/pc), SPLC, MODEVAR (also keynote at MODEVAR@VaMoS)
 - **2023**: SPLC, VaMoS
 - **2022**: MODEVAR
 - **2021**: SPLC, VaMoS
@@ -17,221 +18,11 @@ committees = """
 - **Earlier**: ASE 2018, ICSE NIER 2014, 2015, 2018, ICSE SEIP 2014, ICSR 2018, SPLC 2014–2018, VaMoS 2016–2018, SAC SE 2015–2018, SEAA, FOSD, REVE, and others ([full list until 2019](https://web.archive.org/web/2024/https://mathieuacher.com/services.html))
 """
 
-juries = """
-- Reviewer (*rapporteur*): Younoussa Sow (Université de Lille, 2026), Salman Farhat (Université de Lille, 2024), Corentin Latappy (Université de Bordeaux, 2024)
-- President: Élodie Germani (Université de Rennes, 2024), Adrien Gougeon (Université de Rennes, 2023)
-- Prize committees: SIF PhD thesis prize (2022), Gilles Kahn PhD thesis prize (2021); jury of the *Agrégation d'informatique* (2022)
-- Full record on [theses.fr](https://theses.fr/158563913)
-"""
-
 reviewing = """
 IEEE Transactions on Software Engineering (TSE), ACM Computing Surveys, IEEE Software, Information and Software Technology (IST), Science of Computer Programming (SCP), Automated Software Engineering, Journal of Systems and Software (JSS), Software and Systems Modeling (SoSyM), STTT, and others. Guest editor of the JSS special issue on systems and software product line engineering (2019, with Myra B. Cohen).
+
+Expertise: member of the ANR evaluation committee "Machine Learning Operations, Génie Logiciel pour l'IA" (2024).
 """
-
-# --- People ---------------------------------------------------------------
-
-[[people]]
-id = "phd-current"
-title = "Current PhD students"
-
-[[people.members]]
-name = "Axel Allain"
-years = "2026–"
-topic = "Continuous co-evolution of code for mainstream languages and libraries"
-with = "Djamel Eddine Khelladi and Aymeric Blot"
-
-[[people.members]]
-name = "Jean-Baptiste Espinasse"
-years = "2025–"
-topic = "LLM-based code modernization"
-with = "Djamel Eddine Khelladi"
-funding = "CIFRE with Sopra Steria"
-
-[[people.members]]
-name = "Youenn Merel Jourdan"
-years = "2024–"
-topic = "Exploring variability induced by configurations in neuroimaging analysis pipelines"
-with = "Camille Maumet (Empenn team)"
-
-[[people.members]]
-name = "Charly Reux"
-years = "2024–"
-topic = "LLMs and software variants"
-with = "Djamel Eddine Khelladi and Olivier Barais"
-funding = "Inria challenge LLM4Code"
-
-[[people.members]]
-name = "N'Guessan Hermann Kouadio"
-years = "2023–"
-topic = "Improving software quality in application modernization with large language models (IBM-i RPG)"
-with = "Olivier Barais"
-funding = "CIFRE with CGI France"
-
-[[people.members]]
-name = "Wentao Sun"
-years = "2026–"
-topic = "LLM causal deduction ([NeurIPS 2026 paper](https://mathieuacher.com/publications/#sun2026externalized))"
-funding = "CIFRE with Nokia"
-
-[[people]]
-id = "phd"
-title = "Former PhD students"
-
-[[people.members]]
-name = "Georges Aaron Randrianaina"
-years = "2021–2025"
-topic = "[Incremental, reproducible builds of software variants](https://hal.science/tel-05308121). GDR SciLog 2026 thesis prize."
-with = "Olivier Zendra and Djamel Eddine Khelladi"
-funding = "MESR doctoral contract"
-
-[[people.members]]
-name = "Zohra Kaouter Kebaili"
-years = "2022–2025"
-topic = "[Supporting metamodel and code co-evolution](https://hal.science/tel-05272600)"
-with = "Olivier Barais and Djamel Eddine Khelladi"
-funding = "ANR CoEvolution"
-
-[[people.members]]
-name = "Luc Lesoil"
-years = "2020–2023"
-topic = "[Deep software variability for resilient performance models of configurable systems](https://hal.science/tel-04190983)"
-with = "Arnaud Blouin and Jean-Marc Jézéquel"
-funding = "ANR VaryVary"
-
-[[people.members]]
-name = "Hugo Martin"
-years = "2018–2021"
-topic = "[Machine learning for performance modelling on colossal software configuration spaces](https://hal.science/tel-03698474)"
-with = "Jean-Marc Jézéquel"
-funding = "ANR VaryVary"
-
-[[people.members]]
-name = "Paul Temple"
-years = "2015–2018"
-topic = "[Investigate the matrix: leveraging variability to specialize software and test suites](https://hal.science/tel-02125962)"
-with = "Jean-Marc Jézéquel"
-funding = "MESR doctoral contract"
-
-[[people.members]]
-name = "Quentin Plazar"
-years = "2015–2018"
-role = "thesis not defended"
-topic = "Decision procedures and solvers, constraint programming, SMT"
-with = "Arnaud Gotlieb and Sébastien Bardin"
-funding = "ANR SOPRANO"
-
-[[people.members]]
-name = "Guillaume Bécan"
-years = "2013–2016"
-topic = "Metamodels and feature models: complementary approaches to formalize product comparison matrices"
-with = "Benoit Baudry"
-funding = "MESR doctoral contract"
-
-[[people.members]]
-name = "Sana Ben Nasr"
-years = "2013–2016"
-topic = "Mining and modeling variability from natural language documents"
-with = "Benoit Baudry"
-funding = "CONNEXION project (with EDF)"
-
-[[people]]
-id = "postdocs"
-title = "Postdocs"
-
-[[people.members]]
-name = "Gauthier Le Bartz Lyan"
-years = "2024–2026"
-topic = "Reproducibility and variability"
-funding = "Inria–Simula associate team RIPOST"
-
-[[people.members]]
-name = "Xhevahire Tërnava"
-years = "2020–2022"
-topic = "Debloating variability"
-funding = "SLIMFAST project"
-
-[[people.members]]
-name = "Juliana Alves Pereira"
-years = "2018–2020"
-topic = "Machine learning and variability"
-funding = "ANR VaryVary"
-now = "PUC-Rio, Brazil"
-
-[[people.members]]
-name = "Jin Hyun Kim"
-years = "2014–2016"
-topic = "Product lines and formal analysis"
-with = "Axel Legay"
-funding = "SAD program (Brittany region)"
-
-[[people.members]]
-name = "José A. Galindo"
-years = "2013–2016"
-role = "PhD, then postdoc"
-topic = "Synthesis of video variants, automated reasoning"
-funding = "MOTIV project"
-
-[[people.members]]
-name = "João Bosco Ferreira Filho"
-years = "2012–2016"
-role = "PhD, then postdoc"
-topic = "Model-based product lines"
-funding = "VaryMDE / Clarity"
-
-[[people.members]]
-name = "Mauricio Alférez"
-years = "2012–2014"
-topic = "Synthesis of video variants, variability modelling"
-funding = "MOTIV project (DGA, Bertin, InPixal)"
-
-# --- Projects -------------------------------------------------------------
-
-[[projects]]
-name = "LLM4Code"
-years = "2024–2028"
-role = "co-lead with Guillaume Baudart"
-url = "https://project.inria.fr/llm4code/"
-text = "Inria challenge on reliable and productive code assistants based on large language models: 11 Inria teams, LaBRI, Software Heritage, and Sopra Steria."
-
-[[projects]]
-name = "RIPOST"
-years = "2024–2027"
-role = "co-lead with Arnaud Gotlieb"
-url = "https://diverse-project.github.io/ripost_ea/"
-text = "Inria–Simula associate team on resilient and reproducible software, following RESIST (2021–2023)."
-
-[[projects]]
-name = "CodeCommons"
-years = "2025–2028"
-url = "https://codecommons.org/"
-text = "France 2030 project around Software Heritage, building large-scale, curated code datasets for AI; my part covers programming-language identification and a catalog of programming languages."
-
-[[projects]]
-name = "COFECUB with PUC-Rio"
-years = "2024–2027"
-text = "Learning from software evolution to learn software variability, with Juliana Alves Pereira (PUC-Rio, Brazil)."
-
-[[projects]]
-name = "Industrial collaborations"
-years = "2021–"
-text = "CGI France (legacy code re-engineering with LLMs, IBM-i), Sopra Steria (COBOL modernization, within LLM4Code), Airbus (OneWay project, MODELS 2023 best paper), DGA (SLIMFAST, debloating variability)."
-
-[[projects]]
-name = "REVARY"
-years = "2021–2026"
-url = "https://www.iufrance.fr/les-membres-de-liuf/membre/2282-mathieu-acher.html"
-text = "My IUF project: finding and removing useless variability."
-
-[[projects]]
-name = "VaryVary"
-years = "2018–2021"
-role = "coordinator"
-url = "https://varyvary.github.io/"
-text = "ANR JCJC project on software variability and statistical machine learning (ANR-17-CE25-0010)."
-
-[[projects]]
-name = "Earlier projects"
-text = "ANR SOPRANO (SMT and constraint programming solvers), MOTIV (synthesis of video variants, with DGA, Bertin, and InPixal), ITEA2 MERGE (safety, security, and variability), VaryMDE (Thales–Inria collaboration on variability and model-driven engineering)."
 
 # --- Roles ----------------------------------------------------------------
 
@@ -241,11 +32,11 @@ text = "Journal-First co-chair of [VARIABILITY 2026](https://conf.researchr.org/
 
 [[roles]]
 year = "2025"
-text = "General chair of [VaMoS 2025](https://familiar-project.github.io/VaMoS2025/), Rennes"
+text = "General chair of [VaMoS 2025](https://familiar-project.github.io/VaMoS2025/), Rennes, and editor of its proceedings (ACM)"
 
 [[roles]]
 year = "2024"
-text = "Challenge track co-chair of SPLC 2024 (Luxembourg), with Thomas Thüm"
+text = "Challenge track co-chair of SPLC 2024 (Luxembourg), with Thomas Thüm; co-editor of the proceedings (volumes A and B, ACM)"
 
 [[roles]]
 year = "2021"
@@ -253,20 +44,20 @@ text = "Social media co-chair of ICPE 2021 (Rennes); co-organizer of MODEVAR@SPL
 
 [[roles]]
 year = "2020"
-text = "Program co-chair of [VaMoS 2020](https://blog.mathieuacher.com/VaMoS2020/), with Maxime Cordy; workshops co-chair of MODELS 2020; co-organizer of MODEVAR and REVE"
+text = "Program co-chair of [VaMoS 2020](https://blog.mathieuacher.com/VaMoS2020/), with Maxime Cordy, and co-editor of its proceedings; workshops co-chair of MODELS 2020; co-organizer of MODEVAR and REVE"
 
 [[roles]]
 year = "2019"
-text = "Co-organizer of MODEVAR, REVE, and SPLTea at SPLC 2019 (Paris), and of MaLTeSQuE 2019 (ESEC/FSE)"
+text = "Co-organizer of MODEVAR, REVE, and SPLTea at SPLC 2019 (Paris), and of MaLTeSQuE 2019 (ESEC/FSE), co-editor of its proceedings"
 
 [[roles]]
 year = "2017"
-text = "Research track chair of SPLC 2017 (Sevilla), with Myra B. Cohen"
+text = "Research track chair of SPLC 2017 (Sevilla), with Myra B. Cohen, and co-editor of the proceedings (volume A)"
 
 [[roles]]
 year = "2013–2018"
-text = "Organizer of the SPLTea workshops (teaching software product lines), MASES 2018 (machine learning and software engineering, at ASE), and the Journée Lignes de Produits 2013"
+text = "Organizer of the SPLTea workshops (teaching software product lines), MASES 2018 (machine learning and software engineering, at ASE; co-editor of the proceedings), and the Journée Lignes de Produits 2013"
 
 [[roles]]
 year = "Ongoing"
-text = "Member of the steering committees of SPLC and VaMoS"
+text = "Member of the steering committees of SPLC (since 2018), VaMoS (since 2020), and VARIABILITY (since 2025, the conference merging SPLC, VaMoS, and ICSR)"

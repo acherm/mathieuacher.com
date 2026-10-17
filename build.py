@@ -52,6 +52,8 @@ def load_md(name: str) -> str:
 
 
 def load_content() -> dict:
+    juries = load_toml("juries.toml")
+    media = load_toml("media.toml")
     return {
         "site": load_toml("site.toml"),
         "about": load_md("about.md"),
@@ -61,8 +63,78 @@ def load_content() -> dict:
         "teaching": load_md("teaching.md"),
         "theses": load_toml("theses.toml"),
         "service": load_toml("service.toml"),
+        "people": people_groups(load_toml("people.toml")["person"]),
+        "projects": [dict(p, years=span(p.get("start"), p.get("end"))) for p in load_toml("projects.toml")["project"]],
+        "juries": dict(juries, groups=jury_groups(juries["jury"])),
+        "talks": talk_years(load_toml("talks.toml")["talk"]),
+        "media": media,
         "chess": load_md("chess.md"),
     }
+
+
+def year_of(date) -> int | None:
+    return int(str(date)[:4]) if date else None
+
+
+def span(start, end) -> str:
+    s, e = year_of(start), year_of(end)
+    return f"{s}–{e}" if s and e else f"{s}–" if s else ""
+
+
+PEOPLE_GROUPS = [
+    ("phd-current", "Current PhD students", lambda p: p["kind"] == "phd" and p["status"] == "ongoing"),
+    ("phd-associated", "Other PhD students I work with", lambda p: p["kind"] == "associated"),
+    ("phd", "Former PhD students", lambda p: p["kind"] == "phd" and p["status"] != "ongoing"),
+    ("postdocs-current", "Current postdocs", lambda p: p["kind"] == "postdoc" and p["current"]),
+    ("postdocs", "Former postdocs", lambda p: p["kind"] == "postdoc" and not p["current"]),
+]
+
+
+def people_groups(people: list[dict]) -> list[dict]:
+    """Group people.toml entries for the service page; years and labels are derived here."""
+    this_year = dt.date.today().year
+    rows = []
+    for p in people:
+        p = dict(p)
+        p["years"] = span(p.get("start"), p.get("end") or p.get("defense"))
+        p["current"] = not p.get("end") or year_of(p["end"]) >= this_year
+        if p.get("status") == "not-defended":
+            p["role"] = "thesis not defended"
+        rows.append(p)
+    rows.sort(key=lambda p: str((p.get("defense") or p.get("end") if p.get("status") in ("defended", "not-defended") else None)
+                                or p.get("start") or "0"), reverse=True)
+    groups = []
+    for gid, title, keep in PEOPLE_GROUPS:
+        members = [p for p in rows if keep(p)]
+        if members:
+            groups.append({"id": gid, "title": title, "members": members})
+    return groups
+
+
+JURY_LABELS = {("PhD", "reviewer"): "PhD reviewer (*rapporteur*)", ("PhD", "president"): "PhD jury president",
+               ("PhD", "examiner"): "PhD examiner", ("PhD", "member"): "PhD jury member",
+               ("HDR", "reviewer"): "Habilitation (HDR) reviewer", ("HDR", "examiner"): "Habilitation (HDR) examiner",
+               ("HDR", "president"): "Habilitation (HDR) jury president", ("HDR", "member"): "Habilitation (HDR) jury member"}
+
+
+def jury_groups(juries: list[dict]) -> list[dict]:
+    groups: dict[str, list[str]] = {}
+    for j in sorted(juries, key=lambda j: j.get("year") or 0, reverse=True):
+        where = ", ".join(str(x) for x in (j.get("institution"), j.get("year")) if x)
+        groups.setdefault(JURY_LABELS[(j["degree"], j["role"])], []).append(
+            f"{j['name']} ({where})" if where else j["name"])
+    return [{"label": k, "names": v} for k, v in groups.items()]
+
+
+TALK_KINDS = {"keynote": "Keynote", "invited": "Invited talk", "lecture": "Invited lecture",
+              "outreach": "Public talk", "industry": "Talk"}
+
+
+def talk_years(talks: list[dict]) -> list[dict]:
+    years: dict[int, list[dict]] = {}
+    for t in sorted(talks, key=lambda t: str(t["date"]), reverse=True):
+        years.setdefault(year_of(t["date"]), []).append(dict(t, label=TALK_KINDS[t["kind"]]))
+    return [{"year": y, "talks": ts} for y, ts in years.items()]
 
 
 # --------------------------------------------------------------------------

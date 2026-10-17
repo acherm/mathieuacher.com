@@ -20,11 +20,13 @@ llms_facts = """
 Key facts:
 
 - Full Professor at INSA Rennes since September 2022; researcher in the DiverSE team (Inria, IRISA) since 2012; Associate Professor at University of Rennes 1 (ISTIC) from 2012 to 2022; postdoc at the University of Namur (2011–2012).
-- Member (sociétaire) of the Institut Universitaire de France (IUF), appointed junior member in 2021.
-- Co-lead of the Inria challenge LLM4Code (2024–2028) and of the Inria–Simula associate team RIPOST (2024–2027).
+- Member (sociétaire) of the Institut Universitaire de France (IUF), appointed junior member in 2021 on the chair in science outreach (Médiation scientifique).
+- Recommended for the CNRS bronze medal by Section 6 of the CNRS National Committee (2023).
+- Co-lead of the Inria challenge LLM4Code (2024–2028) and of the Inria–Simula associate team RIPOST (2024–2027); lead for DiverSE of the Inria–Mitsubishi Electric challenge FRAIME (since 2025); head of the variability engineering axis of DiverSE.
+- Co-head of the research Master SIF (Rennes) since 2024.
 - PhD (2011, University of Nice Sophia Antipolis) on managing multiple feature models (FAMILIAR language); HDR (2021, University of Rennes 1) on modelling, reverse engineering, and learning software variability.
 - Awards: VARIABILITY 2026 Most Influential Paper, SCAM 2026 Distinguished Paper, ISSTA 2024 Distinguished Paper, AST 2024, MODELS 2023, ICSR 2022, SPLC 2021, and ICPE 2020 Best Paper, SLE 2019 Most Influential Paper, SPLC 2013 Best Student Paper.
-- General chair of VaMoS 2025; member of the SPLC and VaMoS steering committees.
+- General chair of VaMoS 2025; member of the SPLC, VaMoS, and VARIABILITY steering committees.
 - Chess: FIDE Master with three international master norms.
 - Contact: mathieu.acher@irisa.fr. Affiliation used in papers: INSA Rennes, Université de Rennes, Inria, CNRS, IRISA (France).
 """
@@ -108,6 +110,10 @@ url = "/#dev"
 [[nav]]
 label = "Teaching"
 url = "/#teaching"
+
+[[nav]]
+label = "Outreach"
+url = "/#outreach"
 
 [[nav]]
 label = "Students & service"
