@@ -56,7 +56,7 @@ Works you deliberately leave out (preprints of published papers, datasets…) go
 - `/acher.bib`, `/acher_bib.html` (old URL, kept with the same anchors)
 - schema.org JSON-LD (`Person` on every page, `ScholarlyArticle` list on `/publications/`), `sitemap.xml`, `robots.txt`
 - `/services.html` redirects to `/service/`
-- everything in `legacy/` is copied as-is (old teaching material, PhD manuscript, FAMILIAR jars…) so old URLs keep working; folders without an `index.html` get a generated listing
+- everything in `legacy/` is copied as-is so its old URLs keep working (today only the PhD manuscript, see below); folders without an `index.html` get a generated listing
 
 ## Hosting
 
