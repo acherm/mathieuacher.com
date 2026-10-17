@@ -70,3 +70,12 @@ GitHub Pages serves the site (workflow: `.github/workflows/pages.yml`, custom do
 | `blog.mathieuacher.com` | CNAME | `acherm.github.io.` (unchanged) |
 
 MX records (OVH mail) are not affected.
+
+### Switching from OVH hosting (one-time)
+
+Old course material and downloads (`/teaching/`, `/pub/`, 2+ GB) stay on the OVH web hosting, served as `files.mathieuacher.com`; the site's 404 page forwards `/teaching/…` and `/pub/…` there (`legacy_host` in `content/site.toml`).
+
+1. OVH Manager → Web Hosting → **Multisite** → add `files.mathieuacher.com`, root folder `www`, with SSL. Check that `https://files.mathieuacher.com/teaching/` works.
+2. OVH Manager → Domain → **DNS zone** for `mathieuacher.com`: replace the `A 213.186.33.4` record of the apex with the four GitHub `A` records above, add the four `AAAA` records, and point `www` to `acherm.github.io.` (CNAME). Leave MX, SPF, and the `blog` CNAME as they are.
+3. GitHub → repository Settings → Pages: wait for the DNS check to pass and the certificate to be issued, then tick **Enforce HTTPS**.
+4. Optional: GitHub account Settings → Pages → **Verified domains** → add `mathieuacher.com` (one TXT record at OVH) to prevent domain takeover.
