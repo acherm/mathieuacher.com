@@ -115,6 +115,7 @@ funding = "MESR doctoral contract"
 [[people.members]]
 name = "Quentin Plazar"
 years = "2015–2018"
+role = "thesis not defended"
 topic = "Decision procedures and solvers, constraint programming, SMT"
 with = "Arnaud Gotlieb and Sébastien Bardin"
 funding = "ANR SOPRANO"
