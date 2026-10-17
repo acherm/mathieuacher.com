@@ -3,18 +3,6 @@
 {% block canonical %}/404.html{% endblock %}
 {% block head %}
 <meta name="robots" content="noindex">
-{% if site.site.legacy_host %}
-<script>
-  // Old teaching material and downloads live on the legacy host.
-  (() => {
-    const prefixes = {{ site.site.legacy_prefixes | tojson }};
-    const p = location.pathname;
-    if (prefixes.some((x) => p === x || (x.endsWith("/") && p.startsWith(x)))) {
-      location.replace({{ site.site.legacy_host | tojson }} + p + location.search + location.hash);
-    }
-  })();
-</script>
-{% endif %}
 {% endblock %}
 {% block content %}
 <div class="wrap block">
@@ -25,9 +13,6 @@
     <li><a href="/publications/">Publications</a></li>
     <li><a href="/service/">Students, projects &amp; service</a></li>
     <li><a href="{{ site.site.blog }}">Blog</a></li>
-    {% if site.site.legacy_host %}
-    <li>Older course material and downloads: <a href="{{ site.site.legacy_host }}/teaching/">{{ site.site.legacy_host | replace("https://", "") }}</a></li>
-    {% endif %}
   </ul>
 </div>
 {% endblock %}

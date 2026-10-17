@@ -6,10 +6,6 @@ domain = "mathieuacher.com"
 lang = "en"
 blog = "https://blog.mathieuacher.com"
 blog_about = "posts on software variability, coding agents and LLMs, programming languages, chess and AI, research, and teaching"
-# Old course material and downloads are too large for GitHub Pages and stay on the
-# OVH hosting, served under this host. The 404 page forwards these path prefixes there.
-legacy_host = "https://files.mathieuacher.com"
-legacy_prefixes = ["/teaching/", "/teaching", "/pub/", "/pub"]
 news_visible = 8         # news items shown before "Older news"
 selected_visible = 14    # selected publications on the home page
 description = "Mathieu Acher is Full Professor of Computer Science at INSA Rennes, member of the Institut Universitaire de France (IUF), and a researcher in the DiverSE team (Inria, IRISA). He works on software variability, configurable systems, reproducibility, and LLMs and coding agents for software engineering."
