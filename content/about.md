@@ -2,4 +2,4 @@ I am a Full Professor of Computer Science at [INSA Rennes](https://www.insa-renn
 
 My research is about **variability**: software that comes in many variants and configurations, from the Linux kernel and video encoders to scientific pipelines and machine learning systems. I work on modelling, reverse engineering, testing, and learning these huge configuration spaces, and on what they mean for the reproducibility of science. I also study how large language models and coding agents change the way we build, migrate, and vary software, from legacy COBOL to chess engines written in a dozen programming languages.
 
-I am also a chess player (FIDE Master, three international master norms), always up for a game of blitz.
+I am also a chess player (FIDE Master, three international master norms), always up for a game of blitz. On my YouTube channel [CodeplAI](https://www.youtube.com/@CodeplAI) (in French), I explore AI, programming, and games: puzzles, algorithms, variants, and playing with and against AI.

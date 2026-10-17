@@ -176,6 +176,11 @@ url = "https://speakerdeck.com/acherm"
 same_as = true
 
 [[profiles]]
+name = "YouTube"
+url = "https://www.youtube.com/@CodeplAI"
+about = "CodeplAI, a channel (in French) on AI, code, and games"
+
+[[profiles]]
 name = "Bluesky"
 url = "https://bsky.app/profile/macher.bsky.social"
 

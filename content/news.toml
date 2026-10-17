@@ -34,6 +34,10 @@ date = "2026-03"
 text = "Blog series on coding agents writing chess engines from scratch in Rust, C++, COBOL, Rocq, LaTeX ([TeXCCChess](https://blog.mathieuacher.com/TeXCCChessEngine/)), Brainfuck ([BFChess](https://blog.mathieuacher.com/BFChessChessEngineBrainfuck/)), and more ([overview](https://blog.mathieuacher.com/FromScratchChessEnginesPolyglot/))."
 
 [[news]]
+date = "2026-01"
+text = "My panel [*The Constant*](https://www.sourcecode-exhibition.softwareheritage.org/the-constant/), on the number 1070372 that has stayed unchanged in Stockfish's source code since 2014, is part of the [Source Code Exhibition](https://www.sourcecode-exhibition.softwareheritage.org/) for the 10th anniversary of Software Heritage, unveiled at UNESCO in Paris and since shown at the Cité des sciences and Sorbonne Université."
+
+[[news]]
 date = "2025-12"
 text = "JSS article: *Piloting Copilot, Codex, and StarCoder2: Hot Temperature, Cold Prompts, or Black Magic?* ([DOI](https://doi.org/10.1016/j.jss.2025.112562))."
 
