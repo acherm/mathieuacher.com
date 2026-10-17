@@ -2,7 +2,7 @@
 # Keep top-level keys (summary, committees, ...) above the first [[table]].
 
 summary = """
-I supervise PhD students, postdocs, and engineers in the DiverSE team, on variability, machine learning and LLMs for software engineering, reproducibility, and testing, often with industrial partners (CGI France, Sopra Steria, Airbus). I serve the software product line and variability community (SPLC and VaMoS steering committees, VaMoS 2025 general chair) and co-lead the Inria challenge LLM4Code and the Inria–Simula associate team RIPOST.
+I supervise PhD students, postdocs, and engineers in the DiverSE team, on variability, machine learning and LLMs for software engineering, reproducibility, and testing, often with industrial partners (CGI France, Sopra Steria, Nokia, Airbus). I serve the software product line and variability community (SPLC and VaMoS steering committees, VaMoS 2025 general chair) and co-lead the Inria challenge LLM4Code and the Inria–Simula associate team RIPOST.
 """
 
 committees = """
@@ -57,7 +57,9 @@ with = "Camille Maumet (Empenn team)"
 [[people.members]]
 name = "Charly Reux"
 years = "2024–"
+topic = "LLMs and software variants"
 with = "Djamel Eddine Khelladi and Olivier Barais"
+funding = "Inria challenge LLM4Code"
 
 [[people.members]]
 name = "N'Guessan Hermann Kouadio"
@@ -66,27 +68,35 @@ topic = "Improving software quality in application modernization with large lang
 with = "Olivier Barais"
 funding = "CIFRE with CGI France"
 
+[[people.members]]
+name = "Wentao Sun"
+topic = "LLM causal deduction ([NeurIPS 2026 paper](https://mathieuacher.com/publications/#sun2026externalized))"
+funding = "CIFRE with Nokia"
+
 [[people]]
 id = "phd"
 title = "Former PhD students"
 
 [[people.members]]
 name = "Georges Aaron Randrianaina"
-years = "defended 2025"
+years = "2021–2025"
 topic = "[Incremental, reproducible builds of software variants](https://hal.science/tel-05308121). GDR SciLog 2026 thesis prize."
 with = "Olivier Zendra and Djamel Eddine Khelladi"
+funding = "MESR doctoral contract"
 
 [[people.members]]
 name = "Zohra Kaouter Kebaili"
 years = "2022–2025"
 topic = "[Supporting metamodel and code co-evolution](https://hal.science/tel-05272600)"
 with = "Olivier Barais and Djamel Eddine Khelladi"
+funding = "ANR CoEvolution"
 
 [[people.members]]
 name = "Luc Lesoil"
-years = "defended 2023"
+years = "2020–2023"
 topic = "[Deep software variability for resilient performance models of configurable systems](https://hal.science/tel-04190983)"
 with = "Arnaud Blouin and Jean-Marc Jézéquel"
+funding = "ANR VaryVary"
 
 [[people.members]]
 name = "Hugo Martin"
@@ -100,6 +110,7 @@ name = "Paul Temple"
 years = "2015–2018"
 topic = "[Investigate the matrix: leveraging variability to specialize software and test suites](https://hal.science/tel-02125962)"
 with = "Jean-Marc Jézéquel"
+funding = "MESR doctoral contract"
 
 [[people.members]]
 name = "Quentin Plazar"
@@ -110,19 +121,33 @@ funding = "ANR SOPRANO"
 
 [[people.members]]
 name = "Guillaume Bécan"
-years = "2012–2016"
+years = "2013–2016"
 topic = "Metamodels and feature models: complementary approaches to formalize product comparison matrices"
 with = "Benoit Baudry"
+funding = "MESR doctoral contract"
 
 [[people.members]]
 name = "Sana Ben Nasr"
 years = "2013–2016"
 topic = "Mining and modeling variability from natural language documents"
 with = "Benoit Baudry"
+funding = "CONNEXION project (with EDF)"
 
 [[people]]
 id = "postdocs"
 title = "Postdocs"
+
+[[people.members]]
+name = "Gauthier Le Bartz Lyan"
+years = "2024–2026"
+topic = "Reproducibility and variability"
+funding = "Inria–Simula associate team RIPOST"
+
+[[people.members]]
+name = "Xhevahire Tërnava"
+years = "2020–2022"
+topic = "Debloating variability"
+funding = "SLIMFAST project"
 
 [[people.members]]
 name = "Juliana Alves Pereira"
@@ -136,6 +161,7 @@ name = "Jin Hyun Kim"
 years = "2014–2016"
 topic = "Product lines and formal analysis"
 with = "Axel Legay"
+funding = "SAD program (Brittany region)"
 
 [[people.members]]
 name = "José A. Galindo"
@@ -155,7 +181,7 @@ funding = "VaryMDE / Clarity"
 name = "Mauricio Alférez"
 years = "2012–2014"
 topic = "Synthesis of video variants, variability modelling"
-funding = "MOTIV project"
+funding = "MOTIV project (DGA, Bertin, InPixal)"
 
 # --- Projects -------------------------------------------------------------
 

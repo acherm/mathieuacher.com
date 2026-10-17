@@ -13,7 +13,7 @@
     <ul class="people">
     {% for s in group.members %}
       <li>
-        <p class="person-head"><strong>{% if s.url %}<a href="{{ s.url }}">{{ s.name }}</a>{% else %}{{ s.name }}{% endif %}</strong> <span class="muted">· {{ s.years }}{% if s.role %} · {{ s.role }}{% endif %}</span></p>
+        <p class="person-head"><strong>{% if s.url %}<a href="{{ s.url }}">{{ s.name }}</a>{% else %}{{ s.name }}{% endif %}</strong> {% if s.years or s.role %}<span class="muted">{% if s.years %}· {{ s.years }}{% endif %}{% if s.role %} · {{ s.role }}{% endif %}</span>{% endif %}</p>
         {% if s.topic %}<p>{{ s.topic | mdi }}</p>{% endif %}
         {% if s.with %}<p class="muted">With {{ s.with }}{% if s.funding %} · {{ s.funding }}{% endif %}</p>{% elif s.funding %}<p class="muted">{{ s.funding }}</p>{% endif %}
         {% if s.now %}<p class="muted">Now: {{ s.now | mdi }}</p>{% endif %}
