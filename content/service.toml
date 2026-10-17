@@ -20,7 +20,6 @@ committees = """
 juries = """
 - Reviewer (*rapporteur*): Younoussa Sow (Université de Lille, 2026), Salman Farhat (Université de Lille, 2024), Corentin Latappy (Université de Bordeaux, 2024)
 - President: Élodie Germani (Université de Rennes, 2024), Adrien Gougeon (Université de Rennes, 2023)
-- Examiner: César Soto Valero (KTH, 2023)
 - Prize committees: SIF PhD thesis prize (2022), Gilles Kahn PhD thesis prize (2021); jury of the *Agrégation d'informatique* (2022)
 - Full record on [theses.fr](https://theses.fr/158563913)
 """
@@ -49,7 +48,7 @@ with = "Djamel Eddine Khelladi"
 funding = "CIFRE with Sopra Steria"
 
 [[people.members]]
-name = "Youenn Jourdan"
+name = "Youenn Merel Jourdan"
 years = "2024–"
 topic = "Exploring variability induced by configurations in neuroimaging analysis pipelines"
 with = "Camille Maumet (Empenn team)"
@@ -70,6 +69,7 @@ funding = "CIFRE with CGI France"
 
 [[people.members]]
 name = "Wentao Sun"
+years = "2026–"
 topic = "LLM causal deduction ([NeurIPS 2026 paper](https://mathieuacher.com/publications/#sun2026externalized))"
 funding = "CIFRE with Nokia"
 
@@ -191,7 +191,7 @@ name = "LLM4Code"
 years = "2024–2028"
 role = "co-lead with Guillaume Baudart"
 url = "https://project.inria.fr/llm4code/"
-text = "Inria challenge on reliable and productive code assistants based on large language models: about 15 Inria teams, Software Heritage, and Sopra Steria."
+text = "Inria challenge on reliable and productive code assistants based on large language models: 11 Inria teams, LaBRI, Software Heritage, and Sopra Steria."
 
 [[projects]]
 name = "RIPOST"
