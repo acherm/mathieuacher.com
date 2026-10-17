@@ -3,7 +3,7 @@
 # Keep top-level keys (summary, committees, ...) above the first [[table]].
 
 summary = """
-I supervise PhD students, postdocs, and engineers in the DiverSE team, on variability, machine learning and LLMs for software engineering, reproducibility, and testing, often with industrial partners (CGI France, Sopra Steria, Nokia, Mitsubishi Electric, Airbus). I serve the software product line and variability community (SPLC, VaMoS, and VARIABILITY steering committees, VaMoS 2025 general chair), co-lead the Inria challenge LLM4Code and the Inria–Simula associate team RIPOST, and lead DiverSE's part of the Inria–Mitsubishi Electric challenge FRAIME.
+I supervise PhD students, postdocs, and engineers in the DiverSE team, on variability, machine learning and LLMs for software engineering, reproducibility, and testing, often with industrial partners (CGI France, Sopra Steria, Nokia, Mitsubishi Electric, Airbus). I serve the software product line and variability community (SPLC, VaMoS, and VARIABILITY steering committees, VaMoS 2025 general chair), co-lead the Inria challenge LLM4Code and the Inria–Simula associate team RIPOST, and am strongly involved in the Inria–Mitsubishi Electric challenge FRAIME and the France 2030 project CodeCommons.
 """
 
 committees = """

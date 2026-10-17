@@ -1,7 +1,7 @@
 {% from "md/_macros.md" import pub %}
 # Publications of {{ site.person.name }}
 
-{{ pubs | length }} publications ({{ years[-1] }}–{{ years[0] }}): {% for key, label in categories.items() if counts[key] %}{{ counts[key] }} {{ label | lower }}{% if not loop.last %}, {% endif %}{% endfor %}.
+Journal articles, conference and workshop papers, books, and other works ({{ years[-1] }}–{{ years[0] }}), newest first.
 
 Source: {{ base }}/publications/ · BibTeX: {{ base }}/acher.bib · Last updated: {{ built }}
 

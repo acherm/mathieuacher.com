@@ -39,7 +39,7 @@ SCHEMA = {
     "projects.toml": ("project", {}),
     "juries.toml": ("jury", {"degree": {"PhD", "HDR"}, "role": {"reviewer", "examiner", "president", "member"}}),
     "talks.toml": ("talk", {"kind": {"keynote", "invited", "lecture", "outreach", "industry"}}),
-    "media.toml": ("item", {"kind": {"exhibition", "video", "channel", "book", "press", "blog"}}),
+    "media.toml": ("item", {"kind": {"exhibition", "video", "talk", "channel", "book", "press", "blog"}}),
 }
 DATE_FIELDS = ("date", "start", "end", "defense")
 

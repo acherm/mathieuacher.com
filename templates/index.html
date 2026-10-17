@@ -61,7 +61,7 @@
 <section id="publications" class="wrap block">
   <div class="section-head">
     <h2>Selected publications</h2>
-    <a class="button" href="/publications/">All {{ pubs | length }} publications →</a>
+    <a class="button" href="/publications/">All publications →</a>
   </div>
   <p class="muted">Papers with an award or that I consider representative. See also
   {% for pr in site.profiles if pr.scholarly %}<a href="{{ pr.url }}">{{ pr.name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}.</p>
@@ -96,7 +96,7 @@
   <ul class="people">
   {% for m in media.item %}
     <li>
-      <p class="person-head"><strong>{% if m.url %}<a href="{{ m.url }}">{{ m.title }}</a>{% else %}{{ m.title }}{% endif %}</strong> <span class="muted">· {{ m.outlet }} · {{ m.date | month_year }}</span></p>
+      <p class="person-head"><strong>{% if m.url %}<a href="{{ m.url }}">{{ m.title }}</a>{% else %}{{ m.title }}{% endif %}</strong> <span class="muted">· {{ m.outlet }}{% if m.date %} · {{ m.date | month_year }}{% endif %}</span></p>
       {% if m.text %}<p>{{ m.text | mdi }}</p>{% endif %}
     </li>
   {% endfor %}

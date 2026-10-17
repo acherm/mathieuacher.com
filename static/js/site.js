@@ -60,7 +60,7 @@
     for (const b of catButtons) b.setAttribute("aria-pressed", String(b.dataset.cat === state.cat));
     for (const b of flagButtons) b.setAttribute("aria-pressed", String(state.flags.has(b.dataset.flag)));
     const filtered = terms.length || state.cat || state.flags.size;
-    counter.textContent = filtered ? `${shown} of ${pubs.length} publications` : "";
+    counter.textContent = filtered ? (shown === 1 ? "1 publication matches" : `${shown} publications match`) : "";
 
     const p = new URLSearchParams();
     if (state.q) p.set("q", state.q);

@@ -7,7 +7,7 @@
 ## Pages
 
 - [Home]({{ base }}/index.md): biography, news, research themes, software, teaching, PhD and HDR theses, chess, contact
-- [Publications]({{ base }}/publications.md): all {{ pubs | length }} publications ({{ years[-1] }}–{{ years[0] }}) with venues, awards, links, and abstracts
+- [Publications]({{ base }}/publications.md): all publications ({{ years[-1] }}–{{ years[0] }}) with venues, awards, links, and abstracts
 - [Students, projects & service]({{ base }}/service.md): PhD students, postdocs, research projects, conference organization, program committees
 - [BibTeX]({{ base }}/acher.bib): machine-readable bibliography (with abstracts, HAL ids, DOIs)
 

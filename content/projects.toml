@@ -5,10 +5,10 @@
 [[project]]
 name = "FRAIME"
 start = "2025"
-role = "lead for DiverSE"
+role = "strongly involved"
 url = "https://www.inria.fr/fr/fraime"
 highlight = true
-text = "*Formal Reasoning applied to AI for Methodological Engineering*: Inria challenge with Mitsubishi Electric R&D Centre Europe on trustworthy AI with formal methods, from verifying AI-generated code and content to using AI to make formal methods easier to use ([press release](https://www.mitsubishielectric.com/en/pr/2025/pdf/0918.pdf)). In DiverSE: two PhD theses (Najwa Naamane, Guillaume Freyermuth) and a postdoc."
+text = "*Formal Reasoning applied to AI for Methodological Engineering*: Inria challenge with Mitsubishi Electric R&D Centre Europe on trustworthy AI with formal methods, from verifying AI-generated code and content to using AI to make formal methods easier to use ([press release](https://www.mitsubishielectric.com/en/pr/2025/pdf/0918.pdf)). In DiverSE, two PhD theses (Najwa Naamane, Guillaume Freyermuth) and a postdoc."
 
 [[project]]
 name = "LLM4Code"
@@ -22,7 +22,7 @@ text = "Inria challenge on reliable and productive code assistants based on larg
 name = "CodeCommons"
 start = "2025"
 end = "2028"
-role = "work-package lead"
+role = "work package 2 leader, team of nine engineers"
 url = "https://codecommons.org/"
 text = "France 2030 project around Software Heritage, building large-scale, curated code datasets for AI; my part covers programming-language identification and a catalog of programming languages."
 

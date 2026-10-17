@@ -57,7 +57,7 @@ Full list with abstracts: {{ base }}/publications.md · BibTeX: {{ base }}/acher
 {{ media.intro }}
 
 {% for m in media.item %}
-- **{{ m.title }}** ({{ m.outlet }}, {{ m.date }}){% if m.text %}: {{ m.text }}{% endif %}{% if m.url %} {{ m.url }}{% endif %}
+- **{{ m.title }}** ({{ m.outlet }}{% if m.date %}, {{ m.date }}{% endif %}){% if m.text %}: {{ m.text }}{% endif %}{% if m.url %} {{ m.url }}{% endif %}
 
 {% endfor %}
 

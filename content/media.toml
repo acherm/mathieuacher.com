@@ -1,11 +1,43 @@
-# Outreach and media (rendered on the home page, #outreach). Most recent first.
-#   date = "YYYY" or "YYYY-MM";  kind = "exhibition" | "video" | "channel" | "book" | "press" | "blog"
+# Outreach and media (rendered on the home page, #outreach), in order of preference (shown as listed).
+#   date = "YYYY" or "YYYY-MM" (optional);  kind = "video" | "exhibition" | "talk" | "book" | "channel" | "press" | "blog"
 #   title, outlet, url (optional), text (Markdown, optional)
-# Talks for the general public are in talks.toml (kind = "outreach").
+# Talks for the general public are also listed in talks.toml (kind = "outreach").
 
 intro = """
 I joined the IUF in 2021 on its then-new chair in science outreach (*Médiation scientifique*). Chess is my main way in: everyone knows the game, its rules give an objective referee, and it lets anyone check, rather than take on faith, what generative AI can and cannot do. My [blog](https://blog.mathieuacher.com) publishes these experiments with code and data.
 """
+
+[[item]]
+date = "2024-05"
+kind = "video"
+title = "ChatGPT rêve-t-il de cavaliers électriques ?"
+outlet = "Monsieur Phi (YouTube, in French)"
+url = "https://www.youtube.com/watch?v=6D1XIbkm4JE"
+text = "Our experiments on large language models playing chess ([blog post](https://blog.mathieuacher.com/GPTsChessEloRatingLegalMoves/))."
+
+[[item]]
+date = "2026-01"
+kind = "exhibition"
+title = "The Constant"
+outlet = "Source Code Exhibition, Software Heritage and Inria"
+url = "https://www.sourcecode-exhibition.softwareheritage.org/the-constant/"
+text = "A panel on the number 1070372, unchanged in Stockfish's source code since 2014. The exhibition opened at UNESCO in Paris for Software Heritage's 10th anniversary and now travels to other cities and countries (Cité des sciences and Sorbonne Université in Paris, Luxembourg, and more)."
+
+[[item]]
+date = "2026-09"
+kind = "talk"
+title = "Langages de programmation à l'ère de l'IA générative : COBOL, M&M's, français… ou peu importe ?"
+outlet = "Semaine de l'IA, Université de Rennes"
+url = "https://www.youtube.com/watch?v=Aj5arTQzMQ4"
+text = "What coding agents change for programming languages, for about 230 students ([slides](https://blog.mathieuacher.com/languages-codingagents-semaineIA2026/))."
+
+[[item]]
+date = "2024-10"
+kind = "talk"
+title = "Un ordinateur, ça ne calcule jamais juste"
+outlet = "Fête de la science, INSA Rennes"
+url = "https://hal.science/hal-04736121"
+text = "Why computers never compute exactly, and why it matters; also a chapter with Jean-Marc Jézéquel in [*Le calcul à découvert*](https://mathieuacher.com/publications/#acher2025ordinateur) (CNRS Éditions, 2025)."
 
 [[item]]
 date = "2026"
@@ -16,43 +48,7 @@ url = "https://www.youtube.com/@CodeplAI"
 text = "AI, programming, and games: puzzles, algorithms, variants, playing with and against AI."
 
 [[item]]
-date = "2026-01"
-kind = "exhibition"
-title = "The Constant"
-outlet = "Source Code Exhibition, Software Heritage and Inria"
-url = "https://www.sourcecode-exhibition.softwareheritage.org/the-constant/"
-text = "A panel on the number 1070372, unchanged in Stockfish's source code since 2014. Unveiled at UNESCO in Paris, then shown at the Cité des sciences and Sorbonne Université."
-
-[[item]]
-date = "2026"
 kind = "press"
-title = "Interview"
-outlet = "Le Parisien"
-
-[[item]]
-date = "2025"
-kind = "book"
-title = "Un ordinateur, ça ne calcule jamais juste (with Jean-Marc Jézéquel)"
-outlet = "Le calcul à découvert, CNRS Éditions"
-url = "https://mathieuacher.com/publications/#acher2025ordinateur"
-
-[[item]]
-date = "2024-05"
-kind = "video"
-title = "ChatGPT rêve-t-il de cavaliers électriques ?"
-outlet = "Monsieur Phi (YouTube, in French)"
-url = "https://www.youtube.com/watch?v=6D1XIbkm4JE"
-text = "Our experiments on large language models playing chess."
-
-[[item]]
-date = "2023"
-kind = "press"
-title = "Interview"
-outlet = "Science & Vie"
-
-[[item]]
-date = "2022-10"
-kind = "press"
-title = "One software, billions of possibilities"
-outlet = "CNRS News"
-url = "https://news.cnrs.fr/articles/one-software-billions-of-possibilities"
+title = "In the media"
+outlet = "interviews and articles"
+text = "*Le Parisien* (2026), *Science & Vie* (2023), [CNRS News](https://news.cnrs.fr/articles/one-software-billions-of-possibilities) (2022)."
