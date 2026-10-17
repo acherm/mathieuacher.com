@@ -74,6 +74,10 @@ date = "2024-04"
 text = "**Best Paper Award** at AST 2024 for *Testing for Fault Diversity in Reinforcement Learning* ([press release](https://www.linkedin.com/posts/simula-research-laboratory_ast2024-simula-research-activity-7187052083521458177-dsHW/))."
 
 [[news]]
+date = "2023-11"
+text = "Recommended for the **CNRS bronze medal** by Section 6 of the CNRS National Committee (Comité national de la recherche scientifique)."
+
+[[news]]
 date = "2023-10"
 text = "**Best Paper Award** at MODELS 2023 for *Experience in Specializing a Generic Realization Language for SPL Engineering at Airbus*, with Airbus and McGill University."
 
