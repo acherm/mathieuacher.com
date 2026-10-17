@@ -1,0 +1,188 @@
+# Identity, navigation, profiles, and the texts used for meta tags and llms.txt.
+
+[site]
+url = "https://mathieuacher.com"
+domain = "mathieuacher.com"
+lang = "en"
+blog = "https://blog.mathieuacher.com"
+blog_about = "posts on software variability, coding agents and LLMs, programming languages, chess and AI, research, and teaching"
+# Old course material and downloads are too large for GitHub Pages and stay on the
+# OVH hosting, served under this host. The 404 page forwards these path prefixes there.
+legacy_host = "https://files.mathieuacher.com"
+legacy_prefixes = ["/teaching/", "/teaching", "/pub/", "/pub"]
+news_visible = 8         # news items shown before "Older news"
+selected_visible = 14    # selected publications on the home page
+description = "Mathieu Acher is Full Professor of Computer Science at INSA Rennes, member of the Institut Universitaire de France (IUF), and a researcher in the DiverSE team (Inria, IRISA). He works on software variability, configurable systems, reproducibility, and LLMs and coding agents for software engineering."
+
+# Shown as the blockquote of /llms.txt: one dense paragraph a model can quote.
+llms_summary = """
+Mathieu Acher is a Full Professor of Computer Science at INSA Rennes (France), a member (sociétaire) of the Institut Universitaire de France (IUF), and a researcher in the DiverSE team (IRISA, Inria, CNRS, Université de Rennes). His research is on software variability: modelling, reverse engineering, testing, and learning highly configurable systems (feature models, software product lines, the Linux kernel, performance prediction, deep software variability), and on how large language models and coding agents change software engineering.
+"""
+
+# Free-form Markdown after the summary in /llms.txt.
+llms_facts = """
+Key facts:
+
+- Full Professor at INSA Rennes since September 2022; researcher in the DiverSE team (Inria, IRISA) since 2012; Associate Professor at University of Rennes 1 (ISTIC) from 2012 to 2022; postdoc at the University of Namur (2011–2012).
+- Member (sociétaire) of the Institut Universitaire de France (IUF), appointed junior member in 2021.
+- Co-lead of the Inria challenge LLM4Code (2024–2028) and of the Inria–Simula associate team RIPOST (2024–2027).
+- PhD (2011, University of Nice Sophia Antipolis) on managing multiple feature models (FAMILIAR language); HDR (2021, University of Rennes 1) on modelling, reverse engineering, and learning software variability.
+- Awards: VARIABILITY 2026 Most Influential Paper, SCAM 2026 Distinguished Paper, ISSTA 2024 Distinguished Paper, AST 2024, MODELS 2023, ICSR 2022, SPLC 2021, and ICPE 2020 Best Paper, SLE 2019 Most Influential Paper.
+- General chair of VaMoS 2025; member of the SPLC and VaMoS steering committees.
+- Chess: FIDE Master with three international master norms.
+- Contact: mathieu.acher@irisa.fr. Affiliation used in papers: INSA Rennes, Université de Rennes, Inria, CNRS, IRISA (France).
+"""
+
+contact = """
+The best way to reach me is by email: [mathieu.acher@irisa.fr](mailto:mathieu.acher@irisa.fr).
+
+IRISA / Inria Rennes, Campus de Beaulieu, 35042 Rennes, France.
+"""
+
+[person]
+name = "Mathieu Acher"
+given_name = "Mathieu"
+family_name = "Acher"
+job_title = "Full Professor of Computer Science"
+# Shown under the job title on the home page.
+distinction = "Member of the [Institut Universitaire de France](https://www.iufrance.fr/les-membres-de-liuf/membre/2282-mathieu-acher.html) (IUF)"
+member_of = [
+  { name = "Institut Universitaire de France", url = "https://www.iufrance.fr/" },
+]
+email = "mathieu.acher@irisa.fr"
+photo = "img/mathieu-acher.jpg"
+knows_about = [
+  "Software variability", "Software product lines", "Configurable systems", "Feature models",
+  "Model-driven engineering", "Domain-specific languages", "Performance prediction",
+  "Machine learning for software engineering", "Linux kernel configuration",
+  "Reproducibility", "Large language models", "Coding agents", "Legacy code modernization", "Chess",
+]
+alumni = [
+  { name = "Université Nice Sophia Antipolis" },
+]
+awards = [
+  "Member of the Institut Universitaire de France (IUF), appointed junior member in 2021",
+  "VARIABILITY 2026 Most Influential Paper Award",
+  "SCAM 2026 Distinguished Paper Award",
+  "ISSTA 2024 Distinguished Paper Award",
+  "AST 2024 Best Paper Award",
+  "MODELS 2023 Best Paper Award",
+  "ICSR 2022 Best Paper Award",
+  "SPLC 2021 Best Paper Award",
+  "ICPE 2020 Best Paper Award",
+  "SLE 2019 Most Influential Paper Award",
+]
+
+[[person.affiliations]]
+name = "INSA Rennes"
+url = "https://www.insa-rennes.fr/"
+type = "CollegeOrUniversity"
+
+[[person.affiliations]]
+name = "IRISA"
+url = "https://www.irisa.fr/"
+type = "ResearchOrganization"
+
+[[person.affiliations]]
+name = "Inria"
+url = "https://www.inria.fr/"
+type = "ResearchOrganization"
+
+[[person.affiliations]]
+name = "DiverSE team"
+url = "https://www.diverse-team.fr/"
+type = "ResearchOrganization"
+
+
+# Main navigation. Use "/#anchor" so links also work from sub-pages.
+[[nav]]
+label = "Research"
+url = "/#research"
+
+[[nav]]
+label = "Publications"
+url = "/publications/"
+page = "publications"
+
+[[nav]]
+label = "Software"
+url = "/#dev"
+
+[[nav]]
+label = "Teaching"
+url = "/#teaching"
+
+[[nav]]
+label = "Students & service"
+url = "/service/"
+page = "service"
+
+[[nav]]
+label = "Theses"
+url = "/#theses"
+
+[[nav]]
+label = "Chess"
+url = "/#chess"
+
+[[nav]]
+label = "Blog"
+url = "https://blog.mathieuacher.com"
+external = true
+
+[[nav]]
+label = "Contact"
+url = "/#contact"
+
+# Profiles: shown in the hero, used as schema.org sameAs, listed in llms.txt.
+# scholarly = true -> also listed next to publications.
+[[profiles]]
+name = "Email"
+url = "mailto:mathieu.acher@irisa.fr"
+same_as = false
+
+[[profiles]]
+name = "Blog"
+url = "https://blog.mathieuacher.com"
+
+[[profiles]]
+name = "Google Scholar"
+url = "https://scholar.google.com/citations?user=cC6xt1YAAAAJ"
+scholarly = true
+
+[[profiles]]
+name = "DBLP"
+url = "https://dblp.org/pid/57/2898.html"
+scholarly = true
+
+[[profiles]]
+name = "HAL"
+url = "https://cv.hal.science/mathieu-acher"
+scholarly = true
+about = "open-access versions of most papers"
+
+[[profiles]]
+name = "ORCID"
+url = "https://orcid.org/0000-0003-1483-3858"
+scholarly = true
+
+[[profiles]]
+name = "GitHub"
+url = "https://github.com/acherm"
+
+[[profiles]]
+name = "LinkedIn"
+url = "https://www.linkedin.com/in/mathieuacher"
+
+[[profiles]]
+name = "Slides"
+url = "https://speakerdeck.com/acherm"
+same_as = true
+
+[[profiles]]
+name = "Bluesky"
+url = "https://bsky.app/profile/macher.bsky.social"
+
+[[profiles]]
+name = "X / Twitter"
+url = "https://x.com/acherm"

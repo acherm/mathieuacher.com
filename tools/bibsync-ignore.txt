@@ -1,0 +1,9 @@
+# Works that bibsync.py keeps reporting but that were deliberately not added to data/acher.bib.
+# One source id per line (dblp:<key>, hal:<id>, orcid:<put-code>, doi:<doi>); '#' starts a comment.
+
+dblp:conf/icse/RandrianainaKZA22   # ICSE-NIER 2022: IEEE DOI of the paper already listed with its ACM DOI (randrianaina:hal-03558479)
+orcid:73567214                     # ORCID record "(submitted)" of the JSS 2021 SLR (alvespereira:hal-02148791), placeholder DOI
+dblp:data/12/AcherPMLJK22          # Zenodo dataset
+dblp:data/12/DevroeyHNAP20         # Zenodo dataset
+dblp:data/12/MartinA21             # Zenodo dataset
+dblp:data/12/MazouniGSA24          # Zenodo dataset

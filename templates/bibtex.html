@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}BibTeX · {{ site.person.name }}{% endblock %}
+{% block description %}BibTeX entries for all publications of {{ site.person.name }}.{% endblock %}
+{% block canonical %}/acher_bib.html{% endblock %}
+{% block content %}
+<div class="wrap block">
+  <h1>BibTeX</h1>
+  <p class="muted">One entry per publication, anchored by its key. Download the complete file: <a href="/acher.bib">acher.bib</a>. Human-friendly list: <a href="/publications/">publications</a>.</p>
+  {% for p in pubs %}
+  <a id="{{ p.key }}"></a>
+  <pre class="bibtex"><code>{{ p.bibtex }}</code></pre>
+  {% endfor %}
+</div>
+{% endblock %}

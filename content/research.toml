@@ -1,0 +1,71 @@
+# Research section. `summary` (one sentence) is used in llms.txt; `text` is Markdown.
+
+intro = """
+Software comes in many variants. Configuration options, conditional compilation, plugins, generators, input data, and now prompts multiply the possible versions of a system, and each version can behave and perform differently. Variability makes it possible to tailor software to many needs, but it also creates combinatorial spaces that no one can fully test, configure, or understand by hand. My work is about modelling, reverse engineering, testing, and learning these spaces, and about the new forms of variability that large language models bring to software engineering.
+"""
+
+[[themes]]
+title = "Coding agents and programming languages"
+summary = "What LLM-based coding agents can build, in which programming languages (from Rust to COBOL, LaTeX, or Brainfuck), and whether programming languages still matter."
+text = """
+Do programming languages still matter when a coding agent writes the code? I run large-scale experiments where agents build complete systems, such as chess engines in 17 languages or COBOL systems, and measure what they get right, what it costs, and where they fail.
+"""
+links = [
+  { label = "Do Programming Languages Still Matter to Your AI Coding Agent Teammate? (2026)", url = "https://arxiv.org/abs/2606.13763" },
+  { label = "Coding Agents Can Develop COBOL Systems (2026)", url = "https://inria.hal.science/hal-05743207" },
+]
+
+[[themes]]
+title = "LLMs for software evolution and modernization"
+summary = "Using large language models to migrate, summarize, and co-evolve legacy and industrial code (COBOL, IBM-i RPG, metamodels), with industrial partners."
+text = """
+Legacy systems have to evolve, and LLMs are a new tool for migrating, documenting, and transforming them. With CGI France, Sopra Steria, and the Inria LLM4Code challenge, I study how reliable these tools are on real industrial code.
+"""
+links = [
+  { label = "CRACS, SCAM 2026 Distinguished Paper", url = "https://hal.science/hal-05757598" },
+  { label = "Code Transformation Rule Synthesis Using LLMs (ASE 2026)", url = "https://arxiv.org/abs/2609.03592" },
+]
+
+[[themes]]
+title = "Deep variability and reproducible science"
+summary = "Variability across layers (hardware, OS, compilers, libraries, inputs, options) and its consequences for the reproducibility and replicability of computational science."
+text = """
+Results depend not only on software options but on inputs, compilers, libraries, operating systems, and hardware. This *deep* variability threatens the generalization of empirical results and the reproducibility of computational science, from neuroimaging pipelines to machine learning. I also teach reproducibility hands-on.
+"""
+links = [
+  { label = "Embracing Deep Variability for Reproducibility and Replicability (REP 2024)", url = "https://hal.science/hal-04582287" },
+  { label = "Navigating Variability in Neuroimaging Software Pipelines (SPLC 2025)", url = "https://hal.science/hal-05158426" },
+]
+
+[[themes]]
+title = "Learning configurable systems"
+summary = "Sampling, measuring, and learning the performance and build behaviour of huge configuration spaces such as the Linux kernel."
+text = """
+How fast, how big, or how buggy is a configuration? I study how to sample, measure, and learn the behaviour of configurable systems with statistical machine learning, up to the 15,000+ options of the Linux kernel, including transfer learning across versions and incremental, reproducible builds.
+"""
+links = [
+  { label = "Linux Kernel Configurations at Scale (EASE 2025)", url = "https://hal.science/hal-05063560" },
+  { label = "PyroBuildS: incremental build of configurations (JSS 2026)", url = "https://hal.science/hal-05213625" },
+]
+
+[[themes]]
+title = "Testing AI-based and configurable systems"
+summary = "Testing reinforcement learning policies, uniform random samplers, and chess engines; replication studies."
+text = """
+I work on testing systems whose behaviour is learned, such as reinforcement learning policies, and on testing the tools we rely on to explore configuration spaces, such as uniform random samplers. Replication studies are part of the method.
+"""
+links = [
+  { label = "Fault Diversity in Reinforcement Learning Policy Testing (TOSEM 2026)", url = "https://doi.org/10.1145/3821533" },
+  { label = "Testing Uniform Random Samplers (TOSEM 2026)", url = "https://doi.org/10.1145/3797477" },
+]
+
+[[themes]]
+title = "Modelling and reverse engineering variability"
+summary = "Feature models, variability languages (FAMILIAR, UVL), product comparison matrices, and synthesizing variability models from existing artefacts."
+text = """
+Feature models are the de facto standard for documenting what can vary. I have worked on their foundations, on languages and tools to compose, slice, compare, and reason about them (FAMILIAR, UVL), and on extracting them from code, configurators, and tables. This is the topic of my PhD and HDR.
+"""
+links = [
+  { label = "24 Reasons Why Variability Models Are Not Yet Universal (keynote, 2024)", url = "https://blog.mathieuacher.com/VaMoS2024/" },
+  { label = "Handbook of Re-Engineering Software Intensive Systems into Software Product Lines (2023)", url = "https://link.springer.com/book/10.1007/978-3-031-11686-5" },
+]

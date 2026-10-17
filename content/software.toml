@@ -1,0 +1,63 @@
+# Software and research artefacts. `status` is free text; "active" and "maintained" get a green pill.
+
+[[projects]]
+name = "Agentic chess engines"
+url = "https://github.com/acherm/agentic-chessengine-metaanalysis"
+status = "active"
+text = """
+Chess engines written from scratch by coding agents (Claude Code, Codex) in 17+ languages, from Rust and Java to COBOL, Rocq, Lean, SQL, LaTeX ([TeXCCChess](https://github.com/acherm/agentic-chessengine-latex-TeXCCChess)), and Brainfuck ([BFChess](https://github.com/acherm/agentic-chessengine-brainfuck)), with an Elo evaluation harness.
+"""
+
+[[projects]]
+name = "UVL Studio"
+url = "https://blog.mathieuacher.com/uvl-studio/"
+status = "active"
+text = """
+A self-contained web workbench for the Universal Variability Language: text editor, live checks, feature diagram, and SAT-based interactive configuration ([source](https://github.com/acherm/uvl-studio)).
+"""
+
+[[projects]]
+name = "PlantUML Studio"
+url = "https://blog.mathieuacher.com/plantuml-studio/"
+status = "active"
+text = """
+An offline, single-file PlantUML editor for teaching UML, with live well-formedness checks and "did you mean" diagnostics ([source](https://github.com/acherm/plantuml-studio)).
+"""
+
+[[projects]]
+name = "Programming languages catalog"
+url = "https://blog.mathieuacher.com/PL-ultimate-llm/"
+status = "active"
+text = """
+A catalog of 14,000+ programming languages merged from PLDB, Linguist, Pygments, Wikipedia, and Rosetta Code, with evidence from Software Heritage (CodeCommons project).
+"""
+
+[[projects]]
+name = "gptchess"
+url = "https://github.com/acherm/gptchess"
+text = """
+Experiments pitting GPT models against Stockfish: Elo estimates and legal-move abilities of large language models ([blog post](https://blog.mathieuacher.com/GPTsChessEloRatingLegalMoves/)).
+"""
+
+[[projects]]
+name = "FAMILIAR"
+url = "https://familiar-project.github.io/"
+text = """
+A domain-specific language for managing feature models: compose, decompose, diff, refactor, configure, and reason about several feature models with SAT solvers and BDDs. Migrated to modern Java with a coding agent in 2026.
+"""
+
+[[projects]]
+name = "TuxML"
+url = "https://github.com/TuxML"
+status = "archived"
+text = """
+Sampling, building, measuring, and learning Linux kernel configurations at scale (build failures, kernel size), including transfer learning across kernel versions ([talk at ELC Europe 2019](https://youtu.be/UBghs-cwQX4)).
+"""
+
+[[projects]]
+name = "OpenCompare"
+url = "https://github.com/OpenCompare"
+status = "archived"
+text = """
+Tools for product comparison matrices: editors, miners (MatrixMiner), visualizers, and configurators. No longer maintained, but we learned a lot.
+"""

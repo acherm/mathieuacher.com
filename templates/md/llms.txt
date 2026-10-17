@@ -1,0 +1,37 @@
+# {{ site.person.name }}
+
+> {{ site.site.llms_summary | trim }}
+
+{{ site.site.llms_facts | trim }}
+
+## Pages
+
+- [Home]({{ base }}/index.md): biography, news, research themes, software, teaching, PhD and HDR theses, chess, contact
+- [Publications]({{ base }}/publications.md): all {{ pubs | length }} publications ({{ years[-1] }}–{{ years[0] }}) with venues, awards, links, and abstracts
+- [Students, projects & service]({{ base }}/service.md): PhD students, postdocs, research projects, conference organization, program committees
+- [BibTeX]({{ base }}/acher.bib): machine-readable bibliography (with abstracts, HAL ids, DOIs)
+
+## Research themes
+
+{% for t in research.themes %}
+- **{{ t.title }}**: {{ t.summary }}
+{% endfor %}
+
+## Selected publications
+
+{% for p in selected %}
+- [{{ p.title | md_escape }}]({{ p.main_url or base ~ '/publications/#' ~ p.key }}): {{ p.authors_text }}. {{ p.venue }}, {{ p.year }}.{% if p.award %} {{ p.award }}.{% endif %}
+
+{% endfor %}
+
+## Profiles
+
+{% for pr in site.profiles %}
+- [{{ pr.name }}]({{ pr.url }}){% if pr.about %}: {{ pr.about }}{% endif %}
+
+{% endfor %}
+
+## Optional
+
+- [Everything in one file]({{ base }}/llms-full.txt): home, service, and all publications with abstracts, concatenated as Markdown
+- [Blog]({{ site.site.blog }}): {{ site.site.blog_about }}

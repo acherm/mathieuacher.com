@@ -1,0 +1,136 @@
+{% extends "base.html" %}
+{% from "_macros.html" import pub %}
+{% block content %}
+<section id="main" class="hero wrap">
+  <img class="portrait" src="/{{ site.person.photo }}" alt="Portrait of {{ site.person.name }}" width="240" height="240">
+  <div class="hero-text">
+    <h1>{{ site.person.name }}</h1>
+    <p class="role">{{ site.person.job_title }}</p>
+    {% if site.person.distinction %}<p class="distinction">{{ site.person.distinction | mdi }}</p>{% endif %}
+    <ul class="affils">
+    {% for a in site.person.affiliations if a.show is not defined or a.show %}
+      <li><a href="{{ a.url }}">{{ a.label or a.name }}</a></li>
+    {% endfor %}
+    </ul>
+    <div class="about prose">{{ about | md }}</div>
+    <ul class="profiles" aria-label="Profiles">
+    {% for pr in site.profiles %}
+      <li><a href="{{ pr.url }}"{% if pr.rel %} rel="{{ pr.rel }}"{% endif %}>{{ pr.name }}</a></li>
+    {% endfor %}
+    </ul>
+  </div>
+</section>
+
+<section id="news" class="wrap block">
+  <h2>News</h2>
+  <ol class="news">
+  {% for n in news[:site.site.news_visible] %}
+    <li><time datetime="{{ n.date }}">{{ n.date | month_year }}</time><div>{{ n.text | mdi }}</div></li>
+  {% endfor %}
+  </ol>
+  {% if news | length > site.site.news_visible %}
+  <details class="more">
+    <summary>Older news</summary>
+    <ol class="news">
+    {% for n in news[site.site.news_visible:] %}
+      <li><time datetime="{{ n.date }}">{{ n.date | month_year }}</time><div>{{ n.text | mdi }}</div></li>
+    {% endfor %}
+    </ol>
+  </details>
+  {% endif %}
+</section>
+
+<section id="research" class="wrap block">
+  <h2>Research</h2>
+  <div class="prose lead">{{ research.intro | md }}</div>
+  <div class="themes">
+  {% for t in research.themes %}
+    <article class="theme">
+      <h3>{{ t.title }}</h3>
+      <div class="prose">{{ t.text | md }}</div>
+      {% if t.links %}
+      <ul class="theme-links">
+      {% for l in t.links %}<li><a href="{{ l.url }}">{{ l.label }}</a></li>{% endfor %}
+      </ul>
+      {% endif %}
+    </article>
+  {% endfor %}
+  </div>
+</section>
+
+<section id="publications" class="wrap block">
+  <div class="section-head">
+    <h2>Selected publications</h2>
+    <a class="button" href="/publications/">All {{ pubs | length }} publications →</a>
+  </div>
+  <p class="muted">Papers with an award or that I consider representative. See also
+  {% for pr in site.profiles if pr.scholarly %}<a href="{{ pr.url }}">{{ pr.name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}.</p>
+  <div class="pubs compact">
+  {% for p in selected[:site.site.selected_visible] %}
+    {{ pub(p, full=False) }}
+  {% endfor %}
+  </div>
+  <p><a class="button" href="/publications/">Browse all publications with abstracts and BibTeX →</a></p>
+</section>
+
+<section id="dev" class="wrap block">
+  <h2>Software</h2>
+  <div class="cards">
+  {% for s in software %}
+    <article class="card">
+      <h3><a href="{{ s.url }}">{{ s.name }}</a>{% if s.status %} <span class="status status-{{ s.status | lower | replace(' ', '-') }}">{{ s.status }}</span>{% endif %}</h3>
+      <div class="prose">{{ s.text | md }}</div>
+    </article>
+  {% endfor %}
+  </div>
+</section>
+
+<section id="teaching" class="wrap block">
+  <h2>Teaching</h2>
+  <div class="prose">{{ teaching | md }}</div>
+</section>
+
+<section id="supervision" class="wrap block">
+  <div class="section-head">
+    <h2>Students &amp; service</h2>
+    <a class="button" href="/service/">Students, projects, and service →</a>
+  </div>
+  <div class="prose">{{ service.summary | md }}</div>
+</section>
+
+<section id="theses" class="wrap block">
+  <h2>Theses</h2>
+  <span id="hdr"></span>{# anchor used by the previous version of the site #}
+  <div class="theses">
+  {% for t in [theses.hdr, theses.phd] %}
+    <article class="thesis" id="{{ t.anchor }}">
+      <p class="kicker">{{ t.kind }} · {{ t.year }}</p>
+      <h3><a href="{{ t.url }}">{{ t.title }}</a></h3>
+      <p class="muted">{{ t.institution }}{% if t.supervisors %}. {{ t.supervisors }}{% endif %}</p>
+      <div class="pub-actions">
+        {% for l in t.links %}<a class="chip" href="{{ l.url }}">{{ l.label }}</a>{% endfor %}
+        <details class="fold">
+          <summary class="chip">Abstract</summary>
+          <div class="fold-body abstract prose">{{ t.abstract | md }}</div>
+        </details>
+        <details class="fold">
+          <summary class="chip">Committee</summary>
+          <div class="fold-body"><ul>{% for m in t.committee %}<li>{{ m }}</li>{% endfor %}</ul></div>
+        </details>
+      </div>
+    </article>
+  {% endfor %}
+  </div>
+</section>
+
+<section id="chess" class="wrap block">
+  <h2>Chess</h2>
+  <div class="prose">{{ chess | md }}</div>
+</section>
+
+<section id="contact" class="wrap block">
+  <h2>Contact</h2>
+  <div class="prose">{{ site.site.contact | md }}</div>
+</section>
+{% endblock %}
+{% block scripts %}<script src="/js/site.js" defer></script>{% endblock %}

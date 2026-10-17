@@ -1,0 +1,56 @@
+# PhD and HDR theses, shown on the home page (#phdthesis, #hdrthesis).
+
+[hdr]
+anchor = "hdrthesis"
+kind = "HDR (Habilitation à diriger des recherches)"
+year = 2021
+title = "Modelling, Reverse Engineering, and Learning Software Variability"
+institution = "University of Rennes 1, defended on 16 November 2021"
+url = "https://hal.science/tel-03521806"
+links = [
+  { label = "Manuscript (HAL)", url = "https://hal.science/tel-03521806" },
+  { label = "Video of the defense", url = "https://www.youtube.com/watch?v=w4qBwU7aavI" },
+]
+committee = [
+  "Krzysztof Czarnecki (University of Waterloo, Canada), reviewer",
+  "Ina Schaefer (Technische Universität Braunschweig, Germany), reviewer",
+  "Romain Rouvoy (University of Lille, IUF, France), reviewer",
+  "Julia Lawall (Inria, France), examiner",
+  "Christian Kästner (Carnegie Mellon University, USA), examiner",
+  "Jean-Marc Jézéquel (University of Rennes 1, France), examiner",
+]
+abstract = """
+Society expects software to deliver the right functionality, in a short amount of time and with fewer resources, in every possible circumstance whatever are the hardware, the operating systems, the compilers, or the data fed as input. For fitting such a diversity of needs, it is common that software comes in many variants and is highly configurable through configuration options, runtime parameters, conditional compilation directives, menu preferences, configuration files, plugins, etc. As there is no one-size-fits-all solution, software variability ("the ability of a software system or artifact to be efficiently extended, changed, customized or configured for use in a particular context") has been studied the last two decades and is a discipline of its own. Though highly desirable, software variability also introduces an enormous complexity due to the combinatorial explosion of possible variants. For example, the Linux kernel has 15000+ options and most of them can have 3 values: "yes", "no", or "module". Variability is challenging for maintaining, verifying, and configuring software systems (Web applications, Web browsers, video tools, etc.). It is also a source of opportunities to better understand a domain, create reusable artefacts, deploy performance-wise optimal systems, or find specialized solutions to many kinds of problems. In many scenarios, a model of variability is either beneficial or mandatory to explore, observe, and reason about the space of possible variants. For instance, without a variability model, it is impossible to establish a sampling strategy that would satisfy the constraints among options and meet coverage or testing criteria. I address a central question in this HDR manuscript: How to model software variability? I detail several contributions related to modelling, reverse engineering, and learning software variability.
+
+I first contribute to support the persons in charge of manually specifying feature models, the de facto standard for modeling variability. I develop an algebra together with a language for supporting the composition, decomposition, diff, refactoring, and reasoning of feature models. I further establish the syntactic and semantic relationships between feature models and product comparison matrices, a large class of tabular data. I then empirically investigate how these feature models can be used to test in the large configurable systems with different sampling strategies. Along with this effort, I report on the attempts and lessons learned when defining the "right" variability language. From a reverse engineering perspective, I contribute to synthesize variability information into models and from various kinds of artefacts. I develop foundations and methods for reverse engineering feature models from satisfiability formulae, product comparison matrices, dependencies files and architectural information, and from Web configurators. I also report on the degree of automation and show that the involvement of developers and domain experts is beneficial to obtain high-quality models. Thirdly, I contribute to learning constraints and non-functional properties (performance) of a variability-intensive system. I describe a systematic process "sampling, measuring, learning" that aims to enforce or augment a variability model, capturing variability knowledge that domain experts can hardly express. I show that supervised, statistical machine learning can be used to synthesize rules or build prediction models in an accurate and interpretable way. This process can even be applied to huge configuration space, such as the Linux kernel one.
+
+Despite wide applicability and observed benefits, I show that each individual line of contributions has limitations. I defend the following answer: a supervised, iterative process (1) based on the combination of reverse engineering, modelling, and learning techniques; (2) capable of integrating multiple variability information (eg expert knowledge, legacy artefacts, dynamic observations).
+
+Finally, this work opens different perspectives related to so-called deep software variability, security, smart build of configurations, and (threats to) science.
+"""
+
+[phd]
+anchor = "phdthesis"
+kind = "PhD thesis"
+year = 2011
+title = "Managing Multiple Feature Models: Foundations, Language, and Applications"
+institution = "University of Nice Sophia Antipolis, I3S laboratory (Modalis team)"
+supervisors = "Supervised by Philippe Collet and Philippe Lahire"
+url = "/PhDAcher2011-revised.pdf"
+links = [
+  { label = "Manuscript (PDF)", url = "/PhDAcher2011-revised.pdf" },
+  { label = "theses.fr", url = "https://theses.fr/2011NICE4052" },
+  { label = "FAMILIAR", url = "https://familiar-project.github.io/" },
+]
+committee = [
+  "Krzysztof Czarnecki, Associate Professor, University of Waterloo (Canada), reviewer",
+  "Jean-Marc Jézéquel, Professor, University of Rennes 1 (France), reviewer",
+  "Robert De Simone, Research Director, INRIA Sophia Antipolis (France), examiner",
+  "Patrick Heymans, Professor, University of Namur (Belgium), examiner",
+  "Robert B. France, Professor, Colorado State University (USA), examiner",
+  "Philippe Lahire, Professor, University of Nice Sophia Antipolis, supervisor",
+  "Philippe Collet, Associate Professor, University of Nice Sophia Antipolis, supervisor",
+]
+abstract = """
+**Feature models** (FMs) are a fundamental formalism for specifying and reasoning about commonality and variability of software product lines (SPLs). FMs are becoming increasingly complex, handled by several stakeholders or organizations, used to describe features at various levels of abstraction and related in a variety of ways. In different contexts and application domains, maintaining a single large FM is neither feasible nor desirable. Instead, multiple FMs are now used. In this thesis, we develop theoretical foundations and practical support for managing multiple FMs. We design and develop a set of **composition** and **decomposition** operators (aggregate, merge, slice) for supporting **separation of concerns**. The operators are formally defined, implemented with a fully automated algorithm and guarantee properties in terms of sets of configurations. We show how the composition and decomposition operators can be combined together or with other reasoning and editing operators to realize complex tasks. We propose a textual language, **FAMILIAR** (for FeAture Model scrIpt Language for manIpulation and Automatic Reasoning), which provides a practical solution for managing FMs on a large scale. An SPL practitioner can combine the different operators and manipulate a restricted set of concepts (FMs, features, configurations, etc.) using a concise notation and language facilities. FAMILIAR hides implementation details (e.g., solvers) and comes with a development environment. We report various applications of the operators and usages of FAMILIAR in different domains (medical imaging, video surveillance) and for different purposes (scientific workflow design, variability modeling from requirements to runtime, reverse engineering), showing the applicability of both the operators and the supporting language. Without the new capabilities brought by the operators and FAMILIAR, some analysis and reasoning operations would not be made possible in the different case studies.
+"""

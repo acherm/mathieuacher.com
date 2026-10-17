@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Students, projects & service · {{ site.person.name }}{% endblock %}
+{% block description %}PhD students, postdocs, research projects, and academic service (conference organization, program committees, reviewing) of {{ site.person.name }}.{% endblock %}
+{% block canonical %}/service/{% endblock %}
+{% block content %}
+<div class="wrap block">
+  <h1>Students, projects &amp; service</h1>
+  <div class="prose lead">{{ service.summary | md }}</div>
+
+  {% for group in service.people %}
+  <section class="block-sm" id="{{ group.id }}">
+    <h2>{{ group.title }}</h2>
+    <ul class="people">
+    {% for s in group.members %}
+      <li>
+        <p class="person-head"><strong>{% if s.url %}<a href="{{ s.url }}">{{ s.name }}</a>{% else %}{{ s.name }}{% endif %}</strong> <span class="muted">· {{ s.years }}{% if s.role %} · {{ s.role }}{% endif %}</span></p>
+        {% if s.topic %}<p>{{ s.topic | mdi }}</p>{% endif %}
+        {% if s.with %}<p class="muted">With {{ s.with }}{% if s.funding %} · {{ s.funding }}{% endif %}</p>{% elif s.funding %}<p class="muted">{{ s.funding }}</p>{% endif %}
+        {% if s.now %}<p class="muted">Now: {{ s.now | mdi }}</p>{% endif %}
+      </li>
+    {% endfor %}
+    </ul>
+  </section>
+  {% endfor %}
+
+  <section class="block-sm" id="projects">
+    <h2>Research projects</h2>
+    <ul class="people">
+    {% for pr in service.projects %}
+      <li>
+        <p class="person-head"><strong>{% if pr.url %}<a href="{{ pr.url }}">{{ pr.name }}</a>{% else %}{{ pr.name }}{% endif %}</strong> {% if pr.years or pr.role %}<span class="muted">{% if pr.years %} · {{ pr.years }}{% endif %}{% if pr.role %} · {{ pr.role }}{% endif %}</span>{% endif %}</p>
+        <p>{{ pr.text | mdi }}</p>
+      </li>
+    {% endfor %}
+    </ul>
+  </section>
+
+  <section class="block-sm" id="organization">
+    <h2>Organization &amp; leadership</h2>
+    <ul class="timeline">
+    {% for r in service.roles %}
+      <li><span class="when">{{ r.year }}</span><span>{{ r.text | mdi }}</span></li>
+    {% endfor %}
+    </ul>
+  </section>
+
+  <section class="block-sm" id="committees">
+    <h2>Program committees</h2>
+    <div class="prose">{{ service.committees | md }}</div>
+  </section>
+
+  <section class="block-sm" id="juries">
+    <h2>PhD juries and prize committees</h2>
+    <div class="prose">{{ service.juries | md }}</div>
+  </section>
+
+  <section class="block-sm" id="reviewing">
+    <h2>Journal reviewing</h2>
+    <div class="prose">{{ service.reviewing | md }}</div>
+  </section>
+</div>
+{% endblock %}

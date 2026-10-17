@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% from "_macros.html" import pub %}
+{% block title %}Publications · {{ site.person.name }}{% endblock %}
+{% block description %}All {{ pubs | length }} publications of {{ site.person.name }} ({{ years[-1] }}–{{ years[0] }}) on software variability, configurable systems, model-driven engineering, and machine learning for software engineering, with abstracts, PDFs, and BibTeX.{% endblock %}
+{% block canonical %}/publications/{% endblock %}
+{% block head %}
+<script type="application/ld+json">
+{{ pubs_ld | tojson_ld }}
+</script>
+{% endblock %}
+{% block content %}
+<div class="wrap block">
+  <h1>Publications</h1>
+  <p class="muted">
+    {{ pubs | length }} publications, {{ years[-1] }}–{{ years[0] }}:
+    {% for key, label in categories.items() if counts[key] %}{{ counts[key] }} {{ label | lower }}{% if not loop.last %}, {% endif %}{% endfor %}.
+    Also on {% for pr in site.profiles if pr.scholarly %}<a href="{{ pr.url }}">{{ pr.name }}</a>{% if not loop.last %}, {% endif %}{% endfor %}.
+    Download everything as <a href="/acher.bib">BibTeX</a> or <a href="/publications.md">Markdown</a>.
+  </p>
+
+  <form class="filters" role="search" aria-label="Filter publications" hidden>
+    <label class="search">
+      <span class="visually-hidden">Search</span>
+      <input type="search" name="q" placeholder="Search titles, authors, venues, abstracts…" autocomplete="off">
+    </label>
+    <div class="filter-row" role="group" aria-label="Type">
+      <button type="button" class="toggle" data-cat="" aria-pressed="true">All</button>
+      {% for key, label in categories.items() if counts[key] %}
+      <button type="button" class="toggle" data-cat="{{ key }}" aria-pressed="false">{{ label }} <span class="count">{{ counts[key] }}</span></button>
+      {% endfor %}
+    </div>
+    <div class="filter-row" role="group" aria-label="Highlights">
+      <button type="button" class="toggle" data-flag="selected" aria-pressed="false">★ Selected</button>
+      <button type="button" class="toggle" data-flag="award" aria-pressed="false">Awards <span class="count">{{ awards | length }}</span></button>
+      <button type="button" class="toggle" data-expand aria-pressed="false">Show all abstracts</button>
+    </div>
+    <p class="result-count" aria-live="polite"></p>
+  </form>
+
+  <nav class="years" aria-label="Years">
+    {% for y in years %}<a href="#y{{ y }}">{{ y }}</a>{% endfor %}
+  </nav>
+
+  <div class="pubs">
+  {% for y in years %}
+    <section class="year-group" id="y{{ y }}" data-year="{{ y }}">
+      <h2 class="year-head">{{ y }}</h2>
+      {% for p in pubs if p.year == y %}
+      {{ pub(p) }}
+      {% endfor %}
+    </section>
+  {% endfor %}
+  </div>
+</div>
+{% endblock %}
+{% block scripts %}<script src="/js/site.js" defer></script>{% endblock %}

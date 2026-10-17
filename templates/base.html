@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="{{ site.site.lang }}">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{{ site.person.name }} · {{ site.person.job_title }}{% endblock %}</title>
+<meta name="description" content="{% block description %}{{ site.site.description }}{% endblock %}">
+<meta name="author" content="{{ site.person.name }}">
+<link rel="canonical" href="{{ base }}{% block canonical %}/{% endblock %}">
+{% if md_url %}
+<link rel="alternate" type="text/markdown" href="{{ md_url }}" title="Markdown version">
+{% endif %}
+<link rel="alternate" type="text/plain" href="/llms.txt" title="llms.txt">
+<meta property="og:type" content="profile">
+<meta property="og:title" content="{{ self.title() }}">
+<meta property="og:description" content="{{ self.description() }}">
+<meta property="og:url" content="{{ base }}{{ self.canonical() }}">
+<meta property="og:image" content="{{ base }}/{{ site.person.photo }}">
+<meta property="profile:first_name" content="{{ site.person.given_name }}">
+<meta property="profile:last_name" content="{{ site.person.family_name }}">
+<meta name="twitter:card" content="summary">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#fbfaf7" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#14161a" media="(prefers-color-scheme: dark)">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/site.css">
+<script type="application/ld+json">
+{{ person_ld | tojson_ld }}
+</script>
+{% block head %}{% endblock %}
+</head>
+<body class="page-{{ page }}">
+<a class="skip" href="#content">Skip to content</a>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="/">{{ site.person.name }}</a>
+    <nav aria-label="Main">
+      <ul>
+      {% for item in site.nav %}
+        <li><a href="{{ item.url }}"{% if item.page == page %} aria-current="page"{% endif %}{% if item.external %} rel="noopener"{% endif %}>{{ item.label }}{% if item.external %}<span class="ext" aria-hidden="true">↗</span>{% endif %}</a></li>
+      {% endfor %}
+      </ul>
+    </nav>
+  </div>
+</header>
+<main id="content">
+{% block content %}{% endblock %}
+</main>
+<footer class="site-footer">
+  <div class="wrap footer-inner">
+    <p>© {{ built[:4] }} {{ site.person.name }} · Last updated {{ built }}</p>
+    <p class="machine">
+      For machines: <a href="/llms.txt">llms.txt</a> · <a href="/llms-full.txt">llms-full.txt</a>{% if md_url %} · <a href="{{ md_url }}">this page in Markdown</a>{% endif %} · <a href="/acher.bib">BibTeX</a>
+    </p>
+  </div>
+</footer>
+{% block scripts %}{% endblock %}
+</body>
+</html>

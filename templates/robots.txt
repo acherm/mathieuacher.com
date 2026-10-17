@@ -1,0 +1,6 @@
+# Humans, search engines, and LLM crawlers are all welcome.
+# A Markdown summary for language models: {{ base }}/llms.txt
+User-agent: *
+Allow: /
+
+Sitemap: {{ base }}/sitemap.xml

@@ -1,0 +1,114 @@
+# News, most recent first. `date` is YYYY-MM; `text` is Markdown.
+# The first `news_visible` items (see site.toml) are shown; the rest go under "Older news".
+
+[[news]]
+date = "2026-10"
+text = "Paper at ASE 2026: *Code Transformation Rule Synthesis Using LLMs: Potential and Limits*, with Axel Allain, Aymeric Blot, and Djamel Eddine Khelladi ([arXiv](https://arxiv.org/abs/2609.03592))."
+
+[[news]]
+date = "2026-10"
+text = "**Most Influential Paper Award** at [VARIABILITY 2026](https://conf.researchr.org/track/variability-2026/variability-2026-mip-award), the new conference merging SPLC, VaMoS, and ICSR, for *Using Machine Learning to Infer Constraints for Product Lines* (SPLC 2016), with Paul Temple, José A. Galindo, and Jean-Marc Jézéquel. I was also Journal-First co-chair."
+
+[[news]]
+date = "2026-09"
+text = "**Paper accepted at NeurIPS 2026**: *Externalized CPDAG Summaries Improve LLM Causal Deduction*, with Wentao Sun, João Paulo Nogueira, Dominique Verchère, and Alonso Silva ([arXiv](https://arxiv.org/abs/2609.31071))."
+
+[[news]]
+date = "2026-09"
+text = "**Distinguished Paper Award** at SCAM 2026 for *CRACS: Question-Driven Assessment of Legacy Code Summaries in Industrial IBM-i Modernization*, with N'Guessan Hermann Kouadio, Olivier Barais, and Jean-Marc Jézéquel, in collaboration with CGI France ([HAL](https://hal.science/hal-05757598))."
+
+[[news]]
+date = "2026-09"
+text = "Talk at the Semaine de l'IA of Université de Rennes: *Langages de programmation à l'ère de l'IA générative : COBOL, M&M's, français… ou peu importe ?* ([video](https://www.youtube.com/watch?v=Aj5arTQzMQ4), [slides](https://blog.mathieuacher.com/languages-codingagents-semaineIA2026/))."
+
+[[news]]
+date = "2026-06"
+text = "Georges Aaron Randrianaina received the **GDR SciLog 2026 thesis prize** for *Incremental, Reproducible Builds of Software Variants* ([news](https://www.irisa.fr/en/news/2026-06/congratulations-georges-aaron-randrianaina-who-has-been-awarded-gdr-scilog-software)). Congratulations!"
+
+[[news]]
+date = "2026-06"
+text = "Preprint: *Do Programming Languages Still Matter to Your AI Coding Agent Teammate? Evidence at Scale from Chess Engines*, with Jean-Marc Jézéquel: 34 engines, 17 languages, 2 coding agents ([arXiv](https://arxiv.org/abs/2606.13763))."
+
+[[news]]
+date = "2026-03"
+text = "Blog series on coding agents writing chess engines from scratch in Rust, C++, COBOL, Rocq, LaTeX ([TeXCCChess](https://blog.mathieuacher.com/TeXCCChessEngine/)), Brainfuck ([BFChess](https://blog.mathieuacher.com/BFChessChessEngineBrainfuck/)), and more ([overview](https://blog.mathieuacher.com/FromScratchChessEnginesPolyglot/))."
+
+[[news]]
+date = "2025-12"
+text = "JSS article: *Piloting Copilot, Codex, and StarCoder2: Hot Temperature, Cold Prompts, or Black Magic?* ([DOI](https://doi.org/10.1016/j.jss.2025.112562))."
+
+[[news]]
+date = "2025-09"
+text = "Keynote at SBCARS (CBSoft 2025, Brazil): *Software Variability for Replicable Science*. Three papers at SPLC 2025 on neuroimaging pipelines, feature reduction and energy, and uniform sampling."
+
+[[news]]
+date = "2025-07"
+text = "*Teaching Reproducibility and Embracing Variability* at ACM REP 2025, about my reproducibility course at INSA Rennes ([blog post](https://blog.mathieuacher.com/TeachingReproducibilityVariability/))."
+
+[[news]]
+date = "2025-06"
+text = "Three papers at EASE 2025: a dataset of Linux kernel configurations at scale, LLM-based code customization, and JHipster performance."
+
+[[news]]
+date = "2025-05"
+text = "Two PhD defenses: Zohra Kaouter Kebaili on metamodel and code co-evolution, and Georges Aaron Randrianaina on incremental and reproducible builds of software variants."
+
+[[news]]
+date = "2025-02"
+text = "General chair of [VaMoS 2025](https://familiar-project.github.io/VaMoS2025/), the 19th International Working Conference on Variability Modelling of Software-Intensive Systems, in Rennes (4–6 February 2025)."
+
+[[news]]
+date = "2024-09"
+text = "**Distinguished Paper Award** at ISSTA 2024 for our replicability study of MDPFuzz, with the Inria–Simula associate team RIPOST."
+
+[[news]]
+date = "2024-05"
+text = "Our experiments on large language models playing chess are featured in Monsieur Phi's video *ChatGPT rêve-t-il de cavaliers électriques ?* ([video](https://www.youtube.com/watch?v=6D1XIbkm4JE), in French)."
+
+[[news]]
+date = "2024-04"
+text = "**Best Paper Award** at AST 2024 for *Testing for Fault Diversity in Reinforcement Learning* ([press release](https://www.linkedin.com/posts/simula-research-laboratory_ast2024-simula-research-activity-7187052083521458177-dsHW/))."
+
+[[news]]
+date = "2023-10"
+text = "**Best Paper Award** at MODELS 2023 for *Experience in Specializing a Generic Realization Language for SPL Engineering at Airbus*, with Airbus and McGill University."
+
+[[news]]
+date = "2023-04"
+text = "Luc Lesoil defended his PhD thesis, *Deep Software Variability for Resilient Performance Models of Configurable Systems*."
+
+[[news]]
+date = "2023-01"
+text = "The *Handbook of Re-Engineering Software Intensive Systems into Software Product Lines* is out ([Springer](https://link.springer.com/book/10.1007/978-3-031-11686-5)): 20 chapters and 78 contributors on reverse engineering variability and re-engineering product lines and configurable systems."
+
+[[news]]
+date = "2022-09"
+text = "I am now Full Professor at [INSA Rennes](https://www.insa-rennes.fr/), still in Rennes and in the DiverSE team."
+
+[[news]]
+date = "2022-06"
+text = "**Best Paper Award** at ICSR 2022 ([press release](https://www.irisa.fr/article/2022-06/felicitations-lequipe-diverse-pour-le-prix-obtenu-icsr-2022))."
+
+[[news]]
+date = "2022-05"
+text = "Three papers at [ICSE 2022](https://conf.researchr.org/home/icse-2022): incremental build (research and NIER tracks) and transfer learning across Linux versions (journal first)."
+
+[[news]]
+date = "2022-02"
+text = "Keynote on reproducible science and deep software variability, and two papers, at [VaMoS 2022](https://vamos2022.isti.cnr.it/)."
+
+[[news]]
+date = "2021-12"
+text = "Hugo Martin defended his PhD thesis, *Machine Learning for Performance Modelling on Colossal Software Configuration Spaces*."
+
+[[news]]
+date = "2021-11"
+text = "I defended my HDR, *Modelling, Reverse Engineering, and Learning Software Variability* ([manuscript](https://hal.science/tel-03521806), [video](https://www.youtube.com/watch?v=w4qBwU7aavI))."
+
+[[news]]
+date = "2021-09"
+text = "**Best Paper Award** at SPLC 2021 ([press release](https://www.irisa.fr/article/2021-09/best-research-paper-award-la-conference-acm-international-systems-and-software))."
+
+[[news]]
+date = "2021-06"
+text = "Appointed junior member of the Institut Universitaire de France, starting October 2021 ([announcement](https://www.iufrance.fr/detail-de-lactualite/247.html))."
