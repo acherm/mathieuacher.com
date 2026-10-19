@@ -88,7 +88,7 @@ GitHub Pages serves the site (workflow: `.github/workflows/pages.yml`, custom do
 
 MX records (OVH mail) are not affected. The `_github-pages-challenge-acherm` TXT record verifies the domain on the GitHub account.
 
-The primary address is `www.mathieuacher.com`; GitHub redirects `mathieuacher.com` to it. With the apex as primary, GitHub never started the HTTPS certificate request (stuck at "new" for more than a day in October 2026, despite valid DNS, a verified domain, re-adding the domain, and re-creating the Pages site); with `www` as primary, the request started. If you ever switch back, change the domain in the repository's Pages settings and `url`/`domain` in `content/site.toml` together.
+The primary address is `www.mathieuacher.com`; GitHub redirects `mathieuacher.com` to it. With the apex as primary, GitHub never started the HTTPS certificate request (stuck at "new" for more than a day in October 2026, despite valid DNS, a verified domain, re-adding the domain, and re-creating the Pages site); with `www` as primary, the request started but stalled again overnight at "Requesting a new certificate". It completed within minutes once the DNS check was re-run (`gh api repos/acherm/mathieuacher.com/pages/health`, which answered 202 then 200, and reloading the repository's Pages settings page). If a certificate ever stalls, try that first. The certificate covers both names and GitHub renews it. If you ever switch back, change the domain in the repository's Pages settings and `url`/`domain` in `content/site.toml` together.
 
 ### Old OVH hosting
 
