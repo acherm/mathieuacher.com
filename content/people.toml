@@ -32,7 +32,7 @@ name = "Wentao Sun"
 kind = "phd"
 status = "ongoing"
 start = "2026"
-topic = "LLM causal deduction ([NeurIPS 2026 paper](https://mathieuacher.com/publications/#sun2026externalized))"
+topic = "LLM causal deduction ([NeurIPS 2026 paper](/publications/#sun2026externalized))"
 funding = "CIFRE with Nokia"
 
 [[person]]

@@ -1,8 +1,8 @@
 # Identity, navigation, profiles, and the texts used for meta tags and llms.txt.
 
 [site]
-url = "https://mathieuacher.com"
-domain = "mathieuacher.com"
+url = "https://www.mathieuacher.com"
+domain = "www.mathieuacher.com"
 lang = "en"
 blog = "https://blog.mathieuacher.com"
 blog_about = "posts on software variability, coding agents and LLMs, programming languages, chess and AI, research, and teaching"

@@ -37,7 +37,7 @@ kind = "talk"
 title = "Un ordinateur, ça ne calcule jamais juste"
 outlet = "Fête de la science, INSA Rennes"
 url = "https://hal.science/hal-04736121"
-text = "Why computers never compute exactly, and why it matters; also a chapter with Jean-Marc Jézéquel in [*Le calcul à découvert*](https://mathieuacher.com/publications/#acher2025ordinateur) (CNRS Éditions, 2025)."
+text = "Why computers never compute exactly, and why it matters; also a chapter with Jean-Marc Jézéquel in [*Le calcul à découvert*](/publications/#acher2025ordinateur) (CNRS Éditions, 2025)."
 
 [[item]]
 date = "2026"
