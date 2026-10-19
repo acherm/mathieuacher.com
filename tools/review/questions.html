@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clarification questions</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/__review/static/ui.css">
+</head>
+<body>
+<div class="top">
+  <div class="wrap">
+    <div class="row">
+      <strong id="title" class="grow">Questions</strong>
+      <a class="button" href="/__review/">Review home</a>
+      <a class="button" href="/">Site</a>
+    </div>
+    <div class="progress" aria-hidden="true"><span id="bar"></span></div>
+    <div class="row small">
+      <span id="stats" class="grow muted"></span>
+      <div class="seg" role="group" aria-label="Show">
+        <button type="button" data-filter="todo" aria-pressed="true">To answer</button>
+        <button type="button" data-filter="later">Later</button>
+        <button type="button" data-filter="answered">Answered</button>
+        <button type="button" data-filter="all">All</button>
+      </div>
+      <input id="search" type="search" placeholder="Search" style="width: 12rem">
+      <button type="button" id="next">Next to answer ↓</button>
+    </div>
+  </div>
+</div>
+<main class="wrap">
+  <div id="intro" class="muted"></div>
+  <nav class="toc" id="toc" aria-label="Sections"></nav>
+  <nav class="toc" id="toc-markers" aria-label="Dossier markers"></nav>
+  <div id="list"></div>
+</main>
+<script>
+"use strict";
+const TOKEN = "__TOKEN__";
+let DATA = null, filter = "todo", query = "";
+
+function h(tag, attrs, ...kids) {
+  const el = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (v == null || v === false) continue;
+    if (k === "class") el.className = v;
+    else if (k === "html") el.innerHTML = v;
+    else if (k === "text") el.textContent = v;
+    else if (k.startsWith("on")) el.addEventListener(k.slice(2), v);
+    else el.setAttribute(k, v === true ? "" : v);
+  }
+  for (const kid of kids.flat(Infinity)) if (kid != null) el.append(kid);
+  return el;
+}
+const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+function inline(s) {
+  return esc(s)
+    .replace(/`([^`]+)`/g, "<code>$1</code>")
+    .replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>")
+    .replace(/(^|[^*])\*([^*\s][^*]*)\*/g, "$1<em>$2</em>")
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+|\/[^)\s]*)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+}
+function md(s) {
+  if (!s) return "";
+  const out = [];
+  let list = null;
+  for (const line of String(s).split("\n")) {
+    const m = line.match(/^\s*[-*] (.*)$/);
+    if (m) { if (!list) { list = []; } list.push("<li>" + inline(m[1]) + "</li>"); continue; }
+    if (list) { out.push("<ul>" + list.join("") + "</ul>"); list = null; }
+    if (line.trim()) out.push("<p>" + inline(line) + "</p>");
+  }
+  if (list) out.push("<ul>" + list.join("") + "</ul>");
+  return out.join("");
+}
+
+async function post(body) {
+  const r = await fetch("/__review/api/answers", {
+    method: "POST", headers: { "Content-Type": "application/json", "X-Review-Token": TOKEN }, body: JSON.stringify(body),
+  });
+  if (!r.ok) throw new Error("save failed: " + r.status);
+  return r.json();
+}
+
+const answer = (q) => DATA.answers[q.id] || {};
+const stateOf = (q) => answer(q).state || "todo";
+function hasValue(v) {
+  if (v == null) return false;
+  if (Array.isArray(v)) return v.length > 0;
+  if (typeof v === "object") return Object.values(v).some((x) => String(x || "").trim());
+  return String(v).trim() !== "";
+}
+function visible(q) {
+  const st = stateOf(q);
+  if (filter === "todo" && st !== "todo") return false;
+  if (filter === "later" && st !== "later" && st !== "unknown") return false;
+  if (filter === "answered" && st !== "answered") return false;
+  if (query) {
+    const hay = [q.q, q.context, q.id, JSON.stringify(q.values || []), JSON.stringify(q.options || [])].join(" ").toLowerCase();
+    if (!hay.includes(query)) return false;
+  }
+  return true;
+}
+
+function stats() {
+  const qs = DATA.questions, n = qs.length;
+  const c = { answered: 0, later: 0, unknown: 0 };
+  for (const q of qs) { const s = stateOf(q); if (s in c) c[s]++; }
+  document.getElementById("bar").style.width = (n ? (100 * c.answered) / n : 0) + "%";
+  document.getElementById("stats").textContent =
+    `${c.answered} of ${n} answered · ${c.later} later · ${c.unknown} don't know · ${n - c.answered - c.later - c.unknown} to answer`;
+  const chip = (s, label) => {
+    const qs = DATA.questions.filter((q) => q.section === s.id);
+    const todo = qs.filter((q) => stateOf(q) === "todo").length;
+    return h("a", { href: "#sec-" + s.id }, label + " ", h("span", { class: "n", text: todo ? `${todo}/${qs.length}` : "✓" }));
+  };
+  const markers = DATA.sections.filter((s) => s.id.startsWith("m-"));
+  document.getElementById("toc").replaceChildren(...DATA.sections.filter((s) => !s.id.startsWith("m-")).map((s) => chip(s, s.title)));
+  document.getElementById("toc-markers").replaceChildren(...(markers.length ? [h("span", { class: "muted small", text: "Dossier markers:" })] : []),
+    ...markers.map((s) => chip(s, s.id.slice(2))));
+}
+
+function card(q) {
+  const a = answer(q);
+  const st = stateOf(q);
+  const saved = h("span", { class: "saved" });
+  let timer = null;
+  const read = {};  // functions returning current value / other
+  async function save(stateOverride) {
+    const value = read.value ? read.value() : null;
+    const other = read.other ? read.other() : "";
+    const state = stateOverride !== undefined ? stateOverride
+      : hasValue(value) || other.trim() ? "answered" : (a.state === "later" || a.state === "unknown" ? a.state : null);
+    try {
+      const r = await post({ id: q.id, value, other, note: note.value, state });
+      DATA.answers[q.id] = r;
+      el.className = "card " + (r.state || "");
+      saved.textContent = "Saved " + new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+      stats();
+    } catch (e) { saved.textContent = String(e); saved.style.color = "var(--danger)"; }
+  }
+  const soon = () => { clearTimeout(timer); timer = setTimeout(() => save(), 700); };
+
+  const kids = [];
+  const tags = [h("span", { class: "pill", text: (DATA.sections.find((s) => s.id === q.section) || {}).title || q.section })];
+  if (q.private) tags.push(h("span", { class: "pill private", title: "Goes to the private overlay or the dossier, never to the public site", text: "private" }));
+  if (a.applied) tags.push(h("span", { class: "pill applied", title: a.applied, text: "applied" }));
+  tags.push(h("span", { class: "muted small", text: q.id }));
+  kids.push(h("div", { class: "row" }, tags));
+  kids.push(h("h3", { text: q.q }));
+  if (q.context) kids.push(h("div", { class: "context", html: md(q.context) }));
+  if (q.values && q.values.length) {
+    kids.push(h("table", { class: "values" }, h("tbody", {}, q.values.map((v) =>
+      h("tr", {}, h("td", { text: v.label }), h("td", { html: inline(v.value || "—") }), h("td", { html: v.where ? inline(v.where) : "" }))))));
+  }
+
+  const type = q.type === "yesno" ? "choice" : q.type || "text";
+  const options = q.type === "yesno" && !q.options ? ["Yes", "No"] : q.options || [];
+  const name = "q-" + q.id;
+  if (type === "choice" || type === "multi") {
+    const input = type === "choice" ? "radio" : "checkbox";
+    const cur = a.value;
+    const boxes = options.map((o) => {
+      const opt = typeof o === "string" ? { value: o, label: o } : o;
+      const checked = type === "choice" ? cur === opt.value : Array.isArray(cur) && cur.includes(opt.value);
+      const box = h("input", { type: input, name, value: opt.value, checked, onchange: () => save() });
+      return h("label", {}, box, h("span", {}, h("span", { html: inline(opt.label) }), opt.hint ? h("span", { class: "muted small", html: " — " + inline(opt.hint) }) : null));
+    });
+    let otherText = null;
+    if (q.other !== false) {
+      otherText = h("input", { type: "text", class: "other", placeholder: "Other / precise value", value: a.other || "", oninput: soon });
+      boxes.push(h("label", {}, h("span", { class: "muted", text: "Other:" }), otherText));
+    }
+    kids.push(h("div", { class: "options" }, boxes));
+    read.value = () => {
+      const on = [...el.querySelectorAll(`input[name="${name}"]:checked`)].map((b) => b.value);
+      return type === "choice" ? on[0] || null : on;
+    };
+    read.other = () => (otherText ? otherText.value : "");
+  } else if (type === "fields") {
+    const inputs = {};
+    kids.push(h("div", { class: "fields" }, q.fields.map((f) => {
+      const v = (a.value || {})[f.key] ?? "";
+      let input;
+      if (f.options) {
+        input = h("select", { onchange: () => save() }, h("option", { value: "", text: "—" }),
+          f.options.map((o) => h("option", { value: o, text: o, selected: v === o })));
+      } else {
+        input = h("input", { type: "text", value: v, placeholder: f.placeholder || "", oninput: soon });
+      }
+      inputs[f.key] = input;
+      return h("label", {}, h("span", { html: inline(f.label) }), input, f.current ? h("span", { class: "cur", html: "Now: " + inline(f.current) }) : null);
+    })));
+    read.value = () => Object.fromEntries(Object.entries(inputs).map(([k, i]) => [k, i.value]));
+  } else {
+    const ta = h("textarea", { rows: 3, placeholder: q.placeholder || "Your answer" , oninput: soon });
+    ta.value = a.value || "";
+    kids.push(h("div", { class: "fields" }, ta));
+    read.value = () => ta.value;
+  }
+
+  const note = h("textarea", { rows: 2, placeholder: "Note, nuance, or source (optional)", oninput: soon });
+  note.value = a.note || "";
+  note.style.minHeight = "2.8em";
+  kids.push(note);
+  kids.push(h("div", { class: "foot" },
+    h("button", { type: "button", title: "Come back to it later", onclick: () => save("later"), text: "Later" }),
+    h("button", { type: "button", onclick: () => save("unknown"), text: "Don't know" }),
+    h("button", { type: "button", title: "Back to 'to answer'", onclick: () => save(null), text: "Reset state" }),
+    saved,
+    q.targets ? h("span", { class: "muted small grow", style: "text-align:right", html: "Will update: " + q.targets.map(inline).join(" · ") }) : null));
+
+  const el = h("article", { class: "card " + (st === "todo" ? "" : st), id: "q-" + q.id }, kids);
+  return el;
+}
+
+function render() {
+  const list = document.getElementById("list");
+  list.replaceChildren();
+  let shown = 0;
+  for (const s of DATA.sections) {
+    const qs = DATA.questions.filter((q) => q.section === s.id && visible(q));
+    if (!qs.length) continue;
+    list.append(h("h2", { class: "section-title", id: "sec-" + s.id, text: s.title }));
+    if (s.intro) list.append(h("div", { class: "section-intro", html: md(s.intro) }));
+    for (const q of qs) { list.append(card(q)); shown++; }
+  }
+  if (!shown) list.append(h("div", { class: "empty", text: filter === "todo" ? "Nothing left to answer here." : "No question matches." }));
+  stats();
+}
+
+document.querySelectorAll("[data-filter]").forEach((b) => b.addEventListener("click", () => {
+  filter = b.dataset.filter;
+  document.querySelectorAll("[data-filter]").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+  render();
+}));
+document.getElementById("search").addEventListener("input", (e) => { query = e.target.value.trim().toLowerCase(); render(); });
+document.getElementById("next").addEventListener("click", () => {
+  const cards = [...document.querySelectorAll(".card")];
+  const y = window.scrollY + 140;
+  const next = cards.find((c) => !/answered|later|unknown/.test(c.className) && c.offsetTop > y) || cards.find((c) => !/answered|later|unknown/.test(c.className));
+  if (next) next.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+(async () => {
+  const r = await fetch("/__review/api/questions");
+  DATA = await r.json();
+  DATA.sections = DATA.sections || [];
+  for (const q of DATA.questions) if (!DATA.sections.some((s) => s.id === q.section)) DATA.sections.push({ id: q.section, title: q.section });
+  if (DATA.title) { document.getElementById("title").textContent = DATA.title; document.title = DATA.title; }
+  document.getElementById("intro").innerHTML = md(DATA.intro || "") || (DATA.questions.length ? "" : "<p>No questions file yet (questions.json in the data directory).</p>");
+  render();
+  if (location.hash) document.querySelector(location.hash)?.scrollIntoView();
+})();
+</script>
+</body>
+</html>

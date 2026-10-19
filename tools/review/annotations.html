@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Notes on the site</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/__review/static/ui.css">
+</head>
+<body>
+<div class="top">
+  <div class="wrap">
+    <div class="row">
+      <strong class="grow">Notes and edits on the site</strong>
+      <a class="button" href="/__review/">Review home</a>
+      <a class="button" href="/">Site</a>
+    </div>
+    <div class="row small">
+      <span id="stats" class="grow muted"></span>
+      <div class="seg" role="group" aria-label="Show">
+        <button type="button" data-filter="open" aria-pressed="true">Open</button>
+        <button type="button" data-filter="applied">Done</button>
+        <button type="button" data-filter="wontfix">Won't fix</button>
+        <button type="button" data-filter="all">All</button>
+      </div>
+    </div>
+  </div>
+</div>
+<main class="wrap" id="list"></main>
+<script>
+"use strict";
+const TOKEN = "__TOKEN__";
+const KINDS = { edit: "Edit", comment: "Comment", question: "Unclear / question", wrong: "Wrong or outdated", missing: "Something missing", remove: "Remove" };
+const STATUS = { open: "open", applied: "done", wontfix: "won't fix" };
+let items = [], filter = "open";
+
+function h(tag, attrs, ...kids) {
+  const el = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (v == null || v === false) continue;
+    if (k === "class") el.className = v;
+    else if (k === "text") el.textContent = v;
+    else if (k.startsWith("on")) el.addEventListener(k.slice(2), v);
+    else el.setAttribute(k, v === true ? "" : v);
+  }
+  for (const kid of kids.flat(Infinity)) if (kid != null) el.append(kid);
+  return el;
+}
+async function api(method, url, body) {
+  const r = await fetch("/__review/api" + url, { method, headers: { "Content-Type": "application/json", "X-Review-Token": TOKEN }, body: body ? JSON.stringify(body) : undefined });
+  if (!r.ok) throw new Error(r.status);
+  return r.json();
+}
+function diff(a, b) {
+  const x = a.split(/(\s+)/), y = b.split(/(\s+)/);
+  if (x.length * y.length > 250000) return [h("del", { text: a }), " ", h("ins", { text: b })];
+  const L = Array.from({ length: x.length + 1 }, () => new Uint16Array(y.length + 1));
+  for (let i = x.length - 1; i >= 0; i--) for (let j = y.length - 1; j >= 0; j--) L[i][j] = x[i] === y[j] ? L[i + 1][j + 1] + 1 : Math.max(L[i + 1][j], L[i][j + 1]);
+  const out = []; let i = 0, j = 0;
+  while (i < x.length || j < y.length) {
+    if (i < x.length && j < y.length && x[i] === y[j]) { out.push(x[i]); i++; j++; }
+    else if (i < x.length && (j === y.length || L[i + 1][j] >= L[i][j + 1])) out.push(h("del", { text: x[i++] }));
+    else out.push(h("ins", { text: y[j++] }));
+  }
+  return out;
+}
+const short = (s, n = 220) => (s && s.length > n ? s.slice(0, n - 1) + "…" : s || "");
+
+function render() {
+  const list = document.getElementById("list");
+  const shown = items.filter((a) => filter === "all" || a.status === filter);
+  const open = items.filter((a) => a.status === "open").length;
+  document.getElementById("stats").textContent = `${items.length} notes · ${open} open · ${items.length - open} closed`;
+  list.replaceChildren();
+  if (!shown.length) { list.append(h("div", { class: "empty", text: items.length ? "Nothing here." : "No notes yet: open the site, switch the toolbar to Edit or Comment, and click a text." })); return; }
+  const pages = [...new Set(shown.map((a) => a.page))];
+  for (const p of pages) {
+    const group = shown.filter((a) => a.page === p);
+    list.append(h("h2", { class: "section-title" }, h("a", { href: p, text: (group[0].title || p) }), " ", h("span", { class: "muted small", text: p })));
+    for (const a of group) {
+      const status = h("select", { onchange: async () => { Object.assign(a, await api("PUT", "/annotations/" + a.id, { status: status.value })); render(); } },
+        Object.entries(STATUS).map(([k, v]) => h("option", { value: k, text: v, selected: a.status === k })));
+      const body = [];
+      if (a.kind === "edit") body.push(h("p", {}, diff(a.original, a.proposed)));
+      else body.push(h("p", { class: "muted" }, a.anchor.quote ? "“" + short(a.anchor.quote) + "”" : short(a.original)));
+      if (a.comment) body.push(h("p", {}, h("strong", { text: "Note: " }), a.comment));
+      if (a.resolution) body.push(h("p", { class: "small", style: "color: var(--ok)", text: a.resolution }));
+      const where = a.patch ? a.patch.matches.map((m) => m.file + ":" + m.line) : (a.sources || []).slice(0, 3).map((s) => s.file + ":" + s.line);
+      if (where.length) body.push(h("p", { class: "small muted" }, (a.patch ? "Source: " : "Likely source: "), where.map((w, i) => [i ? ", " : "", h("code", { text: w })])));
+      list.append(h("div", { class: "card " + (a.status === "open" ? "later" : a.status === "applied" ? "answered" : "unknown") },
+        h("div", { class: "row" },
+          h("span", { class: "pill " + a.status, text: KINDS[a.kind] }),
+          h("span", { class: "muted small grow", text: a.created.slice(0, 16).replace("T", " ") + " · " + a.id }),
+          h("a", { class: "button", href: p + (p.includes("?") ? "&" : "?") + "rv=" + a.id, text: "Show on page" }),
+          status,
+          h("button", { type: "button", text: "Delete", onclick: async () => { if (!confirm("Delete this note?")) return; await api("DELETE", "/annotations/" + a.id); items = items.filter((x) => x !== a); render(); } })),
+        body));
+    }
+  }
+}
+document.querySelectorAll("[data-filter]").forEach((b) => b.addEventListener("click", () => {
+  filter = b.dataset.filter;
+  document.querySelectorAll("[data-filter]").forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+  render();
+}));
+(async () => { items = (await api("GET", "/annotations")).annotations; render(); })();
+</script>
+</body>
+</html>

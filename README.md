@@ -65,6 +65,27 @@ python3 tools/facts.py tables --lang fr # Markdown tables (theses, postdocs, pro
 
 When a fact changes (new student, defense date, project end), change it here first, then regenerate the dossier tables.
 
+## Reviewing the site locally (edit, annotate, answer questions)
+
+```sh
+python3 tools/review.py --open    # builds, then serves http://127.0.0.1:8777/ with a review toolbar
+```
+
+Every page gets a toolbar (bottom right; this exists only in pages served by `tools/review.py`, never on the deployed site):
+
+- **Edit** (`e`): click a text, change it in place, Save. If the change maps to one place in the sources (a TOML value, a BibTeX field, a Markdown line), *Write to source & rebuild* applies it at once; check `git diff` and commit as usual. Otherwise the edit stays recorded for later.
+- **Comment** (`c`): click a text, or select a few words, and leave a note (unclear, wrong or outdated, missing, remove).
+- **Notes**, **All notes** (`/__review/annotations`): list, reopen, close, delete.
+
+`/__review/questions` shows the questions of `questions.json` (one card per question: context, current values, choices, free text) and saves the answers as you type.
+
+Everything is stored outside the repository, in `../review/` by default (`--data DIR` to change): `annotations.json`, `answers.json`, and `review-log.jsonl`, an append-only history of every note, answer, edit written to a source file, and rebuild. To process them later:
+
+```sh
+python3 tools/review.py --report                      # open notes and answers not applied yet (Markdown)
+python3 tools/review.py --resolve ID "what was done"  # mark a note or an answer as applied
+```
+
 ## What gets generated
 
 - `/`, `/publications/`, `/service/`: the human pages

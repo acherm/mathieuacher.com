@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Review</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/__review/static/ui.css">
+</head>
+<body>
+<main class="wrap">
+  <h1>Review</h1>
+  <p class="muted">Local only (<code>tools/review.py</code>). Nothing here is published.</p>
+
+  <div class="card">
+    <h3><a href="/__review/questions">Questions to answer</a></h3>
+    <p>__Q_DONE__ of __Q_TOTAL__ answered. Discrepancies between the website, the dossier and external sources, and the dossier's own points to check. Answers are saved as you type.</p>
+  </div>
+
+  <div class="card">
+    <h3><a href="/">Edit and annotate the site</a></h3>
+    <p>Every page has a toolbar (bottom right):</p>
+    <ul>
+      <li><strong>Edit</strong> (key <code>e</code>): click a text, change it in place, Save. When the change maps to one place in the sources, <em>Write to source &amp; rebuild</em> applies it at once; otherwise it stays recorded for later.</li>
+      <li><strong>Comment</strong> (key <code>c</code>): click a text, or select a few words, and leave a note (unclear, wrong or outdated, missing, remove).</li>
+      <li><strong>Browse</strong> (key <code>b</code> or Esc): normal navigation.</li>
+    </ul>
+    <p><a href="/__review/annotations">All notes</a>: __ANN_OPEN__ open of __ANN_TOTAL__.</p>
+  </div>
+
+  <p class="muted small">Data: <code>__DATA__</code> (annotations.json, answers.json, review-log.jsonl).</p>
+</main>
+</body>
+</html>
