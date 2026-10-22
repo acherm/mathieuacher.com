@@ -19,6 +19,7 @@ the overlay exists only in pages served by this script. Standard library only.
 """
 
 import argparse
+import errno
 import html
 import json
 import mimetypes
@@ -30,6 +31,7 @@ import subprocess
 import sys
 import threading
 import time
+import urllib.request
 import webbrowser
 from collections import Counter
 from datetime import datetime
@@ -827,6 +829,14 @@ def resolve_item(store: Store, ident: str, text: str) -> None:
     sys.exit(f"no note or answer with id {ident}")
 
 
+def is_review_server(base: str) -> bool:
+    try:
+        with urllib.request.urlopen(base + "/__review/", timeout=3) as r:
+            return r.headers.get("Server", "").startswith(Handler.server_version)
+    except OSError:
+        return False
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--port", type=int, default=8777)
@@ -851,8 +861,18 @@ def main() -> None:
     Handler.token = secrets.token_urlsafe(16)
     Handler.port = args.port
     Handler.base = args.base
-    srv = ThreadingHTTPServer(("127.0.0.1", args.port), Handler)
     base = f"http://127.0.0.1:{args.port}"
+    try:
+        srv = ThreadingHTTPServer(("127.0.0.1", args.port), Handler)
+    except OSError as e:
+        if e.errno != errno.EADDRINUSE:
+            raise
+        if not is_review_server(base):
+            sys.exit(f"port {args.port} is used by another program: try --port {args.port + 1}")
+        print(f"a review server is already running at {base}/__review/ (to restart it, stop it first: Ctrl+C in its terminal)")
+        if args.open:
+            webbrowser.open(base + "/__review/")
+        return
     print(f"site with review overlay: {base}/\nquestions: {base}/__review/questions\n"
           f"annotations: {base}/__review/annotations\nwhat changed: {base}/__review/changes\n"
           f"data: {Handler.store.data}")
