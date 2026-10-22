@@ -1,6 +1,7 @@
 // Review overlay, injected by tools/review.py into every page it serves (never deployed).
 // Modes: Browse (normal), Edit (click a text block, change it in place), Comment (click a
 // block or select text, leave a note). Everything is saved through /__review/api.
+// Changes: highlights the texts that differ from the base commit (the last one by default).
 (() => {
   "use strict";
   const TOKEN = (window.REVIEW || {}).token;
@@ -16,6 +17,8 @@
   let items = [];
   let editing = null;
   let popover = null;
+  let changes = null;  // {base, items: [{type, text, was, key, nth, section, context}]} or {error}
+  let showChanges = false;
 
   // --- helpers -------------------------------------------------------------
   function h(tag, attrs, ...kids) {
@@ -89,6 +92,8 @@
   // --- toolbar -------------------------------------------------------------
   const modeButtons = {};
   const countLabel = h("span", { class: "rv-count", text: "0" });
+  const changesLabel = h("span", { class: "rv-count", text: "…" });
+  const changesButton = h("button", { type: "button", class: "rv-btn", "aria-pressed": "false", title: "Highlight what changed since the last commit", onclick: () => toggleChanges() }, "Changes ", changesLabel);
   const toolbar = h("div", { class: "rv-ui rv-toolbar", role: "toolbar", "aria-label": "Review" },
     h("span", { class: "rv-brand", title: "Local review mode (tools/review.py)", text: "Review" }),
     h("div", { class: "rv-seg" },
@@ -97,6 +102,7 @@
         onclick: () => setMode(m), text: { browse: "Browse", edit: "Edit", comment: "Comment" }[m],
       })))),
     h("button", { type: "button", class: "rv-btn", title: "Notes on this page", onclick: () => toggleDrawer() }, "Notes ", countLabel),
+    changesButton,
     h("a", { class: "rv-btn", href: "/__review/questions", title: "Questions to answer" }, "Questions"),
     h("a", { class: "rv-btn", href: "/__review/annotations", title: "All notes, all pages" }, "All notes"),
     h("button", { type: "button", class: "rv-btn", title: "Rebuild the site from the sources and reload", onclick: rebuild }, "Rebuild"),
@@ -282,19 +288,49 @@
     return popover;
   }
 
-  function wordDiff(a, b) {
+  // Word diff of a and b; with ctx, unchanged stretches keep only ctx words on each side.
+  function wordDiff(a, b, ctx = 0) {
     const x = a.split(/(\s+)/), y = b.split(/(\s+)/);
     if (x.length * y.length > 250000) return [h("del", { text: a }), " ", h("ins", { text: b })];
     const L = Array.from({ length: x.length + 1 }, () => new Uint16Array(y.length + 1));
     for (let i = x.length - 1; i >= 0; i--) for (let j = y.length - 1; j >= 0; j--)
       L[i][j] = x[i] === y[j] ? L[i + 1][j + 1] + 1 : Math.max(L[i + 1][j], L[i][j + 1]);
-    const out = [];
+    // segments: unchanged text, or a change {old, new}
+    const segs = [];
+    const push = (t, s) => {
+      const last = segs[segs.length - 1];
+      if (t === "=") { if (last && last.same != null) last.same += s; else segs.push({ same: s }); return; }
+      const c = last && last.same == null ? last : (segs.push({ old: "", new: "" }), segs[segs.length - 1]);
+      c[t === "-" ? "old" : "new"] += s;
+    };
     let i = 0, j = 0;
     while (i < x.length || j < y.length) {
-      if (i < x.length && j < y.length && x[i] === y[j]) { out.push(x[i]); i++; j++; }
-      else if (i < x.length && (j === y.length || L[i + 1][j] >= L[i][j + 1])) out.push(h("del", { text: x[i++] }));
-      else out.push(h("ins", { text: y[j++] }));
+      if (i < x.length && j < y.length && x[i] === y[j]) { push("=", x[i]); i++; j++; }
+      else if (i < x.length && (j === y.length || L[i + 1][j] >= L[i][j + 1])) push("-", x[i++]);
+      else push("+", y[j++]);
     }
+    // a space or a short word between two changes joins them: "old words" then "new words"
+    for (let k = segs.length - 2; k > 0; k--) {
+      const s = segs[k];
+      if (s.same == null || segs[k - 1].same != null || segs[k + 1].same != null || s.same.trim().length > 3 || /\S\s+\S/.test(s.same.trim())) continue;
+      const p = segs[k - 1], n = segs[k + 1];
+      segs.splice(k - 1, 3, { old: p.old + s.same + n.old, new: p.new + s.same + n.new });
+      k--;
+    }
+    const kept = segs.reduce((n, s) => n + (s.same != null ? s.same.split(/\s+/).filter(Boolean).length : 0), 0);
+    const count = (t) => t.split(/\s+/).filter(Boolean).length;
+    if (ctx && kept < 0.5 * count(a) && kept < 0.5 * count(b)) return [h("del", { text: a }), h("br"), h("ins", { text: b })];
+    const out = [];
+    segs.forEach((s, k) => {
+      if (s.same == null) {
+        if (s.old.trim()) out.push(h("del", { text: s.old }));
+        if (s.new.trim()) out.push(h("ins", { text: s.new }));
+        return;
+      }
+      const words = s.same.split(/(\s+)/), first = k === 0, last = k === segs.length - 1, n = 2 * ctx;
+      if (!ctx || (first && last) || words.length <= (first || last ? n : 2 * n) + 1) out.push(s.same);
+      else out.push((first ? "…" : words.slice(0, n).join("")) + (first || last ? "" : " … ") + (last ? "…" : words.slice(-n).join("")));
+    });
     return out;
   }
 
@@ -383,6 +419,7 @@
   function renderDrawer() {
     if (!drawer) return;
     drawer.replaceChildren(
+      showChanges ? changesSection() : null,
       h("div", { class: "rv-pop-head" }, h("strong", { text: "Notes on this page" }), h("a", { href: "/__review/annotations", text: "all pages →" }),
         h("button", { type: "button", class: "rv-x", text: "×", onclick: () => toggleDrawer(false) })),
       items.length ? h("ol", { class: "rv-list" }, items.map((a, i) => h("li", { class: "rv-" + a.status, onclick: () => showAnnotation(a) },
@@ -390,6 +427,65 @@
         h("span", {}, h("strong", { text: KINDS[a.kind] }), " · ", h("span", { class: "rv-muted", text: STATUS[a.status] }), h("br"),
           h("span", { text: short(a.kind === "edit" ? a.proposed : a.comment || a.anchor.quote || a.original, 120) })))))
         : h("p", { class: "rv-muted", text: "No notes yet. Switch to Edit or Comment and click a text." }));
+  }
+
+  // --- what changed since the base commit --------------------------------------
+  const CHANGE = { changed: "Changed", new: "New", removed: "Removed" };
+  const keyOf = (el) => (el.textContent || "").replace(/\s+/g, "");
+  function locateChanges() {
+    if (!changes || !changes.items) return;
+    const byKey = new Map();
+    for (const el of document.querySelectorAll(BLOCKS)) {
+      if (isUI(el)) continue;
+      const k = keyOf(el);
+      if (k) (byKey.get(k) || byKey.set(k, []).get(k)).push(el);
+    }
+    for (const c of changes.items) c._el = c.key ? (byKey.get(c.key) || [])[c.nth] || null : null;
+  }
+  function paintChanges() {
+    document.querySelectorAll(".rv-changed").forEach((el) => el.classList.remove("rv-changed", "rv-ch-new"));
+    document.documentElement.toggleAttribute("data-rv-changes", showChanges);
+    changesButton.setAttribute("aria-pressed", String(showChanges));
+    if (!showChanges || !changes || !changes.items) return;
+    for (const c of changes.items) if (c._el) c._el.classList.add("rv-changed", ...(c.type === "new" ? ["rv-ch-new"] : []));
+  }
+  function toggleChanges(force) {
+    showChanges = force ?? !showChanges;
+    store.set("rv-changes", showChanges ? "1" : "");
+    paintChanges();
+    if (showChanges) toggleDrawer(true); else renderDrawer();
+  }
+  function changesSection() {
+    const head = h("div", { class: "rv-pop-head" },
+      h("strong", { text: "Changed on this page" }), h("a", { href: "/__review/changes", text: "all pages →" }),
+      h("button", { type: "button", class: "rv-x", title: "Hide the highlights", text: "×", onclick: () => toggleChanges(false) }));
+    if (!changes) return h("div", { class: "rv-section" }, head, h("p", { class: "rv-muted", text: "Comparing…" }));
+    if (changes.error) return h("div", { class: "rv-section" }, head, h("p", { class: "rv-muted", text: changes.error }));
+    const b = changes.base;
+    return h("div", { class: "rv-section" }, head,
+      h("p", { class: "rv-muted rv-small", text: "Since commit " + b.short + " (" + b.date + "), uncommitted edits included." }),
+      changes.items.length ? h("ol", { class: "rv-list" }, changes.items.map((c) => h("li", {
+        class: "rv-change rv-ch-" + c.type, title: c._el || c.type === "removed" ? "" : "Not found on the page",
+        onclick: () => { if (!c._el) return; if (innerWidth < 700) toggleDrawer(false); flash(c._el); },
+      },
+        h("span", {},
+          h("strong", { text: CHANGE[c.type] }), c.context || c.section ? h("span", { class: "rv-muted", text: " · " + short(c.context || c.section, 60) }) : null, h("br"),
+          c.type === "changed" ? h("span", { class: "rv-diff-inline" }, wordDiff(c.was, c.text, 6))
+            : c.type === "new" ? h("ins", { text: short(c.text, 160) }) : h("del", { text: short(c.was, 160) })))))
+        : h("p", { class: "rv-muted", text: "Nothing changed on this page." }));
+  }
+  async function loadChanges() {
+    try { changes = await api("GET", "/changes?page=" + encodeURIComponent(page)); }
+    catch (e) { changes = { error: String(e) }; }
+    if (changes.error) { changesLabel.textContent = "!"; changesButton.title = changes.error; }
+    else {
+      changesLabel.textContent = changes.items.length;
+      changesButton.title = "Highlight what changed since commit " + changes.base.short + " (" + changes.base.date + ")";
+      changesButton.classList.toggle("rv-dim", !changes.items.length);
+    }
+    locateChanges();
+    paintChanges();
+    renderDrawer();
   }
 
   function render() {
@@ -432,13 +528,21 @@
     document.body.append(toolbar, layer, hint);
     measure();
     setMode(store.get("rv-mode") || "browse");
+    if ((window.REVIEW || {}).buildError) toast("The last build failed, this page may be out of date:\n" + window.REVIEW.buildError, 12000);
+    const params = new URLSearchParams(location.search);
+    showChanges = params.has("rv-changes") || !!store.get("rv-changes");
+    if (params.has("rv-changes")) store.set("rv-changes", "1");
+    const changesLoaded = loadChanges();
     try { items = (await api("GET", "/annotations?page=" + encodeURIComponent(page))).annotations; }
     catch (e) { toast("Review server unreachable: " + e, 6000); }
     render();
-    if (store.get("rv-drawer")) toggleDrawer(true);
-    const focus = new URLSearchParams(location.search).get("rv");
+    if (store.get("rv-drawer") || showChanges) toggleDrawer(true);
+    const focus = params.get("rv");
     const a = focus && items.find((x) => x.id === focus);
     if (a) setTimeout(() => showAnnotation(a), 300);
+    await changesLoaded;
+    const c = changes && changes.items && changes.items[+params.get("rv-changes")];
+    if (c && c._el) setTimeout(() => flash(c._el), 300);
   }
   init();
 })();

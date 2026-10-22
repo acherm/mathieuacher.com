@@ -89,3 +89,25 @@ del { background: #f8d9d6; }
 @media (prefers-color-scheme: dark) { del { background: #5a2420; } }
 .empty { padding: 2rem; text-align: center; color: var(--muted); border: 1px dashed var(--line); border-radius: 12px; }
 @media (max-width: 640px) { .values td:last-child { display: none; } .top { position: static; } }
+.pill.changed { background: #fff0b3; color: #6b5200; }
+.pill.new { background: var(--ok-soft); color: var(--ok); }
+.pill.removed { background: #f8d9d6; color: var(--danger); }
+@media (prefers-color-scheme: dark) { .pill.changed { background: #4a3f12; color: #f2d77a; } .pill.removed { background: #5a2420; } }
+.card.change { padding: 0.7rem 1rem; margin-bottom: 0.6rem; }
+.card.change > p { margin: 0.45rem 0 0; overflow-wrap: anywhere; }
+.card.change.changed { border-left: 4px solid #e2c044; }
+.card.change.new { border-left: 4px solid var(--ok); }
+.card.change.removed { border-left: 4px solid var(--danger); }
+.button.small { font-size: 0.85rem; padding: 0.2rem 0.6rem; }
+.card.source { padding: 0.6rem 1rem; }
+.card.source summary { cursor: pointer; }
+.add-n { color: var(--ok); font-size: 0.85rem; }
+.rem-n { color: var(--danger); font-size: 0.85rem; }
+.udiff { font: 12.5px/1.45 var(--mono); margin: 0.6rem 0 0; padding: 0.5rem 0; overflow-x: auto; border-top: 1px solid var(--line); white-space: pre-wrap; overflow-wrap: anywhere; }
+.udiff span { display: block; padding: 0 0.4rem; }
+.udiff .add { background: var(--ok-soft); }
+.udiff .rem { background: #f8d9d6; }
+.udiff .hunk { color: var(--muted); margin-top: 0.4rem; }
+@media (prefers-color-scheme: dark) { .udiff .rem { background: #5a2420; } }
+.row select.base { width: 100%; min-width: 0; text-overflow: ellipsis; }
+.top .toc { margin: 0; }

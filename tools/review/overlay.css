@@ -14,6 +14,7 @@
   --rv-danger: #b3261e;
   --rv-ins: #d7f0dc;
   --rv-del: #f8d9d6;
+  --rv-changed: #fff0b3;
   --rv-shadow: 0 8px 28px rgba(20, 22, 26, 0.18), 0 1px 3px rgba(20, 22, 26, 0.12);
 }
 @media (prefers-color-scheme: dark) {
@@ -32,6 +33,7 @@
     --rv-danger: #ff8a80;
     --rv-ins: #1f4a2b;
     --rv-del: #5a2420;
+    --rv-changed: #4a3f12;
     --rv-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
   }
 }
@@ -76,6 +78,9 @@
 .rv-ui .rv-seg button + button { border-left: 1px solid var(--rv-line); }
 .rv-ui .rv-seg button[aria-pressed="true"] { background: var(--rv-accent); color: var(--rv-bg); }
 .rv-count { font-variant-numeric: tabular-nums; color: var(--rv-muted); }
+.rv-ui .rv-btn[aria-pressed="true"] { background: var(--rv-changed); border-color: var(--rv-open); }
+.rv-ui .rv-btn[aria-pressed="true"] .rv-count { color: inherit; }
+.rv-ui .rv-dim { opacity: 0.6; }
 .rv-hint {
   position: fixed; right: 16px; bottom: calc(var(--rv-tb-h, 52px) + 24px); z-index: 2147483000;
   padding: 6px 12px; border-radius: 8px; background: var(--rv-accent); color: var(--rv-bg);
@@ -90,6 +95,8 @@ html[data-rv-mode="comment"] .rv-hover { cursor: cell; }
 .rv-annotated.rv-st-wontfix { outline: 1px dotted var(--rv-gone); outline-offset: 3px; }
 .rv-editing { outline: 2px solid var(--rv-accent) !important; outline-offset: 3px; background: var(--rv-accent-soft); border-radius: 3px; }
 .rv-edited { background: var(--rv-open-soft); border-radius: 3px; }
+html[data-rv-changes] .rv-changed { background: var(--rv-changed); box-shadow: 0 0 0 3px var(--rv-changed); border-radius: 2px; }
+html[data-rv-changes] .rv-changed.rv-ch-new { background: var(--rv-ins); box-shadow: 0 0 0 3px var(--rv-ins); }
 @keyframes rv-flash { from { box-shadow: 0 0 0 6px var(--rv-open); } to { box-shadow: 0 0 0 6px transparent; } }
 .rv-flash { animation: rv-flash 1.2s ease-out; }
 
@@ -122,9 +129,9 @@ textarea.rv-input { resize: vertical; min-height: 3.2em; }
 .rv-quote { margin: 0; padding: 4px 10px; border-left: 3px solid var(--rv-open); color: var(--rv-muted); font-style: italic; }
 .rv-popover p { margin: 0; }
 .rv-diff { max-height: 14em; overflow: auto; padding: 6px 8px; border-radius: 7px; background: var(--rv-accent-soft); }
-.rv-diff ins { background: var(--rv-ins); text-decoration: none; }
-.rv-diff del { background: var(--rv-del); }
-.rv-diff del + ins { margin-left: 2px; }
+.rv-ui ins { background: var(--rv-ins); text-decoration: none; }
+.rv-ui del { background: var(--rv-del); }
+.rv-ui del + ins { margin-left: 2px; }
 .rv-sources { margin: 0; padding-left: 1.1rem; display: grid; gap: 2px; }
 .rv-src summary { cursor: pointer; color: var(--rv-muted); }
 .rv-pill { font-size: 12px; padding: 1px 7px; border-radius: 9px; background: var(--rv-open-soft); color: var(--rv-open); }
@@ -141,6 +148,12 @@ textarea.rv-input { resize: vertical; min-height: 3.2em; }
 .rv-list .rv-num { flex: none; min-width: 20px; height: 20px; border-radius: 10px; background: var(--rv-open); color: #fff; font-size: 11.5px; font-weight: 700; text-align: center; line-height: 20px; }
 .rv-list li.rv-applied .rv-num { background: var(--rv-done); }
 .rv-list li.rv-wontfix .rv-num { background: var(--rv-gone); }
+.rv-section { margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--rv-line); }
+.rv-section > p { margin: 4px 0 0; }
+.rv-small { font-size: 12.5px; }
+.rv-list li.rv-change { border-left: 4px solid var(--rv-changed); overflow-wrap: anywhere; }
+.rv-list li.rv-ch-new { border-left-color: var(--rv-ins); }
+.rv-list li.rv-ch-removed { border-left-color: var(--rv-del); cursor: default; }
 .rv-toast {
   position: fixed; left: 50%; bottom: calc(var(--rv-tb-h, 52px) + 24px); transform: translateX(-50%); z-index: 2147483002;
   padding: 8px 14px; border-radius: 9px; background: var(--rv-ink); color: var(--rv-bg);

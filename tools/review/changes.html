@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What changed</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="/__review/static/ui.css">
+</head>
+<body>
+<div class="top">
+  <div class="wrap">
+    <div class="row">
+      <strong class="grow">What changed on the site</strong>
+      <a class="button" href="/__review/">Review home</a>
+      <a class="button" href="/">Site</a>
+    </div>
+    <div class="row small">
+      <label for="base" class="muted">Compared with</label>
+      <select id="base" class="grow base"></select>
+    </div>
+    <div class="row small">
+      <span id="stats" class="grow muted">Comparing…</span>
+    </div>
+    <div class="toc" id="toc"></div>
+  </div>
+</div>
+<main class="wrap" id="list"></main>
+<script>
+"use strict";
+const TOKEN = "__TOKEN__";
+const TYPE = { changed: "Changed", new: "New", removed: "Removed" };
+let data = null;
+
+function h(tag, attrs, ...kids) {
+  const el = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (v == null || v === false) continue;
+    if (k === "class") el.className = v;
+    else if (k === "text") el.textContent = v;
+    else if (k.startsWith("on")) el.addEventListener(k.slice(2), v);
+    else el.setAttribute(k, v === true ? "" : v);
+  }
+  for (const kid of kids.flat(Infinity)) if (kid != null) el.append(kid);
+  return el;
+}
+async function api(method, url, body) {
+  const r = await fetch("/__review/api" + url, { method, headers: { "Content-Type": "application/json", "X-Review-Token": TOKEN }, body: body ? JSON.stringify(body) : undefined });
+  if (!r.ok) throw new Error((await r.json().catch(() => ({}))).error || r.status);
+  return r.json();
+}
+// Word diff of a and b; with ctx, unchanged stretches keep only ctx words on each side.
+function diff(a, b, ctx = 0) {
+  const x = a.split(/(\s+)/), y = b.split(/(\s+)/);
+  if (x.length * y.length > 250000) return [h("del", { text: a }), " ", h("ins", { text: b })];
+  const L = Array.from({ length: x.length + 1 }, () => new Uint16Array(y.length + 1));
+  for (let i = x.length - 1; i >= 0; i--) for (let j = y.length - 1; j >= 0; j--)
+    L[i][j] = x[i] === y[j] ? L[i + 1][j + 1] + 1 : Math.max(L[i + 1][j], L[i][j + 1]);
+  // segments: unchanged text, or a change {old, new}
+  const segs = [];
+  const push = (t, s) => {
+    const last = segs[segs.length - 1];
+    if (t === "=") { if (last && last.same != null) last.same += s; else segs.push({ same: s }); return; }
+    const c = last && last.same == null ? last : (segs.push({ old: "", new: "" }), segs[segs.length - 1]);
+    c[t === "-" ? "old" : "new"] += s;
+  };
+  let i = 0, j = 0;
+  while (i < x.length || j < y.length) {
+    if (i < x.length && j < y.length && x[i] === y[j]) { push("=", x[i]); i++; j++; }
+    else if (i < x.length && (j === y.length || L[i + 1][j] >= L[i][j + 1])) push("-", x[i++]);
+    else push("+", y[j++]);
+  }
+  // a space or a short word between two changes joins them: "old words" then "new words"
+  for (let k = segs.length - 2; k > 0; k--) {
+    const s = segs[k];
+    if (s.same == null || segs[k - 1].same != null || segs[k + 1].same != null || s.same.trim().length > 3 || /\S\s+\S/.test(s.same.trim())) continue;
+    const p = segs[k - 1], n = segs[k + 1];
+    segs.splice(k - 1, 3, { old: p.old + s.same + n.old, new: p.new + s.same + n.new });
+    k--;
+  }
+  const kept = segs.reduce((n, s) => n + (s.same != null ? s.same.split(/\s+/).filter(Boolean).length : 0), 0);
+  const count = (t) => t.split(/\s+/).filter(Boolean).length;
+  if (ctx && kept < 0.5 * count(a) && kept < 0.5 * count(b)) return [h("del", { text: a }), h("br"), h("ins", { text: b })];
+  const out = [];
+  segs.forEach((s, k) => {
+    if (s.same == null) {
+      if (s.old.trim()) out.push(h("del", { text: s.old }));
+      if (s.new.trim()) out.push(h("ins", { text: s.new }));
+      return;
+    }
+    const words = s.same.split(/(\s+)/), first = k === 0, last = k === segs.length - 1, n = 2 * ctx;
+    if (!ctx || (first && last) || words.length <= (first || last ? n : 2 * n) + 1) out.push(s.same);
+    else out.push((first ? "…" : words.slice(0, n).join("")) + (first || last ? "" : " … ") + (last ? "…" : words.slice(-n).join("")));
+  });
+  return out;
+}
+const plural = (n, w) => n + " " + w + (n === 1 ? "" : "s");
+
+function udiff(text) {
+  return h("pre", { class: "udiff" }, text.split("\n").filter((l) => !/^(diff --git|index |--- |\+\+\+ )/.test(l)).map((l) =>
+    h("span", { class: l.startsWith("@@") ? "hunk" : l.startsWith("+") ? "add" : l.startsWith("-") ? "rem" : "", text: l + "\n" })));
+}
+
+function render() {
+  const list = document.getElementById("list"), toc = document.getElementById("toc"), stats = document.getElementById("stats");
+  list.replaceChildren(); toc.replaceChildren();
+  if (data.error) { stats.textContent = ""; list.append(h("div", { class: "empty", text: data.error })); return; }
+  const sel = document.getElementById("base");
+  sel.replaceChildren(...data.commits.map((c) => h("option", { value: c.sha, selected: c.sha === data.base.sha,
+    text: c.short + " · " + c.date + " · " + c.subject + (c.deployed ? " (deployed)" : "") })));
+  if (!data.commits.some((c) => c.sha === data.base.sha)) sel.prepend(h("option", { value: data.base.sha, selected: true, text: data.base.short + " · " + data.base.date + " · " + data.base.subject }));
+  const n = data.pages.reduce((s, p) => s + p.items.length, 0);
+  stats.textContent = plural(n, "changed text") + " on " + plural(data.pages.length, "page") + " · " + plural(data.sources.length, "source file") + " · uncommitted edits included";
+  if (!n && !data.sources.length) {
+    list.append(h("div", { class: "empty", text: "No difference with this commit. Pick an older one above to see what changed since." }));
+    return;
+  }
+  list.append(h("p", { class: "muted small", text: "Click “Show on page” to see a change in place (highlighted), then comment or edit it with the toolbar as usual. Once you are happy, commit: this page then compares with the new commit." }));
+  for (const p of data.pages) {
+    const id = "sec-" + (p.page.replace(/[^a-z0-9]+/gi, "-").replace(/^-|-$/g, "") || "home");
+    toc.append(h("a", { href: "#" + id }, p.title.split(" · ")[0] || p.page, " ", h("span", { class: "n", text: p.items.length })));
+    list.append(h("h2", { class: "section-title", id },
+      h("a", { href: p.page + "?rv-changes", text: p.title || p.page }), " ", h("span", { class: "muted small", text: p.page }),
+      p.state ? [" ", h("span", { class: "pill", text: p.state })] : null));
+    p.items.forEach((c, i) => {
+      const body = c.type === "changed" ? [h("p", {}, diff(c.was, c.text, 10)),
+        c.text.split(/\s+/).length > 30 ? h("details", { class: "small" }, h("summary", { class: "muted", text: "Whole text" }), h("p", {}, diff(c.was, c.text))) : null]
+        : c.type === "new" ? h("p", {}, h("ins", { text: c.text })) : h("p", {}, h("del", { text: c.was }));
+      list.append(h("div", { class: "card change " + c.type },
+        h("div", { class: "row" },
+          h("span", { class: "pill " + c.type, text: TYPE[c.type] }),
+          h("span", { class: "muted small grow", text: [c.section, c.context].filter(Boolean).join(" · ") }),
+          c.type !== "removed" ? h("a", { class: "button small", href: p.page + "?rv-changes=" + i, text: "Show on page" }) : null),
+        body));
+    });
+  }
+  if (data.sources.length) {
+    toc.append(h("a", { href: "#sec-sources" }, "Source files ", h("span", { class: "n", text: data.sources.length })));
+    list.append(h("h2", { class: "section-title", id: "sec-sources", text: "Source files" }),
+      h("p", { class: "section-intro", text: "The same changes in the files they come from (what git diff shows)." }));
+    for (const f of data.sources) {
+      list.append(h("details", { class: "card source" },
+        h("summary", {}, h("code", { text: f.file }), " ",
+          f.plus === "new" ? h("span", { class: "pill new", text: "new file" }) : [h("span", { class: "add-n", text: "+" + f.plus }), " ", h("span", { class: "rem-n", text: "−" + f.minus })]),
+        f.diff ? udiff(f.diff) : h("p", { class: "muted small", text: "Not tracked by git yet." })));
+    }
+  }
+}
+
+async function load() {
+  try { data = await api("GET", "/changes"); } catch (e) { data = { error: String(e) }; }
+  render();
+}
+document.getElementById("base").addEventListener("change", async (e) => {
+  document.getElementById("stats").textContent = "Building that version…";
+  try { await api("POST", "/base", { ref: e.target.value }); } catch (err) { alert(err); }
+  load();
+});
+load();
+</script>
+</body>
+</html>

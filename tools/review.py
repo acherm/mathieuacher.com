@@ -5,11 +5,13 @@
     python3 tools/review.py --data DIR    # where questions, answers and annotations live
     python3 tools/review.py --report      # what is still to apply (open notes, new answers)
     python3 tools/review.py --resolve ID "commit abc123"   # record that it was applied
+    python3 tools/review.py --base REF    # "what changed" compares with REF (default: HEAD)
 
 On every page, a toolbar lets you edit text in place or attach comments. Simple text edits
 can be written back to the source file (content/*.toml|md, data/acher.bib, templates/) and the
 site rebuilt; everything else stays recorded for later. `/__review/questions` lists the
-questions of DIR/questions.json and saves the answers.
+questions of DIR/questions.json and saves the answers. `/__review/changes` (and the toolbar's
+Changes button) shows what differs from the base commit, uncommitted edits included.
 
 Stored in DIR (default ../review, outside the repository): annotations.json, answers.json,
 and review-log.jsonl (append-only history of every change). Nothing here is deployed:
@@ -29,7 +31,10 @@ import sys
 import threading
 import time
 import webbrowser
+from collections import Counter
 from datetime import datetime
+from difflib import SequenceMatcher
+from html.parser import HTMLParser
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 from urllib.parse import parse_qs, unquote, urlparse
@@ -38,10 +43,13 @@ ROOT = Path(__file__).resolve().parent.parent
 UI = Path(__file__).resolve().parent / "review"
 SITE = ROOT / "_site"
 SOURCES = ["content/*.toml", "content/*.md", "data/acher.bib", "templates/*.html", "templates/md/*"]
+BUILD_INPUTS = ["build.py", "sitegen/*.py", "content/*", "data/*", "templates/**/*", "static/**/*"]
+CACHE = ROOT / "tools" / ".cache" / "review-base"  # builds of earlier commits, to compare with
 KINDS = {"edit", "comment", "question", "wrong", "remove", "missing"}
 STATUSES = {"open", "applied", "wontfix"}
 ANSWER_STATES = {"answered", "later", "unknown"}
 LOCK = threading.Lock()
+BUILD = threading.RLock()  # held while _site/ is rebuilt, and while a file of it is read
 
 
 def now() -> str:
@@ -201,12 +209,292 @@ def apply_patch(match: dict) -> str | None:
     return None
 
 
-def rebuild() -> dict:
+def run_build(where: Path) -> dict:
     t = time.time()
     cmd = ["uv", "run", "build.py"] if shutil.which("uv") else [sys.executable, "build.py"]
-    r = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
+    r = subprocess.run(cmd, cwd=where, capture_output=True, text=True)
     out = (r.stdout + r.stderr).strip().splitlines()
     return {"ok": r.returncode == 0, "seconds": round(time.time() - t, 1), "output": "\n".join(out[-15:])}
+
+
+def rebuild() -> dict:
+    with BUILD:
+        r = run_build(ROOT)
+        FRESH.update(stamp=time.time(), error=None if r["ok"] else r["output"])
+        return r
+
+
+FRESH = {"stamp": 0.0, "error": None}
+
+
+def inputs_mtime() -> float:
+    return max((f.stat().st_mtime for pattern in BUILD_INPUTS for f in ROOT.glob(pattern) if f.is_file()), default=0.0)
+
+
+def ensure_fresh(store: "Store") -> str | None:
+    """Rebuild when a source changed since the last build (edited by hand or by another tool).
+    Returns the error of the last build, if it failed."""
+    newest = inputs_mtime()
+    with BUILD:
+        index = SITE / "index.html"
+        built = index.stat().st_mtime if index.exists() else 0.0
+        if newest > max(built, FRESH["stamp"]):
+            r = rebuild()
+            store.log("rebuild", ok=r["ok"], seconds=r["seconds"], auto=True)
+            sys.stderr.write(("rebuilt" if r["ok"] else "BUILD FAILED") + " (sources changed)\n")
+        return FRESH["error"]
+
+
+# --- what changed since a commit -------------------------------------------
+#
+# The site at the base commit is built into CACHE/<sha>/_site; both builds are cut into the
+# text of their block elements, and the blocks that differ are what changed.
+
+BLOCK_TAGS = {"h1", "h2", "h3", "h4", "h5", "h6", "p", "li", "dt", "dd", "td", "th", "blockquote", "figcaption"}
+SKIP_TAGS = {"script", "style", "template", "svg"}
+
+
+class BlockText(HTMLParser):
+    """Text of every block element of a page, nested blocks included, in document order."""
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.blocks: list[dict] = []
+        self.open: list[dict] = []
+        self.skip = 0
+        self.section = ""
+        self.title: list[str] | None = None
+        self.page_title = ""
+
+    def handle_starttag(self, tag, attrs):
+        if tag in SKIP_TAGS:
+            self.skip += 1
+        elif tag == "title" and not self.skip:
+            self.title = []
+        elif tag == "br":
+            self.handle_data(" ")
+        elif tag in BLOCK_TAGS:
+            b = {"tag": tag, "parts": [], "own": [], "kids": False, "i": len(self.blocks), "section": self.section,
+                 "parent": self.open[-1]["i"] if self.open else None}
+            if self.open:
+                self.open[-1]["kids"] = True
+            self.blocks.append(b)
+            self.open.append(b)
+
+    def handle_endtag(self, tag):
+        if tag in SKIP_TAGS:
+            self.skip = max(0, self.skip - 1)
+        elif tag == "title" and self.title is not None:
+            self.page_title, self.title = " ".join("".join(self.title).split()), None
+        elif tag in BLOCK_TAGS and any(b["tag"] == tag for b in self.open):
+            while self.open:
+                b = self.open.pop()
+                if b["tag"] in ("h1", "h2", "h3", "h4"):
+                    self.section = " ".join("".join(b["parts"]).split())
+                if b["tag"] == tag:
+                    break
+
+    def handle_data(self, data):
+        if self.skip:
+            return
+        if self.title is not None:
+            self.title.append(data)
+        for b in self.open:
+            b["parts"].append(data)
+        if self.open:
+            self.open[-1]["own"].append(data)  # text outside nested blocks
+
+
+PARSED: dict[tuple, tuple[str, list[dict]]] = {}
+
+
+def page_blocks(path: Path) -> tuple[str, list[dict]]:
+    """(title, blocks) of an HTML file, each block with its text and a whitespace-free key."""
+    if not path.is_file():
+        return "", []
+    st = path.stat()
+    sig = (str(path), st.st_mtime_ns, st.st_size)
+    if sig not in PARSED:
+        p = BlockText()
+        p.feed(path.read_text(encoding="utf-8", errors="replace"))
+        for b in p.blocks:
+            text = "".join(b.pop("parts"))
+            b["text"], b["key"] = " ".join(text.split()), re.sub(r"\s+", "", text)
+            b["own"] = re.sub(r"\s+", "", "".join(b["own"]))
+        if len(PARSED) > 64:
+            PARSED.clear()
+        PARSED[sig] = (p.page_title, [b for b in p.blocks if b["key"]])
+    return PARSED[sig]
+
+
+def flag_extra(blocks: list[dict], other: list[dict]) -> list[dict]:
+    """Blocks of `blocks` whose text is not in `other` (as a multiset). Each block gets `nth`,
+    its rank among the blocks with the same text, and `anchor`, the text of the last
+    unchanged block before it."""
+    have = Counter(b["key"] for b in other)
+    seen: Counter = Counter()
+    flagged, anchor = [], ""
+    for b in blocks:
+        seen[b["key"]] += 1
+        b["nth"] = seen[b["key"]] - 1
+        b["anchor"] = anchor
+        if seen[b["key"]] > have[b["key"]]:
+            flagged.append(b)
+        elif not b["kids"]:
+            anchor = b["key"]
+    return flagged
+
+
+def innermost(flagged: list[dict], blocks: list[dict], other_flagged: list[dict]) -> list[dict]:
+    """Drop the blocks that differ only because a nested block changed, appeared or went away."""
+    parents = {b["i"]: b["parent"] for b in blocks}
+    outer = set()
+    for b in flagged:
+        p = b["parent"]
+        while p is not None:
+            outer.add(p)
+            p = parents.get(p)
+    other_own = {b["own"] for b in other_flagged if b["kids"]}
+    return [b for b in flagged if b["i"] not in outer and not (b["kids"] and (not b["own"] or b["own"] in other_own))]
+
+
+def compare_pages(old: list[dict], new: list[dict]) -> list[dict]:
+    """Changed, new and removed blocks; a removed block is paired with the most similar new one,
+    or with the new one that took its place."""
+    fa, fr = flag_extra(new, old), flag_extra(old, new)
+    added, removed = innermost(fa, new, fr), innermost(fr, old, fa)
+    pairs = []
+    for a in added:
+        for r in removed:
+            x, y = r["text"].split(), a["text"].split()
+            sm = SequenceMatcher(None, x, y, autojunk=False)
+            ratio = sm.ratio()
+            # a list item that grew (talks of a year, committees) still counts as changed
+            contained = sum(m.size for m in sm.get_matching_blocks()) / max(1, min(len(x), len(y)))
+            if ratio >= 0.45 or (contained >= 0.7 and r["section"] == a["section"]):
+                pairs.append((ratio + contained, a["i"], r["i"]))
+    was: dict[int, dict] = {}
+    used = set()
+    for ratio, ai, ri in sorted(pairs, reverse=True):
+        if ai not in was and ri not in used:
+            was[ai] = next(r for r in removed if r["i"] == ri)
+            used.add(ri)
+    for r in removed:  # rewritten in place: same unchanged block before both
+        a = next((a for a in added if a["i"] not in was and a["anchor"] == r["anchor"] and a["section"] == r["section"]), None)
+        if a and r["i"] not in used:
+            was[a["i"]] = r
+            used.add(r["i"])
+    def context(b: dict, blocks: dict[int, dict]) -> str:
+        """First line of the item a nested block belongs to (a student's name and years)."""
+        parent = blocks.get(b["parent"])
+        if not parent:
+            return ""
+        first = next((x for x in blocks.values() if x["parent"] == parent["i"]), parent)
+        return "" if first is b else first["text"][:120]
+
+    by_i_new, by_i_old = {b["i"]: b for b in new}, {b["i"]: b for b in old}
+    items = [{"type": "changed" if a["i"] in was else "new", "text": a["text"], "was": was[a["i"]]["text"] if a["i"] in was else "",
+              "key": a["key"], "nth": a["nth"], "tag": a["tag"], "section": a["section"],
+              "context": context(a, by_i_new)} for a in added]
+    items += [{"type": "removed", "text": "", "was": r["text"], "key": "", "nth": 0, "tag": r["tag"], "section": r["section"],
+               "context": context(r, by_i_old)} for r in removed if r["i"] not in used]
+    return items
+
+
+def git(*args: str) -> str:
+    r = subprocess.run(["git", *args], cwd=ROOT, capture_output=True, text=True)
+    if r.returncode:
+        raise RuntimeError(r.stderr.strip() or "git " + " ".join(args) + " failed")
+    return r.stdout
+
+
+def commit_info(ref: str) -> dict:
+    if not ref or ref.startswith("-"):
+        raise RuntimeError(f"not a commit: {ref!r}")
+    sha = git("rev-parse", "--verify", "--quiet", ref + "^{commit}").strip()
+    short, date, subject = git("log", "-1", "--format=%h%x09%ad%x09%s", "--date=short", sha).rstrip("\n").split("\t", 2)
+    return {"ref": ref, "sha": sha, "short": short, "date": date, "subject": subject}
+
+
+def recent_commits(n: int = 25) -> list[dict]:
+    try:
+        deployed = git("rev-parse", "--verify", "--quiet", "origin/main").strip()
+    except RuntimeError:
+        deployed = ""
+    out = []
+    for line in git("log", f"-{n}", "--format=%H%x09%h%x09%ad%x09%s", "--date=short").splitlines():
+        sha, short, date, subject = line.split("\t", 3)
+        out.append({"sha": sha, "short": short, "date": date, "subject": subject, "deployed": sha == deployed})
+    return out
+
+
+BASE_LOCK = threading.Lock()
+
+
+def base_site(sha: str) -> Path:
+    """The site as built from commit `sha` (cached)."""
+    done = CACHE / sha / "_site"
+    with BASE_LOCK:
+        if (done / "index.html").exists():
+            return done
+        tmp = CACHE / (sha + ".tmp")
+        shutil.rmtree(tmp, ignore_errors=True)
+        tmp.mkdir(parents=True)
+        tar = tmp / "src.tar"
+        git("archive", "--format=tar", "-o", str(tar), sha)
+        subprocess.run(["tar", "-xf", str(tar), "-C", str(tmp)], check=True)
+        tar.unlink()
+        r = run_build(tmp)
+        if not r["ok"]:
+            raise RuntimeError("build of " + sha[:7] + " failed:\n" + r["output"])
+        shutil.rmtree(CACHE / sha, ignore_errors=True)
+        os.replace(tmp, CACHE / sha)
+        for old in sorted((d for d in CACHE.iterdir() if d.is_dir()), key=lambda d: d.stat().st_mtime)[:-4]:
+            shutil.rmtree(old, ignore_errors=True)
+        return done
+
+
+def page_url(rel: str) -> str:
+    return "/" + (rel[: -len("index.html")] if rel == "index.html" or rel.endswith("/index.html") else rel)
+
+
+def page_file(url_path: str) -> str:
+    rel = url_path.lstrip("/")
+    return rel + "index.html" if rel == "" or rel.endswith("/") else rel
+
+
+def site_changes(sha: str, only: str | None = None) -> list[dict]:
+    """Per page: what differs between the build of `sha` and the current build."""
+    base = base_site(sha)
+    if only is not None:
+        rels = [page_file(only)]
+    else:
+        rels = sorted({p.relative_to(root).as_posix() for root in (base, SITE) for p in root.rglob("*.html")})
+    pages = []
+    for rel in rels:
+        old_title, old = page_blocks(base / rel)
+        with BUILD:
+            title, new = page_blocks(SITE / rel)
+        if only is None and not old and not new:
+            continue
+        items = compare_pages(old, new)
+        if items or only is not None:
+            state = "new page" if not old and new else "removed page" if old and not new else ""
+            pages.append({"page": page_url(rel), "title": title or old_title, "state": state, "items": items})
+    return pages
+
+
+def source_changes(sha: str) -> list[dict]:
+    """Files that feed the site and differ from `sha` (working tree, uncommitted edits included)."""
+    spec = ["--", ".", ":!tools", ":!README.md", ":!.github"]
+    out = []
+    for line in git("diff", "--numstat", sha, *spec).splitlines():
+        plus, minus, name = line.split("\t", 2)
+        diff = git("diff", "-U2", sha, "--", name)
+        out.append({"file": name, "plus": plus, "minus": minus, "diff": diff[:200_000]})
+    for name in git("ls-files", "--others", "--exclude-standard", "--", "content", "data", "templates", "static", "sitegen").splitlines():
+        out.append({"file": name, "plus": "new", "minus": "", "diff": ""})
+    return out
 
 
 # --- HTTP -----------------------------------------------------------------
@@ -217,6 +505,7 @@ class Handler(BaseHTTPRequestHandler):
     store: Store
     token: str
     port: int
+    base = "HEAD"  # commit that "what changed" compares with
 
     def log_message(self, fmt, *args):  # quiet: one line per write request only
         if self.command != "GET":
@@ -261,6 +550,8 @@ class Handler(BaseHTTPRequestHandler):
             return self.ui_page("questions.html")
         if path == "/__review/annotations":
             return self.ui_page("annotations.html")
+        if path == "/__review/changes":
+            return self.ui_page("changes.html")
         if path.startswith("/__review/static/"):
             return self.static(UI, path[len("/__review/static/"):], inject=False)
         if path == "/__review/api/annotations":
@@ -271,6 +562,8 @@ class Handler(BaseHTTPRequestHandler):
             q = self.store.load("questions.json", {"sections": [], "questions": []})
             q["answers"] = self.store.load("answers.json", {"answers": {}})["answers"]
             return self.json(q)
+        if path == "/__review/api/changes":
+            return self.changes(parse_qs(url.query).get("page", [None])[0])
         return self.static(SITE, path.lstrip("/"), inject=True)
 
     do_HEAD = do_GET
@@ -295,6 +588,13 @@ class Handler(BaseHTTPRequestHandler):
                 r = rebuild()
                 self.store.log("rebuild", ok=r["ok"], seconds=r["seconds"])
                 return self.json(r)
+            if path == "/__review/api/base":
+                try:
+                    info = commit_info(str(data.get("ref", "")))
+                except RuntimeError as e:
+                    return self.json({"error": str(e)}, 400)
+                Handler.base = info["sha"]
+                return self.json(info)
         self.json({"error": "not found"}, 404)
 
     def do_PUT(self):
@@ -325,14 +625,17 @@ class Handler(BaseHTTPRequestHandler):
         target = (base / rel).resolve()
         if base.resolve() not in target.parents and target != base.resolve():
             return self.send(404, b"not found", "text/plain")
-        if target.is_dir():
-            target = target / "index.html"
-        code = 200
-        if not target.is_file():
-            if not inject:
-                return self.send(404, b"not found", "text/plain")
-            code, target = 404, SITE / "404.html"
-        body = target.read_bytes()
+        if inject and (target.is_dir() or target.suffix in ("", ".html")):
+            ensure_fresh(self.store)
+        with BUILD:
+            if target.is_dir():
+                target = target / "index.html"
+            code = 200
+            if not target.is_file():
+                if not inject:
+                    return self.send(404, b"not found", "text/plain")
+                code, target = 404, SITE / "404.html"
+            body = target.read_bytes()
         ctype = mimetypes.guess_type(target.name)[0] or "application/octet-stream"
         if ctype.startswith("text/") or ctype in ("application/javascript", "application/json"):
             ctype += "; charset=utf-8"
@@ -341,9 +644,10 @@ class Handler(BaseHTTPRequestHandler):
         self.send(code, body, ctype)
 
     def inject(self, body: bytes) -> bytes:
+        config = json.dumps({"token": self.token, "buildError": FRESH["error"]}).replace("</", "<\\/")
         snippet = (
             '<link rel="stylesheet" href="/__review/static/overlay.css">'
-            f"<script>window.REVIEW={json.dumps({'token': self.token})};</script>"
+            f"<script>window.REVIEW={config};</script>"
             '<script src="/__review/static/overlay.js" defer></script>'
         ).encode()
         i = body.rfind(b"</body>")
@@ -359,11 +663,30 @@ class Handler(BaseHTTPRequestHandler):
         ans = self.store.load("answers.json", {"answers": {}})["answers"]
         open_ = sum(1 for a in ann if a["status"] == "open")
         answered = sum(1 for x in q if ans.get(x["id"], {}).get("state") == "answered")
+        try:
+            info = commit_info(self.base)
+            pages = site_changes(info["sha"])
+            n = sum(len(p["items"]) for p in pages)
+            changes = (f"{n} changed text{'s' if n != 1 else ''} on {len(pages)} page{'s' if len(pages) != 1 else ''}"
+                       f" since commit {info['short']} ({info['date']}, {html.escape(info['subject'])})")
+        except (RuntimeError, OSError, subprocess.CalledProcessError) as e:
+            changes = "Not available: " + html.escape(str(e))
         body = (UI / "hub.html").read_text(encoding="utf-8")
         for k, v in {"__ANN_OPEN__": open_, "__ANN_TOTAL__": len(ann), "__Q_DONE__": answered,
-                     "__Q_TOTAL__": len(q), "__DATA__": html.escape(str(self.store.data))}.items():
+                     "__Q_TOTAL__": len(q), "__CHANGES__": changes, "__DATA__": html.escape(str(self.store.data))}.items():
             body = body.replace(k, str(v))
         self.send(200, body.encode("utf-8"), "text/html; charset=utf-8")
+
+    def changes(self, page: str | None) -> None:
+        ensure_fresh(self.store)
+        try:
+            info = commit_info(self.base)
+            pages = site_changes(info["sha"], page)
+        except (RuntimeError, OSError, subprocess.CalledProcessError) as e:
+            return self.json({"error": str(e)})
+        if page is not None:
+            return self.json({"base": info, **pages[0]})
+        self.json({"base": info, "commits": recent_commits(), "pages": pages, "sources": source_changes(info["sha"])})
 
     # annotations
     def create_annotation(self, d: dict) -> None:
@@ -510,6 +833,7 @@ def main() -> None:
     ap.add_argument("--data", type=Path, default=ROOT.parent / "review",
                     help="directory for questions.json, answers.json, annotations.json (default: ../review)")
     ap.add_argument("--no-build", action="store_true", help="serve _site/ as it is")
+    ap.add_argument("--base", default="HEAD", help="commit that 'what changed' compares with (default: HEAD, the last commit)")
     ap.add_argument("--open", action="store_true", help="open the browser")
     ap.add_argument("--report", action="store_true", help="print open notes and unapplied answers (Markdown), then exit")
     ap.add_argument("--resolve", nargs=2, metavar=("ID", "HOW"), help="mark a note or an answer as applied, then exit")
@@ -526,10 +850,12 @@ def main() -> None:
     Handler.store = Store(args.data.resolve())
     Handler.token = secrets.token_urlsafe(16)
     Handler.port = args.port
+    Handler.base = args.base
     srv = ThreadingHTTPServer(("127.0.0.1", args.port), Handler)
     base = f"http://127.0.0.1:{args.port}"
     print(f"site with review overlay: {base}/\nquestions: {base}/__review/questions\n"
-          f"annotations: {base}/__review/annotations\ndata: {Handler.store.data}")
+          f"annotations: {base}/__review/annotations\nwhat changed: {base}/__review/changes\n"
+          f"data: {Handler.store.data}")
     if args.open:
         webbrowser.open(base + "/__review/")
     try:

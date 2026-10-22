@@ -76,6 +76,9 @@ Every page gets a toolbar (bottom right; this exists only in pages served by `to
 - **Edit** (`e`): click a text, change it in place, Save. If the change maps to one place in the sources (a TOML value, a BibTeX field, a Markdown line), *Write to source & rebuild* applies it at once; check `git diff` and commit as usual. Otherwise the edit stays recorded for later.
 - **Comment** (`c`): click a text, or select a few words, and leave a note (unclear, wrong or outdated, missing, remove).
 - **Notes**, **All notes** (`/__review/annotations`): list, reopen, close, delete.
+- **Changes**: highlights the texts that differ from the last commit (uncommitted edits, whoever made them), with a word diff of each in the side panel. `/__review/changes` lists them for all pages, with the source files behind them; it can also compare with an older commit (or start with `--base REF`).
+
+The server rebuilds the site by itself when a source file changed since the last build, so it always shows the current state.
 
 `/__review/questions` shows the questions of `questions.json` (one card per question: context, current values, choices, free text) and saves the answers as you type.
 
