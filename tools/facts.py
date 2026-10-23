@@ -38,7 +38,7 @@ SCHEMA = {
                                "status": {"ongoing", "defended", "not-defended", None}}),
     "projects.toml": ("project", {}),
     "juries.toml": ("jury", {"degree": {"PhD", "HDR"}, "role": {"reviewer", "examiner", "president", "member"}}),
-    "talks.toml": ("talk", {"kind": {"keynote", "invited", "lecture", "outreach", "industry"}}),
+    "talks.toml": ("talk", {"kind": {"keynote", "invited", "lecture", "outreach", "industry", "panel", "talk"}}),
     "media.toml": ("item", {"kind": {"exhibition", "video", "talk", "channel", "book", "press", "blog"}}),
 }
 DATE_FIELDS = ("date", "start", "end", "defense")

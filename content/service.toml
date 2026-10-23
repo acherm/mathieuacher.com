@@ -3,19 +3,19 @@
 # Keep top-level keys (summary, committees, ...) above the first [[table]].
 
 summary = """
-I supervise PhD students, postdocs, and engineers in the DiverSE team, on variability, machine learning and LLMs for software engineering, reproducibility, and testing, often with industrial partners (CGI France, Sopra Steria, Nokia, Mitsubishi Electric, Airbus). I serve the software product line and variability community (SPLC, VaMoS, and VARIABILITY steering committees, VaMoS 2025 general chair), co-lead the Inria challenge LLM4Code and the Inria–Simula associate team RIPOST, and am strongly involved in the Inria–Mitsubishi Electric challenge FRAIME and the France 2030 project CodeCommons.
+I supervise PhD students, postdocs, and engineers in the DiverSE team, on variability, machine learning and LLMs for software engineering, reproducibility, and testing, often with industrial partners (CGI France, Sopra Steria, Nokia, Mitsubishi Electric, Airbus). I serve the software product line and variability community (SPLC, VaMoS, and VARIABILITY steering committees, VaMoS 2025 general chair), co-lead the Inria challenge LLM4Code and the Inria–Simula associate team RIPOST, co-lead the Inria–Mitsubishi Electric challenge FRAIME for DiverSE, and lead a work package of the France 2030 project CodeCommons.
 """
 
 committees = """
 - **2026**: VARIABILITY (research papers)
-- **2025**: ECAI, SPLC (main and challenge tracks), MODEVAR
-- **2024**: [ECAI](https://www.ecai2024.eu/committees/pc), SPLC, MODEVAR (also keynote at MODEVAR@VaMoS)
+- **2025**: ECAI, SPLC (main and challenge tracks), VaMoS, MODEVAR
+- **2024**: [ECAI](https://www.ecai2024.eu/committees/pc), SPLC, VaMoS, MODEVAR (also keynote at MODEVAR@VaMoS)
 - **2023**: SPLC, VaMoS
-- **2022**: MODEVAR
+- **2022**: VaMoS, MODEVAR
 - **2021**: SPLC, VaMoS
 - **2020**: ICSE (SEIP), SPLC, MODELS (doctoral symposium)
 - **2019**: SPLC (research, demos and tools), VaMoS, ASE (journal first)
-- **Earlier**: ASE 2018, ICSE NIER 2014, 2015, 2018, ICSE SEIP 2014, ICSR 2018, SPLC 2014–2018, VaMoS 2016–2018, SAC SE 2015–2018, SEAA, FOSD, REVE, and others ([full list until 2019](https://web.archive.org/web/2024/https://mathieuacher.com/services.html))
+- **Earlier**: ASE 2018, ICSE NIER 2014, 2015, 2018, ICSE SEIP 2014, ICSR 2018, SPLC 2014–2018, VaMoS 2015–2018, SAC SE 2015–2018, SEAA, FOSD, REVE, and others ([full list until 2019](https://web.archive.org/web/2024/https://mathieuacher.com/services.html))
 """
 
 reviewing = """
@@ -36,7 +36,7 @@ text = "General chair of [VaMoS 2025](https://familiar-project.github.io/VaMoS20
 
 [[roles]]
 year = "2024"
-text = "Challenge track co-chair of SPLC 2024 (Luxembourg), with Thomas Thüm; co-editor of the proceedings (volumes A and B, ACM)"
+text = "Co-chair of the Challenges and Solutions track of SPLC 2024 (Luxembourg), with Thomas Thüm; co-editor of the proceedings (volumes A and B, ACM)"
 
 [[roles]]
 year = "2021"
@@ -48,7 +48,7 @@ text = "Program co-chair of [VaMoS 2020](https://blog.mathieuacher.com/VaMoS2020
 
 [[roles]]
 year = "2019"
-text = "Co-organizer of MODEVAR, REVE, and SPLTea at SPLC 2019 (Paris), and of MaLTeSQuE 2019 (ESEC/FSE), co-editor of its proceedings"
+text = "Co-organizer of MODEVAR, REVE, and SPLTea at SPLC 2019 (Paris), and of MaLTeSQuE 2019 (ESEC/FSE), a workshop I co-founded; co-editor of its proceedings"
 
 [[roles]]
 year = "2017"
@@ -60,4 +60,4 @@ text = "Organizer of the SPLTea workshops (teaching software product lines), MAS
 
 [[roles]]
 year = "Ongoing"
-text = "Member of the steering committees of SPLC (since 2018), VaMoS (since 2020), and VARIABILITY (since 2025, the conference merging SPLC, VaMoS, and ICSR)"
+text = "Member of the steering committees of SPLC (since 2018), VaMoS (since 2020), and VARIABILITY (since 2025, the conference merging SPLC, VaMoS, and ICSR); member of the scientific council (*Conseil scientifique*) of INSA Rennes (since 2026)"

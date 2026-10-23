@@ -595,7 +595,7 @@
 }
 
 @inproceedings{bessal2025unveiling,
-  author = {João Marcello Bessal and Millena Cavalcanti and Mathieu Acher and Markus Endler and Juliana Alves Pereira},
+  author = {João Marcello Bessa and Millena Cavalcanti and Mathieu Acher and Markus Endler and Juliana Alves Pereira},
   title = {Unveiling the Impact of Sampling on Feature Selection for Performance Prediction in Configurable Systems},
   booktitle = {22nd {IEEE/ACM} International Conference on Software and Systems Reuse, {ICSR} 2025, Ottawa, {ON}, Canada, April 27-28, 2025},
   pages = {55--66},
@@ -617,6 +617,7 @@
   month = mar,
   doi = {10.1109/icst62969.2025.10989017},
   url = {https://doi.org/10.1109/icst62969.2025.10989017},
+  workshop = {1},
   abstract = {Configurable software systems, such as software product lines, enable the generation of products based on configurations tailored to specific requirements by combining reusable features. A key challenge in product lines lies in combinatorial interaction testing, which ensures that all possible feature combinations are tested to identify configurations that may fail. When a configuration fails, pinpointing the feature or the feature interaction causing the fault is crucial. However, fault masking - where faulty interactions remain undetected because other features or interactions could override their effects - potentially hinders the effective identification of faults in product lines. Despite the potential of missing critical interaction faults, fault masking in product lines has received limited attention in existing research. To address this gap, we investigate and analyze on already identified faults of the real-world product line JHipster and quantitatively analyze these faults in terms of masking. In our case study, we find evidence of the existence of fault masking in JHipster and how the detectability of masked faults is influenced. For one feature-interaction fault in JHipster, we miss to identify 17.6\% of all configurations containing this fault due to masking effects. By analyzing masked faults of a real-world product line, we raise awareness of investigating feature-interaction masking further in software product lines.}
 }
 
@@ -929,6 +930,7 @@
   hal_version = {v1},
   pdf = {https://hal.science/hal-04312909v1/file/DemonstrationVariabilityGPTVaMoS-preprint.pdf},
   keywords = {variability ; end-user programming ; software product lines ; generator ; generative AI ; LLM ; code synthesis ; customization},
+  workshop = {1},
   abstract = {{Producing a variant of code is highly challenging, particularly for individuals unfamiliar with programming. This demonstration introduces a novel use of generative AI to aid end-users in customizing code. We first describe how generative AI can be used to customize code through prompts and instructions, and further demonstrate its potential in building end-user tools for configuring code. We showcase how to transform an undocumented, technical, low-level TikZ into a user-friendly, configurable, Web-based customization tool written in Python, HTML, CSS, and JavaScript and itself configurable. We discuss how generative AI can support this transformation process and traditional variability engineering tasks, such as identification and implementation of features, synthesis of a template code generator, and development of end-user configurators. We believe it is a first step towards democratizing variability programming, opening a path for end-users to adapt code to their needs.}}
 }
 
@@ -985,6 +987,7 @@ Pang et al. evaluated their work with four use cases, by comparing the number of
   timestamp = {Fri, 31 May 2024 21:05:15 +0200},
   biburl = {https://dblp.org/rec/conf/icse/ZeyenCPA24.bib},
   bibsource = {dblp computer science bibliography, https://dblp.org},
+  workshop = {1},
   abstract = {{Uniform Random Sampling (URS) is the problem of selecting solutions (models) from a Boolean formula such that each solution gets the same probability of being selected. URS has many applications. In large configurable software systems, one wants an unbiased sample of configurations to look for bugs at an affordable cost [12, 13]. Other applications of URS include deep learning verification (to sample inputs from unknown distributions) [2] and evolutionary algorithms (to initialize the input population) [4].}}
 }
 
@@ -1106,6 +1109,7 @@ Pang et al. evaluated their work with four use cases, by comparing the number of
   pdf = {https://inria.hal.science/hal-04160693/file/FromVariants2SPLWithLLM%20%282%29.pdf},
   slides = {https://www.slideshare.net/acher/generative-ai-for-reengineering-variants-into-software-product-lines-an-experience-report},
   keywords = {generative AI ; software product line ; variability ; configuration ; variant ; large language model ; reverse engineering},
+  workshop = {1},
   abstract = {{The migration and reengineering of existing variants into a software product line (SPL) is an error-prone and time-consuming activity. Many extractive approaches have been proposed, spanning different activities from feature identification and naming to the synthesis of reusable artefacts. In this paper, we explore how large language model (LLM)-based assistants can support domain analysts and developers. We revisit four illustrative cases of the literature where the challenge is to migrate variants written in different formalism (UML class diagrams, Java, GraphML, statecharts). We systematically report on our experience with ChatGPT-4, describing our strategy to prompt LLMs and documenting positive aspects but also failures. We compare the use of LLMs with state-of-the-art approach, BUT4Reuse. While LLMs offer potential in assisting domain analysts and developers in transitioning software variants into SPLs, their intrinsic stochastic nature and restricted ability to manage large variants or complex structures necessitate a semiautomatic approach, complete with careful review, to counteract inaccuracies.}}
 }
 
@@ -1294,6 +1298,7 @@ In this chapter, we show how to leverage statistical machine learning (and more 
   year = {2022},
   month = nov,
   keywords = {software product line ; software variability ; software testing ; ma- chine learning ; quality assurance},
+  workshop = {1},
   abstract = {{Software product line (SPL) engineers put a lot of effort to ensure that, through the setting of a large number of possible configuration options, products are acceptable and well-tailored to customers' needs. Unfortunately, options and their mutual interactions create a huge configuration space which is intractable to exhaustively explore. Instead of testing all products, machine learning is increasingly employed to approximate the set of acceptable products out of a small training sample of configurations. Machine learning (ML) techniques can refine a software product line through learned constraints and a priori prevent non-acceptable products to be derived. In this paper, we use adversarial ML techniques to generate adver-sarial configurations fooling ML classifiers and pinpoint incorrect classifications of products (videos) derived from an industrial video generator. Our attacks yield (up to) a 100\% misclassification rate and a drop in accuracy of 5\%. We discuss the implications these results have on SPL quality assurance.}}
 }
 
@@ -1417,6 +1422,7 @@ In this chapter, we show how to leverage statistical machine learning (and more 
   hal_id = {hal-03528889},
   hal_version = {v1},
   pdf = {https://hal.science/hal-03528889/file/KeynoteVaMoSReproducibleScienceDeepVariability.pdf},
+  workshop = {1},
   abstract = {{Biology, medicine, physics, astrophysics, chemistry: all these scientific domains need to process large amount of data with more and more complex software systems. For achieving reproducible science, there are several challenges ahead involving multidisciplinary collaboration and socio-technical innovation with software at the center of the problem. Despite the availability of data and code, several studies report that the same data analyzed with different software can lead to different results. I am seeing this problem as a manifestation of deep software variability: many factors (operating system, third-party libraries, versions, workloads, compile-time options and flags, etc.) themselves subject to variability can alter the results, up to the point it can dramatically change the conclusions of some scientific studies. In this keynote, I argue that deep software variability is a threat and also an opportunity for reproducible science. I first outline some works about (deep) software variability, reporting on preliminary evidence of complex interactions between variability layers. I then link the ongoing works on variability modelling and deep software variability in the quest for reproducible science.}}
 }
 
@@ -1466,6 +1472,7 @@ In this chapter, we show how to leverage statistical machine learning (and more 
   biburl = {https://dblp.org/rec/journals/corr/abs-2210-14082.bib},
   bibsource = {dblp computer science bibliography, https://dblp.org},
   published = {ternava:hal-03916459},
+  other = {1},
   abstract = {{Numerous software systems are highly configurable through run-time options, such as command-line parameters. Users can tune some of the options to meet various functional and non-functional requirements such as footprint, security, or execution time. However, some options are never set for a given system instance, and their values remain the same whatever the use cases of the system. Herein, we design a controlled experiment in which the system's run-time configuration space can be specialized at compile-time and combinations of options can be removed on demand. We perform an in-depth study of the well-known x264 video encoder and quantify the effects of its specialization to its non-functional properties, namely on binary size, attack surface, and performance while ensuring its validity. Our exploratory study suggests that the configurable specialization of a system has statistically significant benefits on most of its analysed non-functional properties, which benefits depend on the number of the debloated options. While our empirical results and insights show the importance of removing code related to unused run-time options to improve software systems, an open challenge is to further automate the specialization process.}}
 }
 
@@ -1483,6 +1490,7 @@ In this chapter, we show how to leverage statistical machine learning (and more 
   biburl = {https://dblp.org/rec/journals/corr/abs-2210-14699.bib},
   bibsource = {dblp computer science bibliography, https://dblp.org},
   published = {doderlein2025piloting},
+  other = {1},
   abstract = {{Language models are promising solutions for tackling increasing complex problems. In software engineering, they recently attracted attention in code assistants, with programs automatically written in a given programming language from a programming task description in natural language. They have the potential to save time and effort when writing code. However, these systems are currently poorly understood, preventing them from being used optimally. In this paper, we investigate the various input parameters of two language models, and conduct a study to understand if variations of these input parameters (e.g. programming task description and the surrounding context, creativity of the language model, number of generated solutions) can have a significant impact on the quality of the generated programs. We design specific operators for varying input parameters and apply them over two code assistants (Copilot and Codex) and two benchmarks representing algorithmic problems (HumanEval and LeetCode). Our results showed that varying the input parameters can significantly improve the performance of language models. However, there is a tight dependency when varying the temperature, the prompt and the number of generated solutions, making potentially hard for developers to properly control the parameters to obtain an optimal result. This work opens opportunities to propose (automated) strategies for improving performance.}}
 }
 
@@ -1650,6 +1658,7 @@ In this chapter, we show how to leverage statistical machine learning (and more 
   timestamp = {Mon, 03 Jan 2022 15:45:35 +0100},
   biburl = {https://dblp.org/rec/journals/corr/abs-2112-07279.bib},
   bibsource = {dblp computer science bibliography, https://dblp.org},
+  other = {1},
   abstract = {{Widely used software systems such as video encoders are by necessity highly configurable, with hundreds or even thousands of options to choose from. Their users often have a hard time finding suitable values for these options (i.e. finding a proper configuration of the software system) to meet their goals for the tasks at hand, e.g. compress a video down to a certain size. One dimension of the problem is of course that performance depends on the input data: a video as input to an encoder like x264 or a file system fed to a tool like xz. To achieve good performance, users should therefore take into account both dimensions of (1) software variability and (2) input data. In this problem-statement paper, we conduct a large study over 8 configurable systems that quantifies the existing interactions between input data and configurations of software systems. The results exhibit that (1) inputs fed to software systems interact with their configuration options in non monotonous ways, significantly impacting their performance properties (2) tuning a software system for its input data makes it possible to multiply its performance by up to ten (3) input variability can jeopardize the relevance of performance predictive models for a field deployment.}}
 }
 
@@ -1670,6 +1679,7 @@ In this chapter, we show how to leverage statistical machine learning (and more 
   youtube_id = {https://www.youtube.com/watch?v=sSKosyrfitA},
   twitter_id = {https://twitter.com/acherm/status/1436360161061392385},
   keywords = {software product lines, variability model, SAT, benchmark, configurable systems, sampling},
+  workshop = {1},
   abstract = {{We present BURST, a benchmarking platform for uniform random sampling techniques. With BURST, researchers have a flexible, controlled environment in which they can evaluate the scalability and uniformity of their sampling. BURST comes with an extensive --- and extensible --- benchmark dataset comprising 128 feature models, including challenging, real-world models of the Linux kernel. BURST takes as inputs a sampling tool, a set of feature models and a sampling budget. It automatically translates any feature model of the set in DIMACS and invokes the sampling tool to generate the budgeted number of samples. To evaluate the scalability of the sampling tool, BURST measures the time the tool needs to produce the requested sample. To evaluate the uniformity of the produced sample, BURST integrates the state-of-the-art and proven statistical test Barbarik. We envision BURST to become the starting point of a standardisation initiative of sampling tool evaluation. Given the huge interest of research for sampling algorithms and tools, this initiative would have the potential to reach and crosscut multiple research communities including AI, ML, SAT and SPL.}}
 }
 
@@ -1794,6 +1804,7 @@ In this chapter, we show how to leverage statistical machine learning (and more 
   timestamp = {Thu, 29 Oct 2020 11:14:57 +0100},
   biburl = {https://dblp.org/rec/conf/splc/Pereira0TA20.bib},
   bibsource = {dblp computer science bibliography, https://dblp.org},
+  workshop = {1},
   abstract = {{The goal of this tutorial is to give an introduction to how machine learning can be used to support activities related to the engineering of con gurable systems and software product lines. To the best of our knowledge, this is the rst practical tutorial in this trending eld. The tutorial is based on a systematic literature review and includes practical tasks (specialization, performance prediction) on real-world systems (VaryLaTeX, x264).}}
 }
 
@@ -1877,7 +1888,8 @@ In this chapter, we show how to leverage statistical machine learning (and more 
   hal_id = {hal-02342130},
   hal_version = {v1},
   pdf = {https://hal.science/hal-02342130/file/TuxML-OSS2019-final.pdf},
-  youtube_id = {https://www.youtube.com/watch?v=UBghs-cwQX4}
+  youtube_id = {https://www.youtube.com/watch?v=UBghs-cwQX4},
+  other = {1}
 }
 
 @inproceedings{martin:hal-02287459,
@@ -1894,6 +1906,7 @@ In this chapter, we show how to leverage statistical machine learning (and more 
   hal_id = {hal-02287459},
   hal_version = {v1},
   pdf = {https://inria.hal.science/hal-02287459v2/file/SPLC_Tuto_ML_config_systems2019Ack.pdf},
+  workshop = {1},
   abstract = {The goal of this tutorial is to give an introduction to how machine learning can be used to support activities related to the engineering of con gurable systems and software product lines. To the best of our knowledge, this is the rst practical tutorial in this trending eld. The tutorial is based on a systematic literature review and includes practical tasks (specialization, performance prediction) on real-world systems (VaryLaTeX, x264).}
 }
 
@@ -2137,6 +2150,7 @@ In this chapter, we show how to leverage statistical machine learning (and more 
   hal_id = {hal-01829933},
   hal_version = {v1},
   keywords = {Surveys and overviews ; Software Engineering Teaching ; Software Product Line Teaching ; $\bullet$ Social and professional topics $\rightarrow$ Computing education ; $\bullet$ Applied computing $\rightarrow$ Education ; $\bullet$ Software and its engineering $\rightarrow$ Software product lines ; Software Product Lines ; Variability Modeling},
+  workshop = {1},
   abstract = {{This extended abstract summarizes our article entitled " Teaching Software Product Lines: A Snapshot of Current Practices and Challenges " published in the ACM Transactions on Computing Education , vol. 18 in 2017 (http://doi.acm.org/10.1145/3088440). The article reports on three initiatives we have conducted with scholars, educators, industry practitioners, and students to understand the connection between software product lines and education and to derive recommendations for educators to continue improving the state of practice of teaching SPLs.}}
 }
 
@@ -2181,6 +2195,7 @@ In this chapter, we show how to leverage statistical machine learning (and more 
   hal_id = {hal-01730163},
   hal_version = {v2},
   pdf = {https://hal.science/hal-01730163/file/Multimorphic.pdf},
+  workshop = {1},
   abstract = {{The functional correctness of a software application is, of course, a prime concern, but other issues such as its execution time, precision , or energy consumption might also be important in some contexts. Systematically testing these quantitative properties is still extremely difficult, in particular, because there exists no method to tell the developer whether such a test set is "good enough" or even whether a test set is better than another one. This paper proposes a new method, called Multimorphic testing, to assess the relative effectiveness of a test suite for revealing performance variations of a software system. By analogy with mutation testing, our core idea is to vary software parameters, and to check whether it makes any difference on the outcome of the tests: i.e. are some tests able to " kill " bad morphs (configurations)? Our method can be used to evaluate the quality of a test suite with respect to a quantitative property of interest, such as execution time or computation accuracy.}}
 }
 
@@ -2348,6 +2363,7 @@ We describe our implementation and report on some experiences with VaryLaTeX.}}
   biburl = {https://dblp.org/rec/bib/journals/corr/abs-1710-07980},
   bibsource = {dblp computer science bibliography, https://dblp.org},
   published = {halin:hal-01829928},
+  other = {1},
   abstract = {{Many approaches for testing configurable software systems start from the same assumption: it is impossible to test all configurations.
     This motivated the definition of variability-aware abstractions and sampling techniques to cope with large configuration spaces.
     Yet, there is no theoretical barrier that prevents the exhaustive testing of all configurations by simply enumerating them, if the effort required to do so remains acceptable.
@@ -2540,7 +2556,7 @@ We describe our implementation and report on some experiences with VaryLaTeX.}}
 }
 
 @inproceedings{kim:hal-01241673,
-  author = {Kim, Jin Hyung and Legay, Axel and Traonouez, Louis-Marie and Acher, Mathieu and Kang, Sungwon},
+  author = {Kim, Jin Hyun and Legay, Axel and Traonouez, Louis-Marie and Acher, Mathieu and Kang, Sungwon},
   title = {{A Formal Modeling and Analysis Framework for Software Product Line of Preemptive Real-Time Systems}},
   booktitle = {Symposium on Applied Computing (SAC'16), software engineering track},
   year = {2016},
@@ -2676,6 +2692,7 @@ panorama of the sanity of the operations.}}
   hal_id = {hal-01242180},
   pdf = {https://inria.hal.science/hal-01242180v1/file/SPLC2015-kCVLPatternsTool.pdf},
   note = {(demonstration and tool track)},
+  workshop = {1},
   abstract = {{In systems engineering, the deployment of software components is error-prone since numerous safety and security rules have to be preserved.
   Another related problem is that numerous variants of deployments on different platforms are possible.
   In this paper we present a technological solution to assist industrial practitioners in producing a safe and secure solution out of numerous architectural variants.
@@ -2761,6 +2778,7 @@ See also http://teaching.variability.io}}
   doi = {10.1145/2786805.2803180},
   hal_id = {hal-01234338},
   pdf = {https://inria.hal.science/hal-01234338v1/file/MatrixMiner.pdf},
+  workshop = {1},
   abstract = {{Domain analysts, product managers, or customers aim to capture the important features and differences among a set of related products. A case-by-case reviewing of each product description is a laborious and time-consuming task that fails to deliver a condensed view of a product line. This paper introduces MatrixMiner: a tool for automatically synthesizing product comparison matrices (PCMs) from a set of product descriptions written in natural language. MatrixMiner is capable of identifying and organizing features and values in a PCM – despite the informality and absence of structure in the textual descriptions of products. Our empirical results of products mined from BestBuy show that the synthesized PCMs exhibit numerous quantitative, comparable information. Users can exploit MatrixMiner to visualize the matrix through a Web editor and review, refine, or complement the cell values thanks to the traceability with the original product descriptions and technical specifications.}}
 }
 
@@ -2923,6 +2941,7 @@ This talk has been done at REVE'15 workshop co-located with SPLC'15 (software pr
   language = {Anglais},
   audience = {internationale},
   affiliation = {DIVERSE - INRIA - IRISA},
+  workshop = {1},
   abstract = {{Feature Models (FMs) are the de-facto standard for documenting, model checking, and reasoning about the configurations of a software system. This paper introduces WebFML a comprehensive environment for synthesizing FMs from various kinds of artefacts (e.g. propositional formula, dependency graph, FMs or product comparison matrices). A key feature of WebFML is an interactive support (through ranking lists, clusters, and logical heuristics) for choosing a sound and meaningful hierarchy. WebFML opens avenues for numerous practical applications (e.g., merging multiple product lines, slicing a configuration process, reverse engineering configurable systems).}}
 }
 
@@ -3183,6 +3202,7 @@ Experimental results on five existing Web configurators show that the specificat
   language = {Anglais},
   audience = {internationale},
   affiliation = {DIVERSE - INRIA - IRISA , InPixal [Rennes]},
+  workshop = {1},
   abstract = {{We present ViViD, a variability-based tool to synthesize variants of video sequences. ViViD is developed and used in the context of an industrial project involving consumers and providers of video processing algorithms. The goal is to synthesize synthetic video variants with a wide range of characteristics to then test the algorithms. We describe the key components of ViViD(1) a variability language and an environment to model what can vary within a video sequence; (2) a reasoning back-end to generate relevant testing configurations; (3) a video synthesizer in charge of producing variants of video sequences corresponding to configurations. We show how ViViD can synthesize realistic videos with different characteristics such as luminances, vehicles and persons that cover a diversity of testing scenarios.}}
 }
 
@@ -3573,6 +3593,7 @@ experimental validations are provided using medical imaging pipelines, which are
   lang = {english},
   sorte = {colin},
   days = {2-7 September},
+  workshop = {1},
   abstract = {This tutorial aims at presenting new feature modelling tools directly applicable to a wide range of variability problems and application domains. Techniques and languages (TVL, FAMILIAR) for modelling, managing and configuring feature models will be illustrated and explained to participants (practitioners or academics, beginners or advanced).}
 }
 
@@ -3773,6 +3794,7 @@ data and characterize the properties of the derived FMs.}}
   lang = {english},
   sorte = {colin},
   days = {6-10 november},
+  workshop = {1},
   abstract = {{Variability in software product lines is often expressed through feature models (FMs).
 To handle the complexity of increasingly larger FMs, we propose semantically meaningful decomposition support through a slicing operator.
 We describe how the slicing operator is integrated into the FAMILIAR environment and how it can be combined with other operators to support complex tasks over FMs in different case studies.}}

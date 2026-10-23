@@ -5,7 +5,8 @@
 [[project]]
 name = "FRAIME"
 start = "2025"
-role = "strongly involved"
+end = "2029"
+role = "co-lead for DiverSE"
 url = "https://www.inria.fr/fr/fraime"
 highlight = true
 text = "*Formal Reasoning applied to AI for Methodological Engineering*: Inria challenge with Mitsubishi Electric R&D Centre Europe on trustworthy AI with formal methods, from verifying AI-generated code and content to using AI to make formal methods easier to use ([press release](https://www.mitsubishielectric.com/en/pr/2025/pdf/0918.pdf)). In DiverSE, two PhD theses (Najwa Naamane, Guillaume Freyermuth) and a postdoc."
@@ -21,15 +22,15 @@ text = "Inria challenge on reliable and productive code assistants based on larg
 [[project]]
 name = "CodeCommons"
 start = "2025"
-end = "2028"
+end = "2027"
 role = "work package 2 leader, team of nine engineers"
 url = "https://codecommons.org/"
-text = "France 2030 project around Software Heritage, building large-scale, curated code datasets for AI; my part covers programming-language identification and a catalog of programming languages."
+text = "France 2030 project around Software Heritage, building large-scale, curated code datasets for AI; my part covers programming-language identification, a catalog of programming languages, and SWH-context, which gathers the issues, pull requests, and discussions about code from software forges."
 
 [[project]]
 name = "RIPOST"
 start = "2024"
-end = "2027"
+end = "2026"
 role = "co-lead with Arnaud Gotlieb"
 url = "https://diverse-project.github.io/ripost_ea/"
 text = "Inria–Simula associate team on resilient and reproducible software, following RESIST (2021–2023)."
@@ -38,7 +39,13 @@ text = "Inria–Simula associate team on resilient and reproducible software, fo
 name = "CONFVERT"
 start = "2026"
 end = "2028"
-text = "Postdoctoral project (Sophie Fortz)."
+text = "Postdoctoral project funded by the Brittany region (Sophie Fortz), on configurations and energy consumption."
+
+[[project]]
+name = "VICUNA"
+role = "participant"
+url = "https://anr.fr/Projet-ANR-23-CE45-0022"
+text = "ANR JCJC project coordinated by Camille Maumet (Inria, Empenn team): why different configurations of neuroimaging pipelines give different results (ANR-23-CE45-0022)."
 
 [[project]]
 name = "COFECUB with PUC-Rio"

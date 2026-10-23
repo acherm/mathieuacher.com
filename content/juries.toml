@@ -47,28 +47,28 @@ year = 2023
 [[jury]]
 name = "Chico Sundermann"
 degree = "PhD"
-role = "member"
+role = "reviewer"
 institution = "Ulm University, Germany"
 year = 2025
 
 [[jury]]
 name = "Christian Kaltenecker"
 degree = "PhD"
-role = "member"
+role = "reviewer"
 institution = "Saarland University, Germany"
 year = 2024
 
 [[jury]]
 name = "Raúl Medeiros"
 degree = "PhD"
-role = "member"
+role = "examiner"
 institution = "University of the Basque Country, Spain"
 year = 2024
 
 [[jury]]
 name = "Marcel Heinz"
 degree = "PhD"
-role = "member"
+role = "reviewer"
 institution = "University of Koblenz-Landau, Germany"
 year = 2021
 
@@ -76,8 +76,10 @@ year = 2021
 name = "Clément Quinton"
 degree = "HDR"
 role = "reviewer"
+year = 2024
 
 [[jury]]
 name = "Adel Noureddine"
 degree = "HDR"
 role = "reviewer"
+year = 2024

@@ -52,7 +52,7 @@ links = [
 title = "Learning configurable systems"
 summary = "Sampling, measuring, and learning the performance and build behaviour of huge configuration spaces such as the Linux kernel."
 text = """
-How fast, how big, or how buggy is a configuration? I study how to sample, measure, and learn the behaviour of configurable systems with statistical machine learning, up to the 15,000+ options of the Linux kernel, including transfer learning across versions and incremental, reproducible builds.
+How fast, how big, or how buggy is a configuration? I study how to sample, measure, and learn the behaviour of configurable systems with statistical machine learning, up to the 20,000+ options of the Linux kernel, including transfer learning across versions and incremental, reproducible builds.
 """
 links = [
   { label = "Linux Kernel Configurations at Scale (EASE 2025)", url = "https://hal.science/hal-05063560" },

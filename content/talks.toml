@@ -1,8 +1,9 @@
 # Keynotes, invited talks and lectures (rendered on /service/#talks). Most recent first.
 #   date  = "YYYY", "YYYY-MM", or "YYYY-MM-DD"
-#   kind  = "keynote" | "invited" | "lecture" (invited course) | "outreach" (general public) | "industry"
+#   kind  = "keynote" | "invited" | "lecture" (invited course) | "outreach" (general public) | "industry" | "panel" | "talk" (project meetings, seminars as a participant)
+#   Only keynote, invited and lecture are counted as invited talks in dossiers.
 #   title (may be empty if unknown), event, place, url (slides, video, or event page), bib (key in data/acher.bib)
-# Not listed: Dagstuhl seminars, panels, talks of accepted papers.
+# Not listed: Dagstuhl seminars, talks of accepted papers.
 # Counts per period for dossiers: `python3 tools/facts.py tables`.
 
 [[talk]]
@@ -13,12 +14,27 @@ event = "ShareFAIR and Neurovasc Days (PEPR Santé numérique)"
 place = "Paris, France"
 
 [[talk]]
+date = "2026-11"
+kind = "keynote"
+title = "Coding Agents and Software Variability: Threats and Opportunities for Replicability in Science"
+event = "EnhanceR Symposium"
+place = "ETH Zurich, Switzerland"
+
+[[talk]]
 date = "2026-09-04"
-kind = "outreach"
+kind = "invited"
 title = "Langages de programmation à l'ère de l'IA générative : COBOL, M&M's, français… ou peu importe ?"
 event = "Semaine de l'IA, Université de Rennes"
 place = "Rennes, France"
 url = "https://www.youtube.com/watch?v=Aj5arTQzMQ4"
+
+[[talk]]
+date = "2026-07-02"
+kind = "panel"
+title = "Language Engineering in the Era of LLMs and Agentic AI"
+event = "STAF 2026 panel, co-located with SLE 2026"
+place = "Rennes, France"
+url = "https://conf.researchr.org/details/sle-2026/staf-2026-panel/1/Language-Engineering-in-the-Era-of-LLMs-and-Agentic-AI"
 
 [[talk]]
 date = "2026-06-05"
@@ -27,13 +43,56 @@ title = "Interview on the IUF chair in science outreach (closing session)"
 event = "Congrès de la Société informatique de France (SIF)"
 
 [[talk]]
+date = "2026"
+kind = "talk"
+title = "Language Detection"
+event = "CodeCommons plenary meeting"
+url = "https://www.youtube.com/watch?v=OFSIpLyYbww"
+
+[[talk]]
 date = "2025-09"
 kind = "keynote"
 title = "Software Variability for Replicable Science"
 event = "SBCARS, CBSoft 2025"
-place = "Rio de Janeiro, Brazil"
+place = "Recife, Brazil"
 bib = "acher2025software"
 url = "https://hal.science/hal-05334168"
+
+[[talk]]
+date = "2025-10-09"
+kind = "outreach"
+title = "Perroquet (ChatGPT) vs Poisson (Stockfish) : qui gagne aux échecs ? Tester les IA"
+event = "Fête de la science, INSA Rennes science village"
+place = "Rennes, France"
+
+[[talk]]
+date = "2025-09-22"
+kind = "talk"
+title = "DiverSE team activities and project context metadata collection"
+event = "CodeCommons annual review (pre-recorded)"
+place = "Inria Paris, France"
+url = "https://www.softwareheritage.org/2025/09/25/codecommons-annual-review-2025-09-22/"
+
+[[talk]]
+date = "2025-09-22"
+kind = "talk"
+title = "Programming language identification"
+event = "CodeCommons annual review (pre-recorded)"
+place = "Inria Paris, France"
+url = "https://www.softwareheritage.org/2025/09/25/codecommons-annual-review-2025-09-22/"
+
+[[talk]]
+date = "2025"
+kind = "invited"
+title = "Who Codes When AI Can Generate Code? Impacts of Generative AI on Professional Developers, End Users, and Researchers"
+event = "CEA SOTELO seminar (De l'impact de l'IA générative sur le génie logiciel)"
+
+[[talk]]
+date = "2025"
+kind = "invited"
+title = "Can Generative AI Generate Computational Experiments?"
+event = "ORAP (CNRS): Les grands modèles de langage, une rupture de pratique pour le développement de codes HPC"
+url = "https://orap.irisa.fr/les-grands-modeles-de-langage-une-rupture-de-pratique-pour-le-developpement-de-codes-hpc/"
 
 [[talk]]
 date = "2024-12-10"
@@ -79,15 +138,18 @@ place = "Brussels, Belgium"
 [[talk]]
 date = "2024-02"
 kind = "keynote"
-title = ""
+title = "24 Reasons Why Variability Models Are Not Yet Universal"
 event = "MODEVAR workshop at VaMoS 2024"
 place = "Bern, Switzerland"
+url = "https://blog.mathieuacher.com/VaMoS2024/"
 
 [[talk]]
-date = "2024"
-kind = "invited"
-title = "Can Generative AI Generate Computational Experiments?"
-event = "ORAP forum (CNRS)"
+date = "2024-01-30"
+kind = "panel"
+title = "Enseignement du GPL et LLMs (round table)"
+event = "Journée nationale EFELIA Côte d'Azur and GDR GPL: Développement logiciel à l'aune des LLMs"
+place = "Polytech Nice Sophia, Sophia Antipolis, France"
+url = "https://univ-cotedazur.fr/efelia-cote-dazur/journee-llms-developpement-logiciel-a-laune-des-llms"
 
 [[talk]]
 date = "2023-07"
@@ -100,23 +162,58 @@ url = "https://hal.science/hal-04152637"
 
 [[talk]]
 date = "2023"
+kind = "panel"
+title = "Generative AI and software product lines"
+event = "SPLC 2023"
+place = "Tokyo, Japan"
+
+[[talk]]
+date = "2023-05"
+kind = "invited"
+title = "Programming Variability with LLM"
+event = "Seminar at KTH Royal Institute of Technology"
+place = "Stockholm, Sweden"
+
+[[talk]]
+date = "2023-03-30"
+kind = "talk"
+title = "Tackling Deep Software Variability"
+event = "FOSD Meeting 2023"
+place = "Ulm, Germany"
+url = "https://fosd23.uni-ulm.de/#talks"
+
+[[talk]]
+date = "2023"
 kind = "invited"
 title = "Deep Software Variability for Replicability in Computational Science"
 event = "Software Engineering Symposium (SES 2023, IPSJ/SIGSE)"
 place = "Tokyo, Japan"
 
 [[talk]]
-date = "2022"
+date = "2022-09-12"
+kind = "keynote"
+title = "Machine Learning and Deep Software Variability"
+event = "VariVolution and VM4ModernTech workshops at SPLC 2022"
+place = "Graz, Austria"
+
+[[talk]]
+date = "2022-07-05"
+kind = "lecture"
+title = "Mastering Software Variability for Innovation and Science"
+event = "EIT Digital Summer School"
+place = "Rennes, France"
+
+[[talk]]
+date = "2022-02"
 kind = "keynote"
 title = "Reproducible Science and Deep Software Variability"
 event = "VaMoS 2022"
-place = "Florence, Italy"
 url = "https://vamos2022.isti.cnr.it/keynotes"
 
 [[talk]]
-date = "2022"
+date = "2022-06"
 kind = "invited"
-title = ""
+title = "Deep software variability"
 event = "Seminar at LaBRI, Université de Bordeaux"
 place = "Bordeaux, France"
 

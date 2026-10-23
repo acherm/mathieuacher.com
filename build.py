@@ -127,7 +127,7 @@ def jury_groups(juries: list[dict]) -> list[dict]:
 
 
 TALK_KINDS = {"keynote": "Keynote", "invited": "Invited talk", "lecture": "Invited lecture",
-              "outreach": "Public talk", "industry": "Talk"}
+              "outreach": "Public talk", "industry": "Talk", "panel": "Panel", "talk": "Talk"}
 
 
 def talk_years(talks: list[dict]) -> list[dict]:

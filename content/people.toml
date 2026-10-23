@@ -15,31 +15,34 @@
 name = "Najwa Naamane"
 kind = "phd"
 status = "ongoing"
-start = "2026"
-topic = "AI, code, and formal methods"
+start = "2026-04"
+topic = "Formal specification and code"
+with = "Djamel Eddine Khelladi (thesis director) and David Mentré (Mitsubishi Electric R&D Centre Europe)"
 funding = "Inria–Mitsubishi Electric challenge FRAIME"
 
 [[person]]
 name = "Guillaume Freyermuth"
 kind = "phd"
 status = "ongoing"
-start = "2026"
-with = "the Khora team"
+start = "2026-10"
+topic = "Formal specification and code"
+with = "Djamel Eddine Khelladi (thesis director) and Denis Cousineau (Mitsubishi Electric R&D Centre Europe)"
 funding = "Inria–Mitsubishi Electric challenge FRAIME"
 
 [[person]]
 name = "Wentao Sun"
 kind = "phd"
 status = "ongoing"
-start = "2026"
-topic = "LLM causal deduction ([NeurIPS 2026 paper](/publications/#sun2026externalized))"
+start = "2026-02"
+topic = "Language and reasoning models for telecom network management (first paper: [NeurIPS 2026](/publications/#sun2026externalized))"
+with = "Dominique Verchère (Nokia)"
 funding = "CIFRE with Nokia"
 
 [[person]]
 name = "Axel Allain"
 kind = "phd"
 status = "ongoing"
-start = "2026-01"
+start = "2025-11"
 topic = "Continuous co-evolution of code for mainstream languages and libraries"
 with = "Djamel Eddine Khelladi and Aymeric Blot"
 thesesfr = "s435552"
@@ -108,6 +111,7 @@ defense = "2025-05-28"
 topic = "[Incremental, reproducible builds of software variants](https://hal.science/tel-05308121). GDR SciLog 2026 thesis prize."
 with = "Olivier Zendra and Djamel Eddine Khelladi"
 funding = "MESR doctoral contract"
+now = "Postdoc at the University of Waterloo, Canada"
 
 [[person]]
 name = "Zohra Kaouter Kebaili"
@@ -117,17 +121,18 @@ start = "2022-01"
 defense = "2025-05-15"
 topic = "[Supporting metamodel and code co-evolution](https://hal.science/tel-05272600)"
 with = "Olivier Barais and Djamel Eddine Khelladi"
-funding = "ANR CoEvolution"
+funding = "ANR JCJC MC-Evo² (Djamel Eddine Khelladi)"
 
 [[person]]
 name = "Luc Lesoil"
 kind = "phd"
 status = "defended"
-start = "2020"
+start = "2019"
 defense = "2023-04-17"
 topic = "[Deep software variability for resilient performance models of configurable systems](https://hal.science/tel-04190983)"
 with = "Arnaud Blouin and Jean-Marc Jézéquel"
 funding = "ANR VaryVary"
+now = "Data scientist at Essilor"
 
 [[person]]
 name = "Hugo Martin"
@@ -138,6 +143,7 @@ defense = "2021-12-16"
 topic = "[Machine learning for performance modelling on colossal software configuration spaces](https://hal.science/tel-03698474)"
 with = "Jean-Marc Jézéquel"
 funding = "ANR VaryVary"
+now = "AI engineer at the University of Rennes"
 
 [[person]]
 name = "Paul Temple"
@@ -148,6 +154,7 @@ defense = "2018-09"
 topic = "[Investigate the matrix: leveraging variability to specialize software and test suites](https://hal.science/tel-02125962)"
 with = "Jean-Marc Jézéquel"
 funding = "MESR doctoral contract"
+now = "Associate Professor at the University of Rennes"
 
 [[person]]
 name = "Quentin Plazar"
@@ -168,6 +175,7 @@ defense = "2016-09-23"
 topic = "Metamodels and feature models: complementary approaches to formalize product comparison matrices"
 with = "Benoit Baudry"
 funding = "MESR doctoral contract"
+now = "Engineer"
 
 [[person]]
 name = "Sana Ben Nasr"
@@ -178,6 +186,7 @@ defense = "2016-04-05"
 topic = "Mining and modeling variability from natural language documents"
 with = "Benoit Baudry"
 funding = "CONNEXION project (with EDF)"
+now = "Engineer"
 
 # --- Postdocs ---------------------------------------------------------------
 
@@ -186,13 +195,15 @@ name = "Sophie Fortz"
 kind = "postdoc"
 start = "2026"
 end = "2028"
-funding = "CONFVERT project"
+topic = "Configurations and energy consumption"
+funding = "CONFVERT project (Brittany region)"
 
 [[person]]
 name = "Zohra Kaouter Kebaili"
 kind = "postdoc"
 start = "2025"
 end = "2027"
+topic = "Code migration"
 funding = "Sopra Steria and Inria"
 
 [[person]]
@@ -200,18 +211,20 @@ name = "Heraldo Borges"
 kind = "postdoc"
 start = "2025"
 end = "2026"
+topic = "Learning configuration spaces"
 
 [[person]]
 name = "Théo Matricon"
 kind = "postdoc"
 start = "2024"
 end = "2026"
+topic = "AI coding agents, benchmarks, and exploration of variants"
 
 [[person]]
 name = "Gauthier Le Bartz Lyan"
 kind = "postdoc"
 start = "2024"
-end = "2026"
+end = "2025"
 topic = "Reproducibility and variability"
 funding = "Inria–Simula associate team RIPOST"
 
@@ -219,9 +232,10 @@ funding = "Inria–Simula associate team RIPOST"
 name = "Xhevahire Tërnava"
 kind = "postdoc"
 start = "2020"
-end = "2022"
+end = "2023"
 topic = "Debloating variability"
 funding = "SLIMFAST project"
+now = "Associate Professor at Télécom Paris"
 
 [[person]]
 name = "Juliana Alves Pereira"
@@ -230,7 +244,7 @@ start = "2018"
 end = "2020"
 topic = "Machine learning and variability"
 funding = "ANR VaryVary"
-now = "PUC-Rio, Brazil"
+now = "Professor at PUC-Rio, Brazil"
 
 [[person]]
 name = "Jin Hyun Kim"
@@ -249,6 +263,7 @@ end = "2016"
 role = "PhD, then postdoc"
 topic = "Synthesis of video variants, automated reasoning"
 funding = "MOTIV project"
+now = "Professor at the University of Seville, Spain"
 
 [[person]]
 name = "João Bosco Ferreira Filho"
@@ -258,6 +273,7 @@ end = "2016"
 role = "PhD, then postdoc"
 topic = "Model-based product lines"
 funding = "VaryMDE / Clarity"
+now = "Professor at the Federal University of Ceará (UFC), Brazil"
 
 [[person]]
 name = "Mauricio Alférez"
@@ -266,3 +282,4 @@ start = "2012"
 end = "2014"
 topic = "Synthesis of video variants, variability modelling"
 funding = "MOTIV project (DGA, Bertin, InPixal)"
+now = "Researcher in Luxembourg"

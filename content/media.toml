@@ -21,7 +21,7 @@ kind = "exhibition"
 title = "The Constant"
 outlet = "Source Code Exhibition, Software Heritage and Inria"
 url = "https://www.sourcecode-exhibition.softwareheritage.org/the-constant/"
-text = "A panel on the number 1070372, unchanged in Stockfish's source code since 2014. The exhibition opened at UNESCO in Paris for Software Heritage's 10th anniversary and now travels to other cities and countries (Cité des sciences and Sorbonne Université in Paris, Luxembourg, and more)."
+text = "A panel on the number 1070372, unchanged in Stockfish's source code since 2014. The exhibition opened at UNESCO in Paris for Software Heritage's 10th anniversary and now travels to other cities and countries (Cité des sciences, Sorbonne Université, and Télécom Paris in Paris, Slovenia, Luxembourg, and more)."
 
 [[item]]
 date = "2026-09"
@@ -30,6 +30,13 @@ title = "Langages de programmation à l'ère de l'IA générative : COBOL, M&M's
 outlet = "Semaine de l'IA, Université de Rennes"
 url = "https://www.youtube.com/watch?v=Aj5arTQzMQ4"
 text = "What coding agents change for programming languages, for about 230 students ([slides](https://blog.mathieuacher.com/languages-codingagents-semaineIA2026/))."
+
+[[item]]
+date = "2025-10"
+kind = "talk"
+title = "Perroquet (ChatGPT) vs Poisson (Stockfish) : qui gagne aux échecs ? Tester les IA"
+outlet = "Fête de la science, INSA Rennes"
+text = "Testing generative AI with chess, given several times in a day to school classes from 12 to 18 years old (about 200 pupils); the recording is on CodeplAI."
 
 [[item]]
 date = "2024-10"
@@ -48,7 +55,22 @@ url = "https://www.youtube.com/@CodeplAI"
 text = "AI, programming, and games: puzzles, algorithms, variants, playing with and against AI."
 
 [[item]]
+date = "2026-03"
+kind = "video"
+title = "Researcher Insight"
+outlet = "Software Center (Sweden)"
+text = "Interview with Jan Bosch on the risks and benefits of generative AI in software engineering."
+
+[[item]]
+date = "2017"
+kind = "video"
+title = "AlphaZéro, l'intelligence artificielle qui met les échecs en PLS"
+outlet = "Blitzstream (YouTube, in French)"
+url = "https://www.youtube.com/watch?v=PH06mEOVVyY"
+text = "AlphaZero and what it changes for chess (about 100,000 views)."
+
+[[item]]
 kind = "press"
 title = "In the media"
 outlet = "interviews and articles"
-text = "*Le Parisien* (2026), *Science & Vie* (2023), [CNRS News](https://news.cnrs.fr/articles/one-software-billions-of-possibilities) (2022)."
+text = "*Le Parisien* (2026), *Epsiloon* (2026), [Inria](https://www.inria.fr/fr/meilleure-ia-developper-code-diverse) (2025), *Science & Vie* (2023), [CNRS News](https://news.cnrs.fr/articles/one-software-billions-of-possibilities) (2022), *CNRS Le Journal* (2021)."
