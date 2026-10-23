@@ -64,6 +64,7 @@ kind = "outreach"
 title = "Perroquet (ChatGPT) vs Poisson (Stockfish) : qui gagne aux échecs ? Tester les IA"
 event = "Fête de la science, INSA Rennes science village"
 place = "Rennes, France"
+url = "https://www.youtube.com/watch?v=TtGiT-tWdmE"
 
 [[talk]]
 date = "2025-09-22"

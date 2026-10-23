@@ -36,6 +36,7 @@ date = "2025-10"
 kind = "talk"
 title = "Perroquet (ChatGPT) vs Poisson (Stockfish) : qui gagne aux échecs ? Tester les IA"
 outlet = "Fête de la science, INSA Rennes"
+url = "https://www.youtube.com/watch?v=TtGiT-tWdmE"
 text = "Testing generative AI with chess, given several times in a day to school classes from 12 to 18 years old (about 200 pupils); the recording is on CodeplAI."
 
 [[item]]
@@ -59,6 +60,7 @@ date = "2026-03"
 kind = "video"
 title = "Researcher Insight"
 outlet = "Software Center (Sweden)"
+url = "https://www.youtube.com/watch?v=y1JkNlDs9Pc"
 text = "Interview with Jan Bosch on the risks and benefits of generative AI in software engineering."
 
 [[item]]
