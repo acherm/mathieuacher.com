@@ -100,6 +100,7 @@ kind = "invited"
 title = "Science du logiciel et IA en science du sport : de la démocratisation des outils à la reproductibilité sans friction"
 event = "Université de Toulon, UFR STAPS"
 place = "Toulon, France"
+url = "https://www.youtube.com/watch?v=zcK9oT1sqJ8"
 
 [[talk]]
 date = "2024-11-28"
