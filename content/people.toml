@@ -103,6 +103,17 @@ with = "Helge Spieker and Arnaud Gotlieb (Simula Research Laboratory, Norway)"
 note = "I supervised his master's internship; we keep working together within the RIPOST associate team."
 
 [[person]]
+name = "Olivier Zeyen"
+kind = "associated"
+status = "defended"
+start = "2021"
+defense = "2025-09-23"
+topic = "[Scaling up uniform random sampling](https://orbilu.uni.lu/handle/10993/66115), PhD defended at the University of Luxembourg"
+with = "Maxime Cordy (thesis supervisor, University of Luxembourg) and Gilles Perrouin (University of Namur)"
+funding = "Luxembourg National Research Fund (FNR)"
+note = "Papers together at [FormaliSE 2024](/publications/#DBLP:conf/icse-formalise/ZeyenCPA24), [SPLC 2025](/publications/#zeyen2025exploring), and [TOSEM 2026](/publications/#zeyen2026testing). I was a member of his PhD committee, as expert."
+
+[[person]]
 name = "Georges Aaron Randrianaina"
 kind = "phd"
 status = "defended"
