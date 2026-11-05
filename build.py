@@ -113,6 +113,7 @@ def people_groups(people: list[dict]) -> list[dict]:
 
 JURY_LABELS = {("PhD", "reviewer"): "PhD reviewer (*rapporteur*)", ("PhD", "president"): "PhD jury president",
                ("PhD", "examiner"): "PhD examiner", ("PhD", "member"): "PhD jury member",
+               ("PhD", "expert"): "PhD committee member and expert",
                ("HDR", "reviewer"): "Habilitation (HDR) reviewer", ("HDR", "examiner"): "Habilitation (HDR) examiner",
                ("HDR", "president"): "Habilitation (HDR) jury president", ("HDR", "member"): "Habilitation (HDR) jury member"}
 

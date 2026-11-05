@@ -37,7 +37,7 @@ SCHEMA = {
     "people.toml": ("person", {"kind": {"phd", "associated", "postdoc"},
                                "status": {"ongoing", "defended", "not-defended", None}}),
     "projects.toml": ("project", {}),
-    "juries.toml": ("jury", {"degree": {"PhD", "HDR"}, "role": {"reviewer", "examiner", "president", "member"}}),
+    "juries.toml": ("jury", {"degree": {"PhD", "HDR"}, "role": {"reviewer", "examiner", "president", "member", "expert"}}),
     "talks.toml": ("talk", {"kind": {"keynote", "invited", "lecture", "outreach", "industry", "panel", "talk"}}),
     "media.toml": ("item", {"kind": {"exhibition", "video", "talk", "channel", "book", "press", "blog"}}),
 }
@@ -234,7 +234,8 @@ def cmd_tables(args) -> int:
     print(f"\n## {'Jurys' if fr else 'Juries'} ({sum(j['degree'] == 'PhD' for j in juries)} PhD, "
           f"{sum(j['degree'] == 'HDR' for j in juries)} HDR)\n")
     for j in sorted(juries, key=lambda j: j.get("year") or 0, reverse=True):
-        print(f"- {j['degree']} {j['role']}: {j['name']} ({', '.join(str(x) for x in (j.get('institution'), j.get('year')) if x)})")
+        role = "committee member and expert" if j["role"] == "expert" else j["role"]
+        print(f"- {j['degree']} {role}: {j['name']} ({', '.join(str(x) for x in (j.get('institution'), j.get('year')) if x)})")
     return 0
 
 

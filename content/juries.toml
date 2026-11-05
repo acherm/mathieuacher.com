@@ -1,5 +1,6 @@
 # Thesis and habilitation juries (rendered on /service/#juries).
 #   degree = "PhD" | "HDR";  role = "reviewer" (rapporteur) | "examiner" | "president" | "member" (role not recorded)
+#                            | "expert" (committee member and expert; official title "Expert & Advisor", University of Luxembourg)
 #   year may be omitted when unknown; url = theses.fr or thesis page when available.
 
 record = "https://theses.fr/158563913"
@@ -43,6 +44,14 @@ degree = "PhD"
 role = "president"
 institution = "Université de Rennes"
 year = 2023
+
+[[jury]]
+name = "Olivier Zeyen"
+degree = "PhD"
+role = "expert"
+institution = "University of Luxembourg"
+year = 2025
+url = "https://orbilu.uni.lu/handle/10993/66115"
 
 [[jury]]
 name = "Chico Sundermann"
